@@ -15,7 +15,7 @@ export default function TestimonialsZone({ zone }: TestimonialsZoneProps) {
     <section
       role="region"
       aria-label={`Témoignages de patients à ${zone.name}`}
-      className="py-20 bg-background"
+      className="py-12 md:py-20 bg-background"
     >
       <div className="container mx-auto max-w-6xl px-4">
         <FadeIn direction="up">

@@ -16,7 +16,7 @@ export default function CoverageZone({ zone }: CoverageZoneProps) {
     <section
       role="region"
       aria-label={`Zone de couverture à ${zone.name}`}
-      className="py-20 bg-muted"
+      className="py-12 md:py-20 bg-muted"
     >
       <div className="container mx-auto max-w-6xl px-4">
         <FadeIn direction="up">
@@ -35,7 +35,7 @@ export default function CoverageZone({ zone }: CoverageZoneProps) {
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Neighborhoods list */}
           <FadeIn direction="left" delay={0.05}>
-            <div className="bg-white rounded-2xl border border-border shadow-sm p-8">
+            <div className="bg-white rounded-2xl border border-border shadow-sm p-5 sm:p-8">
               <h3 className="text-lg font-semibold text-foreground mb-6">
                 Quartiers &amp; hameaux desservis
               </h3>

@@ -19,7 +19,7 @@ export default function HeroZone({ zone }: HeroZoneProps) {
     <section
       role="region"
       aria-label={`Infirmier à domicile à ${zone.name}`}
-      className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-28 pb-20"
+      className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-20 md:pt-28 pb-12 md:pb-20"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />

@@ -17,7 +17,7 @@ export default function ServicesZone({ zone }: ServicesZoneProps) {
     <section
       role="region"
       aria-label={`Services infirmiers disponibles à ${zone.name}`}
-      className="py-20 bg-background"
+      className="py-12 md:py-20 bg-background"
     >
       <div className="container mx-auto max-w-6xl px-4">
         <FadeIn direction="up">

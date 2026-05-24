@@ -79,7 +79,7 @@ export default function HeroSection() {
             </motion.p>
 
             {/* CTA */}
-            <motion.div {...anim(0.3)} className="flex flex-wrap gap-3">
+            <motion.div {...anim(0.3)} className="flex flex-col sm:flex-row gap-3">
               <Link
                 href="/contact"
                 aria-label="Prendre rendez-vous avec notre infirmier"

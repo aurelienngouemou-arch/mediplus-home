@@ -50,7 +50,7 @@ export default function WhyUsZone({ zone }: WhyUsZoneProps) {
     <section
       role="region"
       aria-label={`Pourquoi nous choisir à ${zone.name}`}
-      className="py-20 bg-muted"
+      className="py-12 md:py-20 bg-muted"
     >
       <div className="container mx-auto max-w-6xl px-4">
         <FadeIn direction="up">

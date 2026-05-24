@@ -11,7 +11,7 @@ export default function IntroZone({ zone }: IntroZoneProps) {
     <section
       role="region"
       aria-label={`Présentation de ${zone.name}`}
-      className="py-20 bg-background"
+      className="py-12 md:py-20 bg-background"
     >
       <div className="container mx-auto max-w-6xl px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

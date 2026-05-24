@@ -12,7 +12,7 @@ export default function ReimbursementSection({
     <section className="py-16 md:py-20 bg-background">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn direction="up">
-          <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-8 md:p-10">
+          <div className="rounded-2xl border border-primary/20 bg-primary/[0.03] p-5 sm:p-8 md:p-10">
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 <Wallet className="w-6 h-6 text-primary" aria-hidden="true" />

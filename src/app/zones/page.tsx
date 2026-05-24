@@ -35,7 +35,7 @@ export default function ZonesPage() {
       <section
         role="region"
         aria-label="Nos zones d'intervention"
-        className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-28 pb-20"
+        className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5 pt-20 md:pt-28 pb-12 md:pb-20"
       >
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
@@ -77,7 +77,7 @@ export default function ZonesPage() {
       <section
         role="region"
         aria-label="Présentation des communes desservies"
-        className="py-20 bg-background"
+        className="py-12 md:py-20 bg-background"
       >
         <div className="container mx-auto max-w-6xl px-4">
           <FadeIn direction="up">
@@ -167,11 +167,11 @@ export default function ZonesPage() {
       <section
         role="region"
         aria-label="Vous habitez hors de nos zones ?"
-        className="py-16 bg-muted"
+        className="py-10 md:py-16 bg-muted"
       >
         <div className="container mx-auto max-w-4xl px-4">
           <FadeIn direction="up">
-            <div className="bg-white border border-border rounded-2xl shadow-sm p-8 md:p-12 text-center">
+            <div className="bg-white border border-border rounded-2xl shadow-sm p-5 sm:p-8 md:p-12 text-center">
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-3">
                 Vous n&apos;êtes pas dans ces zones ?
               </h2>

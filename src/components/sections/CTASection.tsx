@@ -17,7 +17,7 @@ function WhatsAppIcon() {
 
 export default function CTASection() {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden">
+    <section className="relative py-12 md:py-24 lg:py-32 overflow-hidden">
       {/* Gradient background */}
       <div
         className="absolute inset-0"

@@ -50,7 +50,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Formulaire */}
             <FadeIn direction="left">
-              <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
+              <div className="rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-sm">
                 <h2 className="font-serif text-2xl font-semibold text-foreground mb-1">
                   Envoyer un message
                 </h2>
@@ -82,7 +82,7 @@ export default function ContactPage() {
       <section className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn direction="up">
-            <div className="rounded-2xl bg-rose-50 border border-rose-200 p-8 text-center">
+            <div className="rounded-2xl bg-rose-50 border border-rose-200 p-5 sm:p-8 text-center">
               <p className="text-xs font-semibold text-rose-600 uppercase tracking-widest mb-3">
                 Urgence médicale non vitale
               </p>

@@ -19,7 +19,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary/[0.04] via-background to-secondary/[0.04] overflow-hidden">
+      <section className="relative py-12 md:py-20 lg:py-28 bg-gradient-to-br from-primary/[0.04] via-background to-secondary/[0.04] overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{

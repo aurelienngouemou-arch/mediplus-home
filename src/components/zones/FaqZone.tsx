@@ -18,7 +18,7 @@ export default function FaqZone({ zone }: FaqZoneProps) {
     <section
       role="region"
       aria-label={`Questions fréquentes à ${zone.name}`}
-      className="py-20 bg-muted"
+      className="py-12 md:py-20 bg-muted"
     >
       <div className="container mx-auto max-w-3xl px-4">
         <FadeIn direction="up">

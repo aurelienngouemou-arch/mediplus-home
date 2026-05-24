@@ -68,7 +68,7 @@ export default function StatsSection() {
           {STATS.map((stat) => (
             <FadeIn key={stat.label} direction="up" delay={0.1}>
               <div className="text-center">
-                <p className="font-serif text-5xl md:text-6xl font-bold text-white mb-2">
+                <p className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-2">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </p>
                 <p className="font-semibold text-white/90 text-base">{stat.label}</p>
