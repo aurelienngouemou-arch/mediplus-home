@@ -36,14 +36,14 @@ const TRUST_ITEMS = [
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-[70vh] sm:min-h-[90vh] flex items-center overflow-hidden pt-16 sm:pt-20">
       {/* Fond dégradé */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-sky-50/50 -z-10" />
       <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.06] blur-3xl -z-10" />
       <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] rounded-full bg-primary/[0.04] blur-3xl -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-24 w-full">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
 
           {/* ── Colonne gauche ── */}
           <div className="flex flex-col gap-6">
@@ -83,7 +83,7 @@ export default function HeroSection() {
               <Link
                 href="/contact"
                 aria-label="Prendre rendez-vous avec notre infirmier"
-                className="inline-flex items-center gap-2 bg-primary text-white rounded-full px-6 py-3 text-sm font-medium shadow-md shadow-primary/20 transition-all hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25"
+                className="flex items-center justify-center gap-2 bg-primary text-white rounded-full px-6 py-3.5 text-sm font-medium shadow-md shadow-primary/20 transition-all hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/25 sm:w-auto"
               >
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 Prendre rendez-vous
@@ -93,7 +93,7 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Nous contacter via WhatsApp"
-                className="inline-flex items-center gap-2 bg-[#25D366] text-white rounded-full px-6 py-3 text-sm font-medium shadow-md shadow-emerald-500/20 transition-all hover:bg-[#1ebe5d] hover:-translate-y-0.5 hover:shadow-lg"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white rounded-full px-6 py-3.5 text-sm font-medium shadow-md shadow-emerald-500/20 transition-all hover:bg-[#1ebe5d] hover:-translate-y-0.5 hover:shadow-lg sm:w-auto"
               >
                 <WhatsAppIcon />
                 WhatsApp
@@ -137,7 +137,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="p-[2px] rounded-3xl bg-gradient-to-br from-primary/35 via-accent/15 to-transparent shadow-2xl hover:shadow-[0_32px_64px_-8px_rgba(10,77,104,0.28)] transition-shadow duration-500"
             >
-              <div className="relative aspect-[4/5] md:aspect-square rounded-[22px] overflow-hidden">
+              <div className="relative aspect-[4/3] sm:aspect-[4/5] md:aspect-square rounded-[22px] overflow-hidden">
                 <Image
                   src="/hero-nurse.png"
                   alt="Infirmière souriante prenant soin d'une dame senior à domicile"
@@ -169,7 +169,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 10, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
               transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
-              className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 p-3.5 flex items-center gap-3"
+              className="hidden sm:flex absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 p-3.5 items-center gap-3"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
                 <Star className="w-5 h-5 text-amber-500 fill-amber-500" aria-hidden="true" />
@@ -189,7 +189,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: -10, x: 10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
               transition={{ duration: 0.5, delay: 0.9, ease: EASE }}
-              className="absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-primary text-white rounded-2xl shadow-xl shadow-primary/30 px-5 py-4"
+              className="hidden sm:block absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-primary text-white rounded-2xl shadow-xl shadow-primary/30 px-5 py-4"
             >
               <p className="text-2xl font-bold leading-none tracking-tight">+500</p>
               <p className="text-xs opacity-75 mt-1 font-medium">patients soignés</p>

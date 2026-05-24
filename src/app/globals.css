@@ -2,6 +2,8 @@
 
 /* ─── CSS Custom Properties (runtime theming + dark mode) ─── */
 :root {
+  color-scheme: light;
+
   /* Medical brand palette */
   --primary: 200 95% 25%;
   --primary-foreground: 0 0% 100%;
@@ -35,25 +37,6 @@
   --radius: 0.625rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 65%;
-
-    --border: 217 33% 18%;
-    --input: 217 33% 18%;
-    --ring: 188 96% 44%;
-  }
-}
 
 /* ─── Tailwind v4 theme mapping ──────────────────────────── */
 @theme inline {
