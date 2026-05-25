@@ -71,18 +71,14 @@ export default function CoverageZone({ zone }: CoverageZoneProps) {
         <FadeIn direction="up" delay={0.15}>
           <div className="mt-10 bg-white border border-border rounded-2xl p-6 text-center shadow-sm">
             <p className="text-muted-foreground">
-              Nous intervenons aussi dans les communes voisines :{" "}
-              <span className="font-semibold text-foreground">
-                {zone.neighborZones.join(", ")}
-              </span>
-              .{" "}
+              Vous habitez dans un village voisin ?{" "}
               <a
                 href="/contact"
                 className="text-primary hover:underline font-medium"
               >
                 Contactez-nous
               </a>{" "}
-              pour toute demande hors périmètre.
+              pour vérifier si nous intervenons chez vous.
             </p>
           </div>
         </FadeIn>

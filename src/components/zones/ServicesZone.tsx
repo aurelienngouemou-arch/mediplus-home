@@ -40,7 +40,7 @@ export default function ServicesZone({ zone }: ServicesZoneProps) {
               <StaggerItem key={service.slug}>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group flex flex-col h-full rounded-xl border border-border bg-card shadow-sm p-6 hover:border-primary/30 hover:shadow-md transition-all"
+                  className="group flex flex-col items-center text-center h-full rounded-xl border border-border bg-card shadow-sm p-6 hover:border-primary/30 hover:shadow-md transition-all"
                   aria-label={`${service.name} à ${zone.name}`}
                 >
                   <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
@@ -52,7 +52,7 @@ export default function ServicesZone({ zone }: ServicesZoneProps) {
                   <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                     {service.description}
                   </p>
-                  <div className="flex items-center gap-1 mt-4 text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center justify-center gap-1 mt-4 text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                     En savoir plus <ArrowRight className="size-3.5" aria-hidden="true" />
                   </div>
                 </Link>

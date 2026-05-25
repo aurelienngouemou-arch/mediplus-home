@@ -69,7 +69,7 @@ export default function WhyUsZone({ zone }: WhyUsZoneProps) {
         <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {cards.map(({ Icon, title, description }) => (
             <StaggerItem key={title}>
-              <div className="flex flex-col h-full bg-white rounded-2xl border border-border shadow-sm p-6 hover:shadow-md transition-shadow">
+              <div className="flex flex-col items-center text-center h-full bg-white rounded-2xl border border-border shadow-sm p-6 hover:shadow-md transition-shadow">
                 <div className="size-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 shrink-0">
                   <Icon className="size-6 text-primary" aria-hidden="true" />
                 </div>
