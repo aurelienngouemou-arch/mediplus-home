@@ -35,7 +35,7 @@ export default function ActesSection() {
         </StaggerContainer>
 
         {/* Mobile scroll */}
-        <div className="md:hidden -mx-4 px-4">
+        <div className="md:hidden -mx-4 px-4" aria-hidden="true">
           <div className="flex gap-3 overflow-x-auto pb-3 snap-x snap-mandatory scrollbar-none">
             {ACTES_TECHNIQUES.map((acte) => (
               <div key={acte.slug} className="snap-start shrink-0 w-[120px]">

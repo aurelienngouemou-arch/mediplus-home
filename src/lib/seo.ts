@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "./constants";
+
+export function getBaseUrl(): string {
+  return process.env.NEXT_PUBLIC_SITE_URL || "https://mediplus-home.vercel.app";
+}
 
 interface CreateMetadataOptions {
   title: string;
@@ -14,7 +17,7 @@ export function createMetadata({
   path = "",
   image,
 }: CreateMetadataOptions): Metadata {
-  const url = `${SITE_URL}${path}`;
+  const url = `${getBaseUrl()}${path}`;
   const fullTitle = `${title} | Mediplus Home`;
 
   return {

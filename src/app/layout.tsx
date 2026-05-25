@@ -3,6 +3,7 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { getBaseUrl } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Mediplus Home" }],
   creator: "Mediplus Home",
-  metadataBase: new URL("https://infirmier-domicile-belgique.be"),
+  metadataBase: new URL(getBaseUrl()),
   openGraph: {
     type: "website",
     locale: "fr_BE",
@@ -44,6 +45,14 @@ export const metadata: Metadata = {
     title: "Mediplus Home · Soins à domicile en Belgique",
     description:
       "Soins infirmiers professionnels à domicile. Disponible 7j/7 dans la région d'Overijse, Hoeilaart et Tervuren.",
+    images: [
+      {
+        url: "/hero-nurse.png",
+        width: 1200,
+        height: 630,
+        alt: "Mediplus Home - Soins infirmiers à domicile en Belgique",
+      },
+    ],
   },
   robots: {
     index: true,

@@ -31,10 +31,8 @@ function MediplusIcon({
       viewBox="0 0 44 44"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      role="img"
       aria-hidden="true"
     >
-      <title>Mediplus Home</title>
       <rect
         width="44"
         height="44"
@@ -85,7 +83,6 @@ export default function Logo({
     return (
       <span
         className={cn("inline-flex shrink-0", className)}
-        aria-label="Mediplus Home - retour à l'accueil"
       >
         {icon}
       </span>
@@ -119,7 +116,6 @@ export default function Logo({
     return (
       <span
         className={cn("inline-flex items-center gap-3", className)}
-        aria-label="Mediplus Home - retour à l'accueil"
       >
         {icon}
         {nameBlock}
@@ -130,7 +126,6 @@ export default function Logo({
   return (
     <span
       className={cn("inline-flex flex-col items-center gap-2", className)}
-      aria-label="Mediplus Home - retour à l'accueil"
     >
       {icon}
       <span className="flex flex-col items-center leading-none gap-0.5">

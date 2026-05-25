@@ -171,11 +171,11 @@ export default function ZonesSection() {
 
             <FadeIn direction="up" delay={0.3}>
               <p className="text-sm text-muted-foreground text-center lg:text-left pt-2">
-                Nous couvrons également{" "}
-                <Link href="/zones" className="text-primary font-medium hover:underline">
-                  Rixensart, La Hulpe, Lasne
+                Vous habitez dans un village voisin ?{" "}
+                <Link href="/contact" className="text-primary font-medium hover:underline">
+                  Contactez-nous
                 </Link>{" "}
-                et les environs.
+                pour vérifier si nous intervenons chez vous.
               </p>
             </FadeIn>
           </StaggerContainer>
