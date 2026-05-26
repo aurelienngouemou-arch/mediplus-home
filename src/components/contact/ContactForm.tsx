@@ -39,12 +39,27 @@ export default function ContactForm() {
     resolver: zodResolver(contactSchema),
   });
 
-  // TODO Phase 5: connecter à l'API route /api/contact
   async function onSubmit(data: ContactFormData) {
     setFormState("submitting");
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form submitted:", data);
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nom: data.fullName,
+          telephone: data.phone,
+          email: data.email,
+          commune: data.commune,
+          type_demande: data.requestType,
+          message: data.message,
+          rgpd_consent: data.rgpdConsent,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
       setFormState("success");
       reset();
     } catch {
@@ -268,9 +283,15 @@ export default function ContactForm() {
       </div>
 
       {formState === "error" && (
-        <div className="flex items-center gap-2 rounded-lg bg-destructive/[0.08] border border-destructive/20 px-4 py-3 text-sm text-destructive" role="alert">
-          <AlertCircle className="w-4 h-4 flex-shrink-0" />
-          Une erreur s&apos;est produite. Veuillez réessayer ou nous appeler directement.
+        <div className="flex items-start gap-2 rounded-lg bg-destructive/[0.08] border border-destructive/20 px-4 py-3 text-sm text-destructive" role="alert">
+          <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+          <span>
+            Une erreur s&apos;est produite. Veuillez réessayer ou{" "}
+            <a href="tel:+32486364888" className="underline hover:no-underline font-medium">
+              nous appeler directement
+            </a>
+            .
+          </span>
         </div>
       )}
 
