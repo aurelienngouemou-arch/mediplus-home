@@ -16,7 +16,7 @@ export const patientCreateSchema = z.object({
   numero_mutuelle: z.string().max(50).optional(),
   allergies: z.string().optional(),
   notes: z.string().optional(),
-  statut: z.enum(["actif", "inactif", "archive"]).default("actif"),
+  statut: z.enum(["actif", "inactif", "archive"]).optional(),
   demande_origine_id: z.string().uuid().optional(),
 });
 
@@ -24,3 +24,4 @@ export const patientUpdateSchema = patientCreateSchema.partial();
 
 export type PatientCreate = z.infer<typeof patientCreateSchema>;
 export type PatientUpdate = z.infer<typeof patientUpdateSchema>;
+export type PatientCreateInput = z.input<typeof patientCreateSchema>;

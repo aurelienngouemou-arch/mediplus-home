@@ -14,7 +14,6 @@ import {
   Calendar,
   Shield,
   ExternalLink,
-  UserPlus,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -22,6 +21,7 @@ import { Separator } from "@/components/ui/separator";
 import DemandeStatusBadge from "@/components/admin/DemandeStatusBadge";
 import DemandeStatusSelector from "@/components/admin/DemandeStatusSelector";
 import DemandeNotes from "@/components/admin/DemandeNotes";
+import ConvertDemandeModal from "@/components/admin/ConvertDemandeModal";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -245,23 +245,26 @@ export default async function DemandeDetailPage({
             </CardContent>
           </Card>
 
-          {/* Convertir en patient (V2) */}
-          <Card className="border-border/50 border-dashed">
-            <CardContent className="pt-4 pb-4">
-              <Button
-                variant="outline"
-                className="w-full text-muted-foreground border-dashed"
-                disabled
-                title="Disponible en Phase 6B"
-              >
-                <UserPlus className="h-4 w-4 mr-2" />
-                Convertir en patient
-              </Button>
-              <p className="text-[10px] text-muted-foreground text-center mt-2">
-                Bientôt disponible (Phase 6B)
-              </p>
-            </CardContent>
-          </Card>
+          {/* Convertir en patient */}
+          {demande.statut !== "traite" && demande.statut !== "archive" && (
+            <Card className="border-border/50">
+              <CardContent className="pt-4 pb-4">
+                <ConvertDemandeModal
+                  demande={{
+                    id: demande.id,
+                    nom: demande.nom,
+                    telephone: demande.telephone,
+                    email: demande.email,
+                    commune: demande.commune,
+                    created_at: demande.created_at,
+                  }}
+                />
+                <p className="text-[10px] text-muted-foreground text-center mt-2">
+                  Crée la fiche patient et marque la demande comme traitée
+                </p>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Historique */}
           <Card className="border-border/50">

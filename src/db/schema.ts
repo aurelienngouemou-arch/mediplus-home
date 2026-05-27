@@ -189,6 +189,29 @@ export const verificationTokens = pgTable(
   (table) => [primaryKey({ columns: [table.identifier, table.token] })]
 );
 
+export const actesPlanSoins = pgTable(
+  "actes_plan_soins",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    patient_id: uuid("patient_id")
+      .notNull()
+      .references(() => patients.id, { onDelete: "cascade" }),
+    acte: varchar("acte", { length: 120 }).notNull(),
+    frequence: varchar("frequence", { length: 60 }).notNull(),
+    duree_minutes: integer("duree_minutes"),
+    moment_journee: varchar("moment_journee", { length: 30 }),
+    actif: boolean("actif").default(true),
+    date_debut: date("date_debut"),
+    date_fin: date("date_fin"),
+    notes: text("notes"),
+    created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [
+    index("idx_actes_patient_actif").on(table.patient_id, table.actif),
+  ]
+);
+
 // ─── Types exportés ──────────────────────────────────────
 
 export type DemandeContact = typeof demandesContact.$inferSelect;
@@ -203,3 +226,5 @@ export type Delegation = typeof delegations.$inferSelect;
 export type NewDelegation = typeof delegations.$inferInsert;
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+export type ActePlanSoins = typeof actesPlanSoins.$inferSelect;
+export type NewActePlanSoins = typeof actesPlanSoins.$inferInsert;

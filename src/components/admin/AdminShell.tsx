@@ -26,6 +26,7 @@ interface AdminShellProps {
   userPrenom: string;
   userEmail: string;
   newDemandesCount: number;
+  patientsActifsCount: number;
   children: React.ReactNode;
 }
 
@@ -191,6 +192,7 @@ export default function AdminShell({
   userPrenom,
   userEmail,
   newDemandesCount,
+  patientsActifsCount,
   children,
 }: AdminShellProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -204,7 +206,12 @@ export default function AdminShell({
       icon: Inbox,
       badge: newDemandesCount > 0 ? newDemandesCount : undefined,
     },
-    { label: "Patients", href: "/admin/patients", icon: Users, disabled: true },
+    {
+      label: "Patients",
+      href: "/admin/patients",
+      icon: Users,
+      badge: patientsActifsCount > 0 ? patientsActifsCount : undefined,
+    },
     { label: "Ma tournée", href: "/admin/tournee", icon: CalendarDays, disabled: true },
     { label: "Mes collègues", href: "/admin/partenaires", icon: Handshake, disabled: true },
   ];

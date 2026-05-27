@@ -1,20 +1,29 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
-import { demandesContact } from "@/db/schema";
+import { demandesContact, patients } from "@/db/schema";
 import { eq, count } from "drizzle-orm";
 import { Toaster } from "sonner";
 import AdminShell from "@/components/admin/AdminShell";
 
-async function getNewDemandesCount() {
+async function getLayoutCounts() {
   try {
-    const [{ value }] = await db
-      .select({ value: count() })
-      .from(demandesContact)
-      .where(eq(demandesContact.statut, "nouveau"));
-    return Number(value);
+    const [demandesResult, patientsResult] = await Promise.all([
+      db
+        .select({ value: count() })
+        .from(demandesContact)
+        .where(eq(demandesContact.statut, "nouveau")),
+      db
+        .select({ value: count() })
+        .from(patients)
+        .where(eq(patients.statut, "actif")),
+    ]);
+    return {
+      newDemandes: Number(demandesResult[0].value),
+      patientsActifs: Number(patientsResult[0].value),
+    };
   } catch {
-    return 0;
+    return { newDemandes: 0, patientsActifs: 0 };
   }
 }
 
@@ -26,7 +35,7 @@ export default async function AdminAppLayout({
   const session = await auth();
   if (!session?.user) redirect("/admin/login");
 
-  const newCount = await getNewDemandesCount();
+  const { newDemandes, patientsActifs } = await getLayoutCounts();
 
   return (
     <>
@@ -34,7 +43,8 @@ export default async function AdminAppLayout({
         userNom={session.user.nom}
         userPrenom={session.user.prenom}
         userEmail={session.user.email ?? ""}
-        newDemandesCount={newCount}
+        newDemandesCount={newDemandes}
+        patientsActifsCount={patientsActifs}
       >
         {children}
       </AdminShell>

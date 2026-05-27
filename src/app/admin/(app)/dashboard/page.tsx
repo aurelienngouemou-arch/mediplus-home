@@ -1,14 +1,14 @@
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { demandesContact } from "@/db/schema";
+import { demandesContact, patients } from "@/db/schema";
 import { eq, count, gte, and, desc } from "drizzle-orm";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
-import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3 } from "lucide-react";
+import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import DemandeStatusBadge from "@/components/admin/DemandeStatusBadge";
+import PatientAvatar from "@/components/admin/PatientAvatar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,33 +19,48 @@ export const metadata: Metadata = {
 async function getStats() {
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
-  const [nouveaux, enCours, traitesRecents, total] = await Promise.all([
-    db
-      .select({ value: count() })
-      .from(demandesContact)
-      .where(eq(demandesContact.statut, "nouveau")),
-    db
-      .select({ value: count() })
-      .from(demandesContact)
-      .where(eq(demandesContact.statut, "en_cours")),
-    db
-      .select({ value: count() })
-      .from(demandesContact)
-      .where(
-        and(
-          eq(demandesContact.statut, "traite"),
-          gte(demandesContact.created_at, sevenDaysAgo)
-        )
-      ),
-    db.select({ value: count() }).from(demandesContact),
-  ]);
+  const [nouveaux, enCours, traitesRecents, total, patientsActifs] =
+    await Promise.all([
+      db
+        .select({ value: count() })
+        .from(demandesContact)
+        .where(eq(demandesContact.statut, "nouveau")),
+      db
+        .select({ value: count() })
+        .from(demandesContact)
+        .where(eq(demandesContact.statut, "en_cours")),
+      db
+        .select({ value: count() })
+        .from(demandesContact)
+        .where(
+          and(
+            eq(demandesContact.statut, "traite"),
+            gte(demandesContact.created_at, sevenDaysAgo)
+          )
+        ),
+      db.select({ value: count() }).from(demandesContact),
+      db
+        .select({ value: count() })
+        .from(patients)
+        .where(eq(patients.statut, "actif")),
+    ]);
 
   return {
     nouveaux: Number(nouveaux[0].value),
     enCours: Number(enCours[0].value),
     traitesRecents: Number(traitesRecents[0].value),
     total: Number(total[0].value),
+    patientsActifs: Number(patientsActifs[0].value),
   };
+}
+
+async function getRecentPatients() {
+  return db
+    .select()
+    .from(patients)
+    .where(eq(patients.statut, "actif"))
+    .orderBy(desc(patients.created_at))
+    .limit(5);
 }
 
 async function getRecentDemandes() {
@@ -70,9 +85,10 @@ function RelativeTime({ date }: { date: Date | null }) {
 
 export default async function DashboardPage() {
   const session = await auth();
-  const [stats, recentDemandes] = await Promise.all([
+  const [stats, recentDemandes, recentPatients] = await Promise.all([
     getStats(),
     getRecentDemandes(),
+    getRecentPatients(),
   ]);
 
   const today = format(new Date(), "EEEE d MMMM yyyy", { locale: fr });
@@ -85,6 +101,7 @@ export default async function DashboardPage() {
       icon: Inbox,
       color: "text-blue-600",
       bg: "bg-blue-50",
+      href: "/admin/demandes?statut=nouveau",
     },
     {
       label: "En attente",
@@ -92,6 +109,7 @@ export default async function DashboardPage() {
       icon: Clock,
       color: "text-amber-600",
       bg: "bg-amber-50",
+      href: "/admin/demandes?statut=en_cours",
     },
     {
       label: "Traitées (7 jours)",
@@ -99,6 +117,7 @@ export default async function DashboardPage() {
       icon: CheckCircle2,
       color: "text-green-600",
       bg: "bg-green-50",
+      href: "/admin/demandes",
     },
     {
       label: "Total demandes",
@@ -106,6 +125,15 @@ export default async function DashboardPage() {
       icon: BarChart3,
       color: "text-primary",
       bg: "bg-primary/10",
+      href: "/admin/demandes",
+    },
+    {
+      label: "Patients actifs",
+      value: stats.patientsActifs,
+      icon: Users,
+      color: "text-teal-600",
+      bg: "bg-teal-50",
+      href: "/admin/patients",
     },
   ];
 
@@ -120,27 +148,70 @@ export default async function DashboardPage() {
       </div>
 
       {/* Stats grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         {statCards.map((stat) => (
-          <Card key={stat.label} className="border-border/50">
-            <CardContent className="pt-5 pb-4">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="text-xs text-muted-foreground leading-tight mb-2">
-                    {stat.label}
-                  </p>
-                  <p className="text-3xl font-bold text-foreground tabular-nums">
-                    {stat.value}
-                  </p>
+          <Link key={stat.label} href={stat.href}>
+            <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer">
+              <CardContent className="pt-5 pb-4">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-xs text-muted-foreground leading-tight mb-2">
+                      {stat.label}
+                    </p>
+                    <p className="text-3xl font-bold text-foreground tabular-nums">
+                      {stat.value}
+                    </p>
+                  </div>
+                  <div className={`rounded-lg p-2 shrink-0 ${stat.bg}`}>
+                    <stat.icon className={`h-5 w-5 ${stat.color}`} />
+                  </div>
                 </div>
-                <div className={`rounded-lg p-2 shrink-0 ${stat.bg}`}>
-                  <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
+
+      {/* Patients récents */}
+      {recentPatients.length > 0 && (
+        <Card className="border-border/50">
+          <CardHeader className="flex flex-row items-center justify-between pb-4">
+            <CardTitle className="text-base font-semibold">
+              Patients récemment ajoutés
+            </CardTitle>
+            <Link
+              href="/admin/patients"
+              className="flex items-center gap-1 text-xs text-primary hover:underline"
+            >
+              Voir tout <ArrowRight className="h-3 w-3" />
+            </Link>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="space-y-0">
+              {recentPatients.map((p) => (
+                <Link
+                  key={p.id}
+                  href={`/admin/patients/${p.id}`}
+                  className="flex items-center gap-3 py-3 hover:bg-muted/50 -mx-2 px-2 rounded-lg transition-colors"
+                >
+                  <PatientAvatar nom={p.nom} prenom={p.prenom} size="sm" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground truncate">
+                      {p.prenom} {p.nom}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {p.commune} · {p.telephone}
+                    </p>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground shrink-0">
+                    <RelativeTime date={p.created_at} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Demandes récentes */}
       <Card className="border-border/50">
