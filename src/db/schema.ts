@@ -8,7 +8,10 @@ import {
   integer,
   date,
   index,
+  primaryKey,
 } from "drizzle-orm/pg-core";
+
+// ─── Tables existantes ───────────────────────────────────
 
 export const demandesContact = pgTable(
   "demandes_contact",
@@ -129,6 +132,65 @@ export const delegations = pgTable(
   ]
 );
 
+// ─── Tables Auth ─────────────────────────────────────────
+
+export const users = pgTable(
+  "users",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    email: varchar("email", { length: 180 }).unique().notNull(),
+    password_hash: varchar("password_hash", { length: 255 }).notNull(),
+    nom: varchar("nom", { length: 60 }).notNull(),
+    prenom: varchar("prenom", { length: 60 }).notNull(),
+    role: varchar("role", { length: 30 }).notNull().default("infirmier"),
+    numero_inami: varchar("numero_inami", { length: 30 }),
+    telephone: varchar("telephone", { length: 20 }),
+    actif: boolean("actif").default(true),
+    email_verified: timestamp("email_verified", { withTimezone: true }),
+    image: varchar("image", { length: 500 }),
+    created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    updated_at: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+  },
+  (table) => [index("idx_users_email").on(table.email)]
+);
+
+export const sessions = pgTable("sessions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  user_id: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  session_token: varchar("session_token", { length: 255 }).unique().notNull(),
+  expires: timestamp("expires", { withTimezone: true }).notNull(),
+  created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
+export const accounts = pgTable(
+  "accounts",
+  {
+    user_id: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    type: varchar("type", { length: 50 }).notNull(),
+    provider: varchar("provider", { length: 50 }).notNull(),
+    provider_account_id: varchar("provider_account_id", { length: 255 }).notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.provider, table.provider_account_id] }),
+  ]
+);
+
+export const verificationTokens = pgTable(
+  "verification_tokens",
+  {
+    identifier: varchar("identifier", { length: 255 }).notNull(),
+    token: varchar("token", { length: 255 }).notNull(),
+    expires: timestamp("expires", { withTimezone: true }).notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.identifier, table.token] })]
+);
+
+// ─── Types exportés ──────────────────────────────────────
+
 export type DemandeContact = typeof demandesContact.$inferSelect;
 export type NewDemandeContact = typeof demandesContact.$inferInsert;
 export type Patient = typeof patients.$inferSelect;
@@ -136,7 +198,8 @@ export type NewPatient = typeof patients.$inferInsert;
 export type Visite = typeof visites.$inferSelect;
 export type NewVisite = typeof visites.$inferInsert;
 export type InfirmierPartenaire = typeof infirmiersPartenaires.$inferSelect;
-export type NewInfirmierPartenaire =
-  typeof infirmiersPartenaires.$inferInsert;
+export type NewInfirmierPartenaire = typeof infirmiersPartenaires.$inferInsert;
 export type Delegation = typeof delegations.$inferSelect;
 export type NewDelegation = typeof delegations.$inferInsert;
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;

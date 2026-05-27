@@ -4,6 +4,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string().min(1, "DATABASE_URL est requis"),
   RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY est requis"),
   NEXT_PUBLIC_SITE_URL: z.string().min(1, "NEXT_PUBLIC_SITE_URL est requis"),
+  AUTH_SECRET: z.string().min(1, "AUTH_SECRET est requis"),
 });
 
 const parsed = envSchema.safeParse(process.env);
