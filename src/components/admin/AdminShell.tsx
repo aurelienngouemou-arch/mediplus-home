@@ -27,6 +27,7 @@ interface AdminShellProps {
   userEmail: string;
   newDemandesCount: number;
   patientsActifsCount: number;
+  visitesDuJour?: number;
   children: React.ReactNode;
 }
 
@@ -193,6 +194,7 @@ export default function AdminShell({
   userEmail,
   newDemandesCount,
   patientsActifsCount,
+  visitesDuJour = 0,
   children,
 }: AdminShellProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -212,7 +214,12 @@ export default function AdminShell({
       icon: Users,
       badge: patientsActifsCount > 0 ? patientsActifsCount : undefined,
     },
-    { label: "Ma tournée", href: "/admin/tournee", icon: CalendarDays, disabled: true },
+    {
+      label: "Ma tournée",
+      href: "/admin/tournee",
+      icon: CalendarDays,
+      badge: visitesDuJour > 0 ? visitesDuJour : undefined,
+    },
     { label: "Mes collègues", href: "/admin/partenaires", icon: Handshake, disabled: true },
   ];
 
@@ -226,7 +233,7 @@ export default function AdminShell({
   const initials = `${userPrenom.charAt(0)}${userNom.charAt(0)}`.toUpperCase();
 
   return (
-    <div className="fixed inset-0 z-[100] flex bg-background overflow-hidden">
+    <div className="fixed inset-0 flex bg-background overflow-hidden">
       {/* ─── Desktop sidebar (flex item) ─────────────────────── */}
       <aside className="hidden md:flex w-64 flex-col shrink-0 border-r border-border bg-card">
         <SidebarHeader />

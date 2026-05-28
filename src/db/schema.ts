@@ -90,6 +90,8 @@ export const visites = pgTable(
     acte_principal: varchar("acte_principal", { length: 120 }),
     actes_supplementaires: text("actes_supplementaires"),
     transmissions: text("transmissions"),
+    notes_pre_visite: text("notes_pre_visite"),
+    etat_patient: varchar("etat_patient", { length: 30 }),
     statut: varchar("statut", { length: 30 }).default("planifiee"),
     delegation_id: uuid("delegation_id"),
     created_at: timestamp("created_at", { withTimezone: true }).defaultNow(),

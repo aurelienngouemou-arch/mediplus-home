@@ -5,10 +5,12 @@ import { eq, count, gte, and, desc } from "drizzle-orm";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
-import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3, Users } from "lucide-react";
+import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3, Users, CalendarDays } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DemandeStatusBadge from "@/components/admin/DemandeStatusBadge";
 import PatientAvatar from "@/components/admin/PatientAvatar";
+import VisiteStatusBadge from "@/components/admin/tournee/VisiteStatusBadge";
+import { getProchesVisites, getStatsVisites } from "@/lib/actions/visites";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -85,10 +87,12 @@ function RelativeTime({ date }: { date: Date | null }) {
 
 export default async function DashboardPage() {
   const session = await auth();
-  const [stats, recentDemandes, recentPatients] = await Promise.all([
+  const [stats, recentDemandes, recentPatients, prochesVisites, statsVisites] = await Promise.all([
     getStats(),
     getRecentDemandes(),
     getRecentPatients(),
+    getProchesVisites(3),
+    getStatsVisites(),
   ]);
 
   const today = format(new Date(), "EEEE d MMMM yyyy", { locale: fr });
@@ -171,6 +175,67 @@ export default async function DashboardPage() {
           </Link>
         ))}
       </div>
+
+      {/* Tournée du jour */}
+      <Card className="border-border/50">
+        <CardHeader className="flex flex-row items-center justify-between pb-4">
+          <CardTitle className="text-base font-semibold flex items-center gap-2">
+            <CalendarDays className="h-4 w-4 text-primary" />
+            Aujourd'hui
+          </CardTitle>
+          <Link
+            href="/admin/tournee"
+            className="flex items-center gap-1 text-xs text-primary hover:underline"
+          >
+            Voir la tournée <ArrowRight className="h-3 w-3" />
+          </Link>
+        </CardHeader>
+        <CardContent className="pt-0">
+          {prochesVisites.length === 0 ? (
+            <div className="text-center py-6 text-muted-foreground">
+              <CalendarDays className="h-7 w-7 mx-auto mb-2 opacity-30" />
+              <p className="text-sm">Aucune visite prévue aujourd'hui</p>
+              <Link
+                href="/admin/tournee"
+                className="text-xs text-primary hover:underline mt-1 inline-block"
+              >
+                Planifier une visite →
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-0">
+              {prochesVisites.map((v) => (
+                <Link
+                  key={v.id}
+                  href="/admin/tournee"
+                  className="flex items-center gap-3 py-3 hover:bg-muted/50 -mx-2 px-2 rounded-lg transition-colors"
+                >
+                  <div className="shrink-0 w-10 text-center">
+                    <p className="text-sm font-bold text-foreground tabular-nums">
+                      {format(new Date(v.date_visite), "HH:mm")}
+                    </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-foreground truncate">
+                      {v.patient_prenom} {v.patient_nom}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {v.patient_commune}
+                      {v.acte_principal && ` · ${v.acte_principal}`}
+                    </p>
+                  </div>
+                  <VisiteStatusBadge statut={v.statut} />
+                </Link>
+              ))}
+            </div>
+          )}
+          {statsVisites.visitesAujourdhui > 3 && (
+            <p className="text-xs text-muted-foreground mt-2 text-center">
+              +{statsVisites.visitesAujourdhui - 3} autre{statsVisites.visitesAujourdhui - 3 > 1 ? "s" : ""} visite{statsVisites.visitesAujourdhui - 3 > 1 ? "s" : ""}
+            </p>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Patients récents */}
       {recentPatients.length > 0 && (
