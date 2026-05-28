@@ -13,7 +13,10 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -24,8 +27,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { createVisite, updateVisite } from "@/lib/actions/visites";
+import { createVisite, updateVisite, getActesDuPatient } from "@/lib/actions/visites";
 import type { VisiteAvecPatient, PatientSelectItem } from "@/lib/actions/visites";
+
+const ACTES_COURANTS = [
+  "Pansement simple",
+  "Pansement complexe",
+  "Injection IM",
+  "Injection SC",
+  "Injection insuline",
+  "Perfusion IV",
+  "Tension artérielle",
+  "Glycémie capillaire",
+  "Soins post-opératoires",
+  "Suivi diabète",
+  "Toilette / aide à la toilette",
+  "Pose/retrait sonde urinaire",
+];
 
 const formSchema = z.object({
   patient_id: z.string().uuid("Sélectionnez un patient"),
@@ -51,6 +69,11 @@ function localNow(date?: string): string {
   return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 }
 
+function isCustomActe(value: string, patientActes: string[]): boolean {
+  if (!value) return false;
+  return !ACTES_COURANTS.includes(value) && !patientActes.includes(value);
+}
+
 export default function VisiteForm({
   patientsActifs,
   initialPatientId,
@@ -60,6 +83,8 @@ export default function VisiteForm({
   onSuccess,
 }: VisiteFormProps) {
   const [open, setOpen] = useState(false);
+  const [patientActes, setPatientActes] = useState<string[]>([]);
+  const [isAutreActe, setIsAutreActe] = useState(false);
   const isEdit = !!visite;
 
   const {
@@ -67,6 +92,8 @@ export default function VisiteForm({
     handleSubmit,
     control,
     reset,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -86,8 +113,22 @@ export default function VisiteForm({
     },
   });
 
+  const watchedPatientId = watch("patient_id");
+
+  // Load plan de soins actes when patient changes
+  useEffect(() => {
+    if (!watchedPatientId) {
+      setPatientActes([]);
+      return;
+    }
+    getActesDuPatient(watchedPatientId).then((rows) => {
+      setPatientActes(rows.map((r) => r.acte));
+    });
+  }, [watchedPatientId]);
+
   useEffect(() => {
     if (open) {
+      const currentActe = visite?.acte_principal ?? "";
       reset({
         patient_id: visite?.patient_id ?? initialPatientId ?? "",
         date_visite: visite
@@ -99,9 +140,12 @@ export default function VisiteForm({
               .slice(0, 16)
           : localNow(initialDate),
         duree_minutes: visite?.duree_minutes ?? undefined,
-        acte_principal: visite?.acte_principal ?? "",
+        acte_principal: currentActe,
         notes_pre_visite: visite?.notes_pre_visite ?? "",
       });
+      // Determine initial "Autre" state based on standard list only
+      // (patient actes load async, so we rely on ACTES_COURANTS here)
+      setIsAutreActe(!!currentActe && !ACTES_COURANTS.includes(currentActe));
     }
   }, [open, visite, initialPatientId, initialDate, reset]);
 
@@ -197,29 +241,91 @@ export default function VisiteForm({
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="duree_minutes">Durée (min)</Label>
-              <Input
-                id="duree_minutes"
-                type="number"
-                min={5}
-                max={480}
-                step={5}
-                placeholder="30"
-                {...register("duree_minutes", {
-                  setValueAs: (v: string) => (v === "" ? undefined : parseInt(v, 10)),
-                })}
-              />
-            </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="acte_principal">Acte principal</Label>
-              <Input
-                id="acte_principal"
-                placeholder="Pansement…"
-                {...register("acte_principal")}
-              />
-            </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="duree_minutes">Durée (min)</Label>
+            <Input
+              id="duree_minutes"
+              type="number"
+              min={5}
+              max={480}
+              step={5}
+              placeholder="30"
+              className="w-full"
+              {...register("duree_minutes", {
+                setValueAs: (v: string) => (v === "" ? undefined : parseInt(v, 10)),
+              })}
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label>Acte principal</Label>
+            <Controller
+              name="acte_principal"
+              control={control}
+              render={({ field }) => {
+                const selectValue = isAutreActe
+                  ? "autre"
+                  : isCustomActe(field.value ?? "", patientActes)
+                  ? "autre"
+                  : (field.value ?? "");
+
+                return (
+                  <>
+                    <Select
+                      value={selectValue}
+                      onValueChange={(val) => {
+                        if (val === "autre") {
+                          setIsAutreActe(true);
+                          field.onChange("");
+                        } else {
+                          setIsAutreActe(false);
+                          field.onChange(val);
+                        }
+                      }}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Sélectionner un acte…" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {patientActes.length > 0 && (
+                          <>
+                            <SelectGroup>
+                              <SelectLabel>Plan de soins</SelectLabel>
+                              {patientActes.map((acte) => (
+                                <SelectItem key={acte} value={acte}>
+                                  {acte}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                            <SelectSeparator />
+                          </>
+                        )}
+                        <SelectGroup>
+                          {patientActes.length > 0 && (
+                            <SelectLabel>Actes courants</SelectLabel>
+                          )}
+                          {ACTES_COURANTS.map((acte) => (
+                            <SelectItem key={acte} value={acte}>
+                              {acte}
+                            </SelectItem>
+                          ))}
+                          <SelectSeparator />
+                          <SelectItem value="autre">Autre…</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    {isAutreActe && (
+                      <Input
+                        placeholder="Décrire l'acte…"
+                        value={field.value ?? ""}
+                        onChange={(e) => field.onChange(e.target.value)}
+                        className="mt-2"
+                      />
+                    )}
+                  </>
+                );
+              }}
+            />
           </div>
 
           <div className="space-y-1.5">
