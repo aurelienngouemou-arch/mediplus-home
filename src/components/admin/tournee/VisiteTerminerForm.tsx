@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
@@ -63,6 +64,16 @@ export default function VisiteTerminerForm({
       actes_effectues: visite.actes_supplementaires ?? visite.acte_principal ?? "",
     },
   });
+
+  useEffect(() => {
+    if (open) {
+      reset({
+        transmissions: visite.transmissions ?? "",
+        etat_patient: undefined,
+        actes_effectues: visite.actes_supplementaires ?? visite.acte_principal ?? "",
+      });
+    }
+  }, [open, visite, reset]);
 
   async function onSubmit(data: FormData) {
     const result = await terminerVisite(visite.id, {

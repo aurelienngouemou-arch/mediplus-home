@@ -52,6 +52,7 @@ export async function createPatient(data: unknown) {
         ...parsed.data,
         statut: parsed.data.statut ?? "actif",
         email: parsed.data.email || null,
+        date_naissance: parsed.data.date_naissance || null,
         updated_at: new Date(),
       })
       .returning({ id: patients.id });
@@ -77,7 +78,12 @@ export async function updatePatient(id: string, data: unknown) {
   try {
     await db
       .update(patients)
-      .set({ ...parsed.data, updated_at: new Date() })
+      .set({
+        ...parsed.data,
+        email: parsed.data.email !== undefined ? (parsed.data.email || null) : undefined,
+        date_naissance: parsed.data.date_naissance !== undefined ? (parsed.data.date_naissance || null) : undefined,
+        updated_at: new Date(),
+      })
       .where(eq(patients.id, id));
 
     revalidatePath(`/admin/patients/${id}`);
@@ -121,12 +127,8 @@ export async function getPatients(filters: {
 
   const conditions = [];
 
-  if (filters.statut && filters.statut !== "tous") {
+  if (filters.statut) {
     conditions.push(eq(patients.statut, filters.statut));
-  } else if (!filters.statut) {
-    conditions.push(
-      or(eq(patients.statut, "actif"), eq(patients.statut, "inactif"))!
-    );
   }
 
   if (filters.commune && filters.commune !== "tous") {
@@ -191,10 +193,8 @@ export async function getPatientById(id: string) {
     db
       .select()
       .from(actesPlanSoins)
-      .where(
-        and(eq(actesPlanSoins.patient_id, id), eq(actesPlanSoins.actif, true))
-      )
-      .orderBy(asc(actesPlanSoins.created_at)),
+      .where(eq(actesPlanSoins.patient_id, id))
+      .orderBy(desc(actesPlanSoins.actif), asc(actesPlanSoins.created_at)),
     db
       .select()
       .from(visites)
@@ -278,6 +278,7 @@ export async function convertDemandeToPatient(
         ...parsed.data,
         statut: parsed.data.statut ?? "actif",
         email: parsed.data.email || null,
+        date_naissance: parsed.data.date_naissance || null,
         demande_origine_id: demandeId,
         updated_at: new Date(),
       })
@@ -313,7 +314,12 @@ export async function createActePlanSoins(data: unknown) {
   try {
     const [acte] = await db
       .insert(actesPlanSoins)
-      .values({ ...parsed.data, updated_at: new Date() })
+      .values({
+        ...parsed.data,
+        date_debut: parsed.data.date_debut || null,
+        date_fin: parsed.data.date_fin || null,
+        updated_at: new Date(),
+      })
       .returning({ id: actesPlanSoins.id });
 
     revalidatePath(`/admin/patients/${parsed.data.patient_id}`);
@@ -342,7 +348,12 @@ export async function updateActePlanSoins(id: string, data: unknown) {
 
     await db
       .update(actesPlanSoins)
-      .set({ ...parsed.data, updated_at: new Date() })
+      .set({
+        ...parsed.data,
+        date_debut: parsed.data.date_debut !== undefined ? (parsed.data.date_debut || null) : undefined,
+        date_fin: parsed.data.date_fin !== undefined ? (parsed.data.date_fin || null) : undefined,
+        updated_at: new Date(),
+      })
       .where(eq(actesPlanSoins.id, id));
 
     if (acte) revalidatePath(`/admin/patients/${acte.patient_id}`);
@@ -377,6 +388,41 @@ export async function toggleActePlanSoinsActif(id: string) {
   } catch (e) {
     console.error("toggleActePlanSoinsActif error:", e);
     return { error: "Erreur lors de la modification de l'acte" };
+  }
+}
+
+export async function createVisite(
+  patientId: string,
+  data: {
+    date_visite: string;
+    duree_minutes?: number;
+    acte_principal?: string;
+    transmissions?: string;
+  }
+) {
+  await requireAuth();
+
+  if (!patientId) return { error: "Patient introuvable" };
+
+  try {
+    await db.insert(visites).values({
+      patient_id: patientId,
+      date_visite: new Date(data.date_visite),
+      duree_minutes: data.duree_minutes ?? null,
+      acte_principal: data.acte_principal || null,
+      transmissions: data.transmissions || null,
+      statut: "planifiee",
+      updated_at: new Date(),
+    });
+
+    revalidatePath(`/admin/patients/${patientId}`);
+    revalidatePath("/admin/tournee");
+    revalidatePath("/admin/dashboard");
+
+    return { success: true };
+  } catch (e) {
+    console.error("createVisite error:", e);
+    return { error: "Erreur lors de la création de la visite" };
   }
 }
 

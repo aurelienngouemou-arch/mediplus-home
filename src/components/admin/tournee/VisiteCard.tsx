@@ -229,6 +229,7 @@ function VisiteEditDialog({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors: _errors, isSubmitting },
   } = useForm<EditData>({
     resolver: zodResolver(editSchema),
@@ -244,6 +245,22 @@ function VisiteEditDialog({
       notes_pre_visite: visite.notes_pre_visite ?? "",
     },
   });
+
+  useEffect(() => {
+    if (open) {
+      reset({
+        date_visite: new Date(
+          new Date(visite.date_visite).getTime() -
+            new Date(visite.date_visite).getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .slice(0, 16),
+        duree_minutes: visite.duree_minutes ?? undefined,
+        acte_principal: visite.acte_principal ?? "",
+        notes_pre_visite: visite.notes_pre_visite ?? "",
+      });
+    }
+  }, [open, visite, reset]);
 
   async function onSubmit(data: EditData) {
     const res = await updateVisite(visite.id, data);

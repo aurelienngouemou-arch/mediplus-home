@@ -72,6 +72,7 @@ interface PlanSoinsActeFormProps {
   acte?: ActePlanSoins;
   trigger?: React.ReactNode;
   onDone?: () => void;
+  onOpen?: () => void;
 }
 
 export default function PlanSoinsActeForm({
@@ -79,6 +80,7 @@ export default function PlanSoinsActeForm({
   acte,
   trigger,
   onDone,
+  onOpen,
 }: PlanSoinsActeFormProps) {
   const [open, setOpen] = useState(false);
   const [acteLibre, setActeLibre] = useState(
@@ -134,13 +136,23 @@ export default function PlanSoinsActeForm({
     }
 
     toast.success(isEdit ? "Acte mis à jour" : "Acte ajouté au plan de soins");
+    setActeLibre(false);
+    setFreqLibre(false);
     setOpen(false);
     reset();
     onDone?.();
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(v) => {
+      setOpen(v);
+      if (v) onOpen?.();
+      else {
+        setActeLibre(false);
+        setFreqLibre(false);
+        if (isEdit) onDone?.(); // ferme le dropdown quand dialog se ferme (annuler ou Escape)
+      }
+    }}>
       <DialogTrigger asChild>
         {trigger ?? (
           <Button size="sm" variant="outline">
@@ -175,7 +187,7 @@ export default function PlanSoinsActeForm({
                   }
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Choisir un acte" />
                 </SelectTrigger>
                 <SelectContent>
@@ -226,7 +238,7 @@ export default function PlanSoinsActeForm({
                   }
                 }}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Choisir la fréquence" />
                 </SelectTrigger>
                 <SelectContent>
@@ -272,7 +284,9 @@ export default function PlanSoinsActeForm({
                 min={5}
                 max={240}
                 step={5}
-                {...register("duree_minutes", { valueAsNumber: true })}
+                {...register("duree_minutes", {
+                  setValueAs: (v: string) => v === "" ? undefined : parseInt(v, 10),
+                })}
                 placeholder="15"
               />
             </div>
@@ -285,7 +299,7 @@ export default function PlanSoinsActeForm({
                   setValue("moment_journee", v as ActeCreate["moment_journee"])
                 }
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Variable" />
                 </SelectTrigger>
                 <SelectContent>

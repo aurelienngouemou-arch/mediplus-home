@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { toast } from "sonner";
@@ -11,6 +11,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -18,6 +28,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { createVisite } from "@/lib/actions/patients";
+
+const ACTES_COURANTS = [
+  "Pansement simple",
+  "Pansement complexe",
+  "Injection IM",
+  "Injection SC",
+  "Injection insuline",
+  "Perfusion IV",
+  "Tension artérielle",
+  "Glycémie capillaire",
+  "Soins post-opératoires",
+  "Suivi diabète",
+  "Toilette / aide à la toilette",
+  "Pose/retrait sonde urinaire",
+];
 
 const visiteSchema = z.object({
   date_visite: z.string().min(1, "La date est requise"),
@@ -38,6 +63,7 @@ export default function NouvelleVisiteForm({
   actesSuggeres = [],
 }: NouvelleVisiteFormProps) {
   const [open, setOpen] = useState(false);
+  const [isAutreActe, setIsAutreActe] = useState(false);
 
   const localNow = () => {
     const now = new Date();
@@ -46,11 +72,19 @@ export default function NouvelleVisiteForm({
       .slice(0, 16);
   };
 
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
+  const { register, handleSubmit, reset, control, setValue, formState: { errors, isSubmitting } } =
     useForm<VisiteInput>({
       resolver: zodResolver(visiteSchema),
       defaultValues: { date_visite: localNow() },
     });
+
+  // Fix 5a — refresh date each time the dialog opens
+  useEffect(() => {
+    if (open) {
+      reset({ date_visite: localNow() });
+      setIsAutreActe(false);
+    }
+  }, [open, reset]);
 
   async function onSubmit(data: VisiteInput) {
     const result = await createVisite(patientId, {
@@ -66,6 +100,7 @@ export default function NouvelleVisiteForm({
     toast.success("Visite planifiée");
     setOpen(false);
     reset({ date_visite: localNow() });
+    setIsAutreActe(false);
   }
 
   return (
@@ -110,20 +145,76 @@ export default function NouvelleVisiteForm({
                 })}
               />
             </div>
+
+            {/* Fix 5b — Select shadcn/ui instead of Input + datalist */}
             <div className="space-y-1.5">
-              <Label htmlFor="acte_principal">Acte principal</Label>
-              <Input
-                id="acte_principal"
-                placeholder="Pansement…"
-                list="actes-suggestions"
-                {...register("acte_principal")}
-              />
-              {actesSuggeres.length > 0 && (
-                <datalist id="actes-suggestions">
-                  {actesSuggeres.map((a) => (
-                    <option key={a} value={a} />
-                  ))}
-                </datalist>
+              <Label>Acte principal</Label>
+              {!isAutreActe ? (
+                <Controller
+                  name="acte_principal"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      value={field.value ?? ""}
+                      onValueChange={(v) => {
+                        if (v === "__autre__") {
+                          setIsAutreActe(true);
+                          setValue("acte_principal", "");
+                        } else {
+                          field.onChange(v);
+                        }
+                      }}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Choisir…" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {actesSuggeres.length > 0 && (
+                          <>
+                            <SelectGroup>
+                              <SelectLabel>Plan de soins</SelectLabel>
+                              {actesSuggeres.map((a) => (
+                                <SelectItem key={a} value={a}>
+                                  {a}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                            <SelectSeparator />
+                          </>
+                        )}
+                        <SelectGroup>
+                          {ACTES_COURANTS.map((a) => (
+                            <SelectItem key={a} value={a}>
+                              {a}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                        <SelectSeparator />
+                        <SelectItem value="__autre__">Autre…</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              ) : (
+                <div className="flex gap-2">
+                  <Input
+                    autoFocus
+                    placeholder="Décrire l'acte"
+                    {...register("acte_principal")}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setIsAutreActe(false);
+                      setValue("acte_principal", "");
+                    }}
+                    className="shrink-0 text-xs"
+                  >
+                    Liste
+                  </Button>
+                </div>
               )}
             </div>
           </div>
