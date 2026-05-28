@@ -368,7 +368,7 @@ export default async function PatientsPage({
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-3 flex-wrap">
         <div>
           <h1 className="text-2xl font-serif font-semibold text-foreground">
             Mes patients
@@ -377,10 +377,11 @@ export default async function PatientsPage({
             {actifs} patient{actifs > 1 ? "s" : ""} suivi{actifs > 1 ? "s" : ""}
           </p>
         </div>
-        <Button asChild>
+        <Button asChild size="sm">
           <Link href="/admin/patients/nouveau">
             <Plus className="h-4 w-4 mr-1.5" />
-            Ajouter un patient
+            <span className="hidden sm:inline">Ajouter un patient</span>
+            <span className="sm:hidden">Nouveau</span>
           </Link>
         </Button>
       </div>

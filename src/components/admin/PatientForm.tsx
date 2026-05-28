@@ -223,7 +223,7 @@ export default function PatientForm({
             <p className="text-xs text-destructive">{errors.adresse.message}</p>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-1.5">
             <Label htmlFor="code_postal">
               Code postal <span className="text-destructive">*</span>
