@@ -33,13 +33,14 @@ export default function TourneeJour({
   }
 
   const dateLabel = format(currentDate, "EEEE d MMMM yyyy", { locale: fr });
+  const dateLabelShort = format(currentDate, "EEE d MMM", { locale: fr });
   const totalDuree = visites.reduce((acc, v) => acc + (v.duree_minutes ?? 0), 0);
   const visitesActives = visites.filter((v) => v.statut !== "annulee");
 
   return (
     <Card className="border-border/50">
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <div className="flex items-center gap-2">
             <button
               onClick={() => navigate(-1)}
@@ -49,7 +50,10 @@ export default function TourneeJour({
               <ChevronLeft className="h-4 w-4" />
             </button>
             <div>
-              <p className="font-semibold text-sm text-foreground capitalize">{dateLabel}</p>
+              <p className="font-semibold text-sm text-foreground capitalize">
+                <span className="sm:hidden">{dateLabelShort}</span>
+                <span className="hidden sm:inline">{dateLabel}</span>
+              </p>
               {isToday && (
                 <span className="text-[10px] text-primary font-medium">Aujourd'hui</span>
               )}
@@ -74,7 +78,7 @@ export default function TourneeJour({
             patientsActifs={patientsActifs}
             initialDate={dateStr}
             trigger={
-              <Button size="sm">
+              <Button size="sm" className="w-full sm:w-auto">
                 <Plus className="h-3.5 w-3.5 mr-1.5" />
                 Nouvelle visite
               </Button>

@@ -57,7 +57,7 @@ export default async function TourneePage({
 
   return (
     <div className="space-y-5">
-      <div className="flex items-start justify-between gap-4 flex-wrap">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="text-2xl font-serif font-semibold text-foreground">Ma tournée</h1>
           <p className="text-sm text-muted-foreground mt-0.5">

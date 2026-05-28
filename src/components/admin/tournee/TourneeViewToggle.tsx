@@ -21,26 +21,28 @@ export default function TourneeViewToggle({ currentVue, currentDate }: TourneeVi
       <button
         onClick={() => switchVue("jour")}
         className={cn(
-          "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+          "flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
           currentVue !== "semaine"
             ? "bg-background text-foreground shadow-sm"
             : "text-muted-foreground hover:text-foreground"
         )}
       >
         <LayoutList className="h-3.5 w-3.5" />
-        Vue Jour
+        <span className="hidden sm:inline">Vue Jour</span>
+        <span className="sm:hidden">Jour</span>
       </button>
       <button
         onClick={() => switchVue("semaine")}
         className={cn(
-          "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+          "flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
           currentVue === "semaine"
             ? "bg-background text-foreground shadow-sm"
             : "text-muted-foreground hover:text-foreground"
         )}
       >
         <CalendarDays className="h-3.5 w-3.5" />
-        Vue Semaine
+        <span className="hidden sm:inline">Vue Semaine</span>
+        <span className="sm:hidden">Semaine</span>
       </button>
     </div>
   );
