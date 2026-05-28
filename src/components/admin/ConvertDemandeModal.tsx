@@ -173,10 +173,10 @@ export default function ConvertDemandeModal({ demande }: ConvertDemandeModalProp
                 Commune <span className="text-destructive">*</span>
               </Label>
               <Select
-                value={communeVal}
+                value={communeVal || undefined}
                 onValueChange={(v) => setValue("commune", v)}
               >
-                <SelectTrigger aria-invalid={!!errors.commune}>
+                <SelectTrigger className="w-full" aria-invalid={!!errors.commune}>
                   <SelectValue placeholder="Sélectionner" />
                 </SelectTrigger>
                 <SelectContent>

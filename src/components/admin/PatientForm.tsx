@@ -246,10 +246,10 @@ export default function PatientForm({
               Commune <span className="text-destructive">*</span>
             </Label>
             <Select
-              value={communeValue}
+              value={communeValue || undefined}
               onValueChange={(v) => setValue("commune", v)}
             >
-              <SelectTrigger id="commune" aria-invalid={!!errors.commune}>
+              <SelectTrigger id="commune" className="w-full" aria-invalid={!!errors.commune}>
                 <SelectValue placeholder="Sélectionner" />
               </SelectTrigger>
               <SelectContent>
@@ -286,10 +286,10 @@ export default function PatientForm({
           <div className="space-y-1.5">
             <Label htmlFor="mutuelle">Mutuelle</Label>
             <Select
-              value={muelleValue ?? ""}
+              value={muelleValue || undefined}
               onValueChange={(v) => setValue("mutuelle", v)}
             >
-              <SelectTrigger id="mutuelle">
+              <SelectTrigger id="mutuelle" className="w-full">
                 <SelectValue placeholder="Sélectionner" />
               </SelectTrigger>
               <SelectContent>
@@ -336,7 +336,7 @@ export default function PatientForm({
                 setValue("statut", v as "actif" | "inactif" | "archive")
               }
             >
-              <SelectTrigger id="statut">
+              <SelectTrigger id="statut" className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

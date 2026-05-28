@@ -22,6 +22,7 @@ import PatientStatusBadge from "@/components/admin/PatientStatusBadge";
 import PatientAvatar from "@/components/admin/PatientAvatar";
 import PlanSoinsActeForm from "@/components/admin/PlanSoinsActeForm";
 import ActeActions from "@/components/admin/ActeActions";
+import NouvelleVisiteForm from "@/components/admin/NouvelleVisiteForm";
 import { getPatientById } from "@/lib/actions/patients";
 import type { Metadata } from "next";
 
@@ -298,7 +299,7 @@ export default async function PatientDetailPage({
                 Plan de soins
                 {actes.length > 0 && (
                   <span className="bg-primary/10 text-primary text-[11px] px-1.5 py-0.5 rounded-full font-medium">
-                    {actes.length} acte{actes.length > 1 ? "s" : ""}
+                    {actes.filter(a => a.actif).length} acte{actes.filter(a => a.actif).length > 1 ? "s" : ""} actif{actes.filter(a => a.actif).length > 1 ? "s" : ""}
                   </span>
                 )}
               </CardTitle>
@@ -318,12 +319,19 @@ export default async function PatientDetailPage({
                   {actes.map((acte) => (
                     <div
                       key={acte.id}
-                      className="py-3 flex items-start justify-between gap-3"
+                      className={`py-3 flex items-start justify-between gap-3 ${!acte.actif ? "opacity-50" : ""}`}
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-foreground">
-                          {acte.acte}
-                        </p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className={`text-sm font-medium ${acte.actif ? "text-foreground" : "text-muted-foreground line-through"}`}>
+                            {acte.acte}
+                          </p>
+                          {!acte.actif && (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200 font-medium">
+                              Inactif
+                            </span>
+                          )}
+                        </div>
                         <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-0.5 text-xs text-muted-foreground">
                           <span>{acte.frequence}</span>
                           {acte.duree_minutes && (
@@ -359,11 +367,10 @@ export default async function PatientDetailPage({
                 <CalendarDays className="h-4 w-4 text-primary" />
                 Historique des visites
               </CardTitle>
-              <Button asChild size="sm" variant="outline">
-                <Link href={`/admin/tournee?patient=${id}`}>
-                  Planifier une visite
-                </Link>
-              </Button>
+              <NouvelleVisiteForm
+                patientId={id}
+                actesSuggeres={actes.filter((a) => a.actif).map((a) => a.acte)}
+              />
             </CardHeader>
             <CardContent className="pt-0">
               {visites.length === 0 ? (
