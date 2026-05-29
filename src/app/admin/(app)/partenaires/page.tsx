@@ -58,7 +58,7 @@ export default async function PartenairesPage({
       bg: "bg-teal-50",
     },
     {
-      label: "Délégations ce mois",
+      label: "Délégations / mois",
       value: stats.delegationsMois,
       icon: Share2,
       color: "text-purple-600",
@@ -87,17 +87,17 @@ export default async function PartenairesPage({
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {statCards.map((s) => (
           <Card key={s.label} className="border-border/50">
-            <CardContent className="pt-4 pb-3">
+            <CardContent className="p-4">
               <div className="flex items-center gap-3">
                 <div className={`rounded-lg p-2 shrink-0 ${s.bg}`}>
                   <s.icon className={`h-4 w-4 ${s.color}`} />
                 </div>
                 <div className="min-w-0">
                   <p className="text-2xl font-bold text-foreground tabular-nums">{s.value}</p>
-                  <p className="text-xs text-muted-foreground leading-tight">{s.label}</p>
+                  <p className="text-xs text-muted-foreground leading-tight truncate">{s.label}</p>
                 </div>
               </div>
             </CardContent>

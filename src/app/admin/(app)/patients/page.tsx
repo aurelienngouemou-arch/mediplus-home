@@ -389,7 +389,7 @@ export default async function PatientsPage({
       {/* Stats */}
       <Suspense
         fallback={
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="h-24 animate-pulse bg-muted rounded-xl" />
             ))}
