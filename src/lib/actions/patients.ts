@@ -96,7 +96,7 @@ export async function updatePatient(id: string, data: unknown) {
   }
 }
 
-export async function deletePatient(id: string) {
+export async function archivePatient(id: string) {
   await requireAuth();
 
   try {
@@ -105,13 +105,73 @@ export async function deletePatient(id: string) {
       .set({ statut: "archive", updated_at: new Date() })
       .where(eq(patients.id, id));
 
+    revalidatePath(`/admin/patients/${id}`);
     revalidatePath("/admin/patients");
     revalidatePath("/admin/dashboard");
 
     return { success: true };
   } catch (e) {
-    console.error("deletePatient error:", e);
+    console.error("archivePatient error:", e);
     return { error: "Erreur lors de l'archivage du patient" };
+  }
+}
+
+export async function deletePatient(id: string) {
+  return archivePatient(id);
+}
+
+export async function restorePatient(id: string) {
+  await requireAuth();
+
+  try {
+    await db
+      .update(patients)
+      .set({ statut: "actif", updated_at: new Date() })
+      .where(eq(patients.id, id));
+
+    revalidatePath(`/admin/patients/${id}`);
+    revalidatePath("/admin/patients");
+    revalidatePath("/admin/dashboard");
+
+    return { success: true };
+  } catch (e) {
+    console.error("restorePatient error:", e);
+    return { error: "Erreur lors de la restauration du patient" };
+  }
+}
+
+export async function deletePatientPermanently(id: string) {
+  await requireAuth();
+
+  try {
+    const activeVisites = await db
+      .select({ id: visites.id })
+      .from(visites)
+      .where(
+        and(
+          eq(visites.patient_id, id),
+          or(
+            eq(visites.statut, "planifiee"),
+            eq(visites.statut, "en_cours")
+          )!
+        )
+      );
+
+    if (activeVisites.length > 0) {
+      return {
+        error: `Impossible : ce patient a ${activeVisites.length} visite${activeVisites.length > 1 ? "s" : ""} planifiée${activeVisites.length > 1 ? "s" : ""} ou en cours. Annulez-les d'abord.`,
+      };
+    }
+
+    await db.delete(patients).where(eq(patients.id, id));
+
+    revalidatePath("/admin/patients");
+    revalidatePath("/admin/dashboard");
+
+    return { success: true };
+  } catch (e) {
+    console.error("deletePatientPermanently error:", e);
+    return { error: "Erreur lors de la suppression définitive du patient" };
   }
 }
 

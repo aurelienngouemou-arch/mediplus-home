@@ -11,16 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Dialog,
   DialogContent,
   DialogHeader,
@@ -69,10 +59,6 @@ function localNow(date?: string): string {
   return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 }
 
-function isCustomActe(value: string, patientActes: string[]): boolean {
-  if (!value) return false;
-  return !ACTES_COURANTS.includes(value) && !patientActes.includes(value);
-}
 
 export default function VisiteForm({
   patientsActifs,
@@ -203,22 +189,19 @@ export default function VisiteForm({
                 name="patient_id"
                 control={control}
                 render={({ field }) => (
-                  <Select
-                    onValueChange={field.onChange}
+                  <select
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus:outline-none focus:ring-[3px] focus:ring-ring/50 focus:border-ring disabled:cursor-not-allowed disabled:opacity-50"
                     value={field.value}
+                    onChange={(e) => field.onChange(e.target.value)}
                     disabled={!!initialPatientId}
                   >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Sélectionner un patient…" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {patientsActifs.map((p) => (
-                        <SelectItem key={p.id} value={p.id}>
-                          {p.prenom} {p.nom} · {p.commune}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <option value="">Sélectionner un patient…</option>
+                    {patientsActifs.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.prenom} {p.nom} · {p.commune}
+                      </option>
+                    ))}
+                  </select>
                 )}
               />
               {errors.patient_id && (
@@ -262,69 +245,46 @@ export default function VisiteForm({
             <Controller
               name="acte_principal"
               control={control}
-              render={({ field }) => {
-                const selectValue = isAutreActe
-                  ? "autre"
-                  : isCustomActe(field.value ?? "", patientActes)
-                  ? "autre"
-                  : (field.value ?? "");
-
-                return (
-                  <>
-                    <Select
-                      value={selectValue}
-                      onValueChange={(val) => {
-                        if (val === "autre") {
-                          setIsAutreActe(true);
-                          field.onChange("");
-                        } else {
-                          setIsAutreActe(false);
-                          field.onChange(val);
-                        }
-                      }}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Sélectionner un acte…" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {patientActes.length > 0 && (
-                          <>
-                            <SelectGroup>
-                              <SelectLabel>Plan de soins</SelectLabel>
-                              {patientActes.map((acte) => (
-                                <SelectItem key={acte} value={acte}>
-                                  {acte}
-                                </SelectItem>
-                              ))}
-                            </SelectGroup>
-                            <SelectSeparator />
-                          </>
-                        )}
-                        <SelectGroup>
-                          {patientActes.length > 0 && (
-                            <SelectLabel>Actes courants</SelectLabel>
-                          )}
-                          {ACTES_COURANTS.map((acte) => (
-                            <SelectItem key={acte} value={acte}>
-                              {acte}
-                            </SelectItem>
-                          ))}
-                          <SelectSeparator />
-                          <SelectItem value="autre">Autre…</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    {isAutreActe && (
-                      <Input
-                        placeholder="Décrire l'acte…"
-                        value={field.value ?? ""}
-                        onChange={(e) => field.onChange(e.target.value)}
-                        className="mt-2"
-                      />
+              render={({ field }) => (
+                <>
+                  <select
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus:outline-none focus:ring-[3px] focus:ring-ring/50 focus:border-ring"
+                    value={isAutreActe ? "autre" : (field.value ?? "")}
+                    onChange={(e) => {
+                      if (e.target.value === "autre") {
+                        setIsAutreActe(true);
+                        field.onChange("");
+                      } else {
+                        setIsAutreActe(false);
+                        field.onChange(e.target.value);
+                      }
+                    }}
+                  >
+                    <option value="">Sélectionner un acte…</option>
+                    {patientActes.length > 0 && (
+                      <optgroup label="Plan de soins">
+                        {patientActes.map((acte) => (
+                          <option key={acte} value={acte}>{acte}</option>
+                        ))}
+                      </optgroup>
                     )}
-                  </>
-                );
-              }}
+                    <optgroup label="Actes courants">
+                      {ACTES_COURANTS.filter((acte) => !patientActes.includes(acte)).map((acte) => (
+                        <option key={acte} value={acte}>{acte}</option>
+                      ))}
+                    </optgroup>
+                    <option value="autre">Autre…</option>
+                  </select>
+                  {isAutreActe && (
+                    <Input
+                      placeholder="Décrire l'acte…"
+                      value={field.value ?? ""}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      className="mt-2"
+                    />
+                  )}
+                </>
+              )}
             />
           </div>
 

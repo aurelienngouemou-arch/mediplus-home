@@ -14,6 +14,7 @@ import {
   ClipboardList,
   Clock,
   ExternalLink,
+  ArchiveRestore,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import PatientAvatar from "@/components/admin/PatientAvatar";
 import PlanSoinsActeForm from "@/components/admin/PlanSoinsActeForm";
 import ActeActions from "@/components/admin/ActeActions";
 import NouvelleVisiteForm from "@/components/admin/NouvelleVisiteForm";
+import PatientActions from "@/components/admin/PatientActions";
 import { getPatientById } from "@/lib/actions/patients";
 import type { Metadata } from "next";
 
@@ -87,6 +89,21 @@ export default async function PatientDetailPage({
 
   return (
     <div className="space-y-5">
+      {/* Bandeau patient archivé */}
+      {patient.statut === "archive" && (
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+          <div className="flex items-center gap-2 text-sm text-amber-800">
+            <ArchiveRestore className="h-4 w-4 shrink-0" />
+            <span>Patient archivé — ses données sont conservées mais il n'apparaît plus dans la liste principale.</span>
+          </div>
+          <PatientActions
+            patientId={id}
+            patientName={`${patient.prenom} ${patient.nom}`}
+            statut={patient.statut ?? "actif"}
+          />
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center gap-3">
         <Link
@@ -110,12 +127,21 @@ export default async function PatientDetailPage({
             <p className="text-xs text-muted-foreground mt-0.5">{age} ans</p>
           )}
         </div>
-        <Button asChild size="sm" variant="outline">
-          <Link href={`/admin/patients/${id}/modifier`}>
-            <Pencil className="h-3.5 w-3.5 mr-1.5" />
-            Modifier
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button asChild size="sm" variant="outline">
+            <Link href={`/admin/patients/${id}/modifier`}>
+              <Pencil className="h-3.5 w-3.5 mr-1.5" />
+              Modifier
+            </Link>
+          </Button>
+          {patient.statut !== "archive" && (
+            <PatientActions
+              patientId={id}
+              patientName={`${patient.prenom} ${patient.nom}`}
+              statut={patient.statut ?? "actif"}
+            />
+          )}
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-5 gap-5">
