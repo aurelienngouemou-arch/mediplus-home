@@ -6,8 +6,6 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
 import {
-  Phone,
-  Mail,
   MessageSquare,
   ArrowLeft,
   MapPin,
@@ -15,6 +13,7 @@ import {
   Shield,
   ExternalLink,
 } from "lucide-react";
+import CopyableContact from "@/components/admin/CopyableContact";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -108,24 +107,8 @@ export default async function DemandeDetailPage({
               </div>
 
               <div className="space-y-2 pl-0">
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                  <a
-                    href={`tel:${demande.telephone}`}
-                    className="text-primary hover:underline"
-                  >
-                    {demande.telephone}
-                  </a>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                  <a
-                    href={`mailto:${demande.email}`}
-                    className="text-primary hover:underline truncate"
-                  >
-                    {demande.email}
-                  </a>
-                </div>
+                <CopyableContact type="tel" value={demande.telephone} />
+                <CopyableContact type="email" value={demande.email} />
                 {demande.commune && (
                   <div className="flex items-center gap-2 text-sm">
                     <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
@@ -137,19 +120,19 @@ export default async function DemandeDetailPage({
               <Separator />
 
               {/* Actions rapides */}
-              <div className="flex flex-wrap gap-2">
-                <Button asChild size="sm" variant="outline">
-                  <a href={`tel:${demande.telephone}`}>
-                    <Phone className="h-3.5 w-3.5 mr-1.5" />
-                    Appeler
-                  </a>
-                </Button>
-                <Button asChild size="sm" variant="outline">
-                  <a href={`mailto:${demande.email}`}>
-                    <Mail className="h-3.5 w-3.5 mr-1.5" />
-                    Email
-                  </a>
-                </Button>
+              <div className="flex flex-wrap items-center gap-3">
+                <CopyableContact
+                  type="tel"
+                  value={demande.telephone}
+                  label="Appeler"
+                  className="text-sm"
+                />
+                <CopyableContact
+                  type="email"
+                  value={demande.email}
+                  label="Email"
+                  className="text-sm"
+                />
                 <Button asChild size="sm" variant="outline">
                   <a href={waUrl} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="h-3.5 w-3.5 mr-1.5" />

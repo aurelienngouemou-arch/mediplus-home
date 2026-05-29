@@ -4,13 +4,12 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import {
   ChevronLeft,
-  Phone,
-  Mail,
   MessageCircle,
   MapPin,
   Pencil,
   Share2,
 } from "lucide-react";
+import CopyableContact from "@/components/admin/CopyableContact";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -103,20 +102,8 @@ export default async function PartenaireDetailPage({
 
               {/* Coordonnées */}
               <div className="space-y-2.5 pt-2 border-t border-border">
-                <a
-                  href={`tel:${partenaire.telephone}`}
-                  className="flex items-center gap-2.5 text-sm text-foreground hover:text-primary transition-colors"
-                >
-                  <Phone className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  {partenaire.telephone}
-                </a>
-                <a
-                  href={`mailto:${partenaire.email}`}
-                  className="flex items-center gap-2.5 text-sm text-foreground hover:text-primary transition-colors break-all"
-                >
-                  <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />
-                  {partenaire.email}
-                </a>
+                <CopyableContact type="tel" value={partenaire.telephone} />
+                <CopyableContact type="email" value={partenaire.email} />
                 <a
                   href={waUrl}
                   target="_blank"
