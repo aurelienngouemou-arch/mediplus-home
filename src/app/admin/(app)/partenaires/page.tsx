@@ -265,38 +265,39 @@ export default async function PartenairesPage({
           {/* Mobile cards */}
           <div className="md:hidden space-y-3">
             {partenaires.map((p) => (
-              <Link key={p.id} href={`/admin/partenaires/${p.id}`}>
-                <Card className="border-border/50 hover:border-primary/30 transition-colors">
-                  <CardContent className="p-4 space-y-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <p className="font-semibold text-foreground">
-                          {p.prenom} {p.nom}
-                        </p>
-                        <ZonesChips zones={p.zones_couvertes} />
-                      </div>
-                      <Badge
-                        variant="outline"
-                        className={
-                          p.actif
-                            ? "border-green-200 bg-green-50 text-green-700 text-[10px]"
-                            : "border-gray-200 bg-gray-50 text-gray-500 text-[10px]"
-                        }
-                      >
-                        {p.actif ? "Actif" : "Inactif"}
-                      </Badge>
-                    </div>
-                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                      <a href={`tel:${p.telephone}`} className="flex items-center gap-1 hover:text-primary">
-                        <Phone className="h-3 w-3" /> {p.telephone}
-                      </a>
-                      <a href={`mailto:${p.email}`} className="flex items-center gap-1 hover:text-primary truncate max-w-[200px]">
-                        <Mail className="h-3 w-3" /> {p.email}
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <Card key={p.id} className="border-border/50">
+                <CardContent className="p-4 space-y-2">
+                  <div className="flex items-start justify-between gap-2">
+                    <Link
+                      href={`/admin/partenaires/${p.id}`}
+                      className="flex-1 min-w-0"
+                    >
+                      <p className="font-semibold text-foreground hover:text-primary transition-colors">
+                        {p.prenom} {p.nom}
+                      </p>
+                      <ZonesChips zones={p.zones_couvertes} />
+                    </Link>
+                    <Badge
+                      variant="outline"
+                      className={
+                        p.actif
+                          ? "border-green-200 bg-green-50 text-green-700 text-[10px]"
+                          : "border-gray-200 bg-gray-50 text-gray-500 text-[10px]"
+                      }
+                    >
+                      {p.actif ? "Actif" : "Inactif"}
+                    </Badge>
+                  </div>
+                  <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                    <a href={`tel:${p.telephone}`} className="flex items-center gap-1 hover:text-primary">
+                      <Phone className="h-3 w-3" /> {p.telephone}
+                    </a>
+                    <a href={`mailto:${p.email}`} className="flex items-center gap-1 hover:text-primary truncate max-w-[200px]">
+                      <Mail className="h-3 w-3" /> {p.email}
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </>
