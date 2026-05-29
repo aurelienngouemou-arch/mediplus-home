@@ -23,6 +23,7 @@ export type VisiteAvecPatient = {
   notes_pre_visite: string | null;
   etat_patient: string | null;
   statut: string;
+  delegation_id: string | null;
   patient_id: string;
   patient_nom: string;
   patient_prenom: string;
@@ -54,6 +55,7 @@ const visiteSelectFields = {
   notes_pre_visite: visites.notes_pre_visite,
   etat_patient: visites.etat_patient,
   statut: visites.statut,
+  delegation_id: visites.delegation_id,
   patient_id: visites.patient_id,
   patient_nom: patients.nom,
   patient_prenom: patients.prenom,
@@ -72,6 +74,7 @@ function normalizeRow(row: {
   notes_pre_visite: string | null;
   etat_patient: string | null;
   statut: string | null;
+  delegation_id: string | null;
   patient_id: string;
   patient_nom: string;
   patient_prenom: string;

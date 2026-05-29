@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { format } from "date-fns";
@@ -15,6 +15,8 @@ import {
   XCircle,
   Pencil,
   Trash2,
+  Share2,
+  RotateCcw,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -33,9 +35,17 @@ import {
   annulerVisite,
   updateVisite,
 } from "@/lib/actions/visites";
+import {
+  getDelegationByVisiteId,
+  cancelDelegation,
+  updateDelegationStatus,
+} from "@/lib/actions/delegations";
+import { getPartenairesActifsForSelect } from "@/lib/actions/partenaires";
 import type { VisiteAvecPatient, PatientSelectItem } from "@/lib/actions/visites";
 import VisiteStatusBadge from "@/components/admin/tournee/VisiteStatusBadge";
 import VisiteTerminerForm from "@/components/admin/tournee/VisiteTerminerForm";
+import DelegationForm from "@/components/admin/tournee/DelegationForm";
+import type { PartenaireSelectItem } from "@/lib/actions/partenaires";
 
 const editSchema = z.object({
   date_visite: z.string().min(1, "La date est requise"),
@@ -54,6 +64,8 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
   const [menuOpen, setMenuOpen] = useState(false);
   const [terminerOpen, setTerminerOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [deleguerOpen, setDeleguerOpen] = useState(false);
+  const [partenaires, setPartenaires] = useState<PartenaireSelectItem[]>([]);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,6 +80,7 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
 
   const heure = format(new Date(visite.date_visite), "HH:mm", { locale: fr });
   const isFini = visite.statut === "terminee" || visite.statut === "annulee";
+  const isDeleguee = visite.statut === "deleguee";
 
   async function handleDemarrer() {
     setMenuOpen(false);
@@ -92,15 +105,52 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
     else toast.success("Visite supprimée");
   }
 
+  async function handleOuvrirDeleguer() {
+    setMenuOpen(false);
+    const list = await getPartenairesActifsForSelect();
+    setPartenaires(list);
+    setDeleguerOpen(true);
+  }
+
+  async function handleAnnulerDelegation() {
+    setMenuOpen(false);
+    if (!confirm("Annuler la délégation ? La visite reviendra en statut Planifiée.")) return;
+    if (!visite.delegation_id) return;
+    const res = await cancelDelegation(visite.delegation_id, visite.id);
+    if ("error" in res && res.error) toast.error(res.error);
+    else toast.success("Délégation annulée");
+  }
+
+  async function handleMarquerDelegation(statut: "acceptee" | "refusee" | "completee") {
+    setMenuOpen(false);
+    if (!visite.delegation_id) return;
+
+    if (statut === "refusee") {
+      if (!confirm("Marquer comme refusée ? La visite reviendra en Planifiée.")) return;
+      await cancelDelegation(visite.delegation_id, visite.id);
+      toast.info("Délégation refusée — visite remise en planifiée");
+      return;
+    }
+
+    const res = await updateDelegationStatus(visite.delegation_id, statut);
+    if ("error" in res && res.error) toast.error(res.error);
+    else {
+      const labels = { acceptee: "Délégation acceptée", completee: "Visite complétée par le partenaire" };
+      toast.success(labels[statut]);
+    }
+  }
+
   return (
     <>
       <div
         className={`relative flex gap-4 p-4 rounded-xl border transition-colors ${
           isFini
             ? "border-border/40 bg-muted/30 opacity-70"
-            : visite.statut === "en_cours"
-              ? "border-amber-200 bg-amber-50/50"
-              : "border-border bg-card hover:border-primary/30"
+            : isDeleguee
+              ? "border-purple-200 bg-purple-50/30"
+              : visite.statut === "en_cours"
+                ? "border-amber-200 bg-amber-50/50"
+                : "border-border bg-card hover:border-primary/30"
         }`}
       >
         <div className="shrink-0 text-center w-12">
@@ -153,17 +203,33 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
           {menuOpen && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
-              <div className="absolute right-0 top-full z-20 mt-1 w-52 bg-popover rounded-lg border border-border shadow-lg py-1 text-sm">
+              <div className="absolute right-0 top-full z-20 mt-1 w-56 bg-popover rounded-lg border border-border shadow-lg py-1 text-sm">
                 {visite.statut === "planifiee" && (
-                  <button
-                    onClick={handleDemarrer}
-                    className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
-                  >
-                    <Play className="h-3.5 w-3.5 text-amber-600" />
-                    Démarrer la visite
-                  </button>
+                  <>
+                    <button
+                      onClick={handleDemarrer}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <Play className="h-3.5 w-3.5 text-amber-600" />
+                      Démarrer la visite
+                    </button>
+                    <button
+                      onClick={() => { setMenuOpen(false); setTerminerOpen(true); }}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <CheckCheck className="h-3.5 w-3.5 text-green-600" />
+                      Marquer comme terminée
+                    </button>
+                    <button
+                      onClick={handleOuvrirDeleguer}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <Share2 className="h-3.5 w-3.5 text-purple-600" />
+                      Déléguer cette visite
+                    </button>
+                  </>
                 )}
-                {(visite.statut === "planifiee" || visite.statut === "en_cours") && (
+                {visite.statut === "en_cours" && (
                   <button
                     onClick={() => { setMenuOpen(false); setTerminerOpen(true); }}
                     className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
@@ -172,30 +238,70 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
                     Marquer comme terminée
                   </button>
                 )}
-                <button
-                  onClick={() => { setMenuOpen(false); setEditOpen(true); }}
-                  className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
-                >
-                  <Pencil className="h-3.5 w-3.5 text-blue-600" />
-                  Modifier
-                </button>
-                {visite.statut !== "annulee" && visite.statut !== "terminee" && (
-                  <button
-                    onClick={handleAnnuler}
-                    className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
-                  >
-                    <XCircle className="h-3.5 w-3.5 text-orange-500" />
-                    Annuler la visite
-                  </button>
+                {isDeleguee && (
+                  <>
+                    <button
+                      onClick={() => handleMarquerDelegation("acceptee")}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <CheckCheck className="h-3.5 w-3.5 text-green-600" />
+                      Marquer acceptée
+                    </button>
+                    <button
+                      onClick={() => handleMarquerDelegation("completee")}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <CheckCheck className="h-3.5 w-3.5 text-teal-600" />
+                      Marquer complétée
+                    </button>
+                    <button
+                      onClick={() => handleMarquerDelegation("refusee")}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left text-orange-600"
+                    >
+                      <XCircle className="h-3.5 w-3.5" />
+                      Marquer refusée
+                    </button>
+                    <button
+                      onClick={handleAnnulerDelegation}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left text-orange-600"
+                    >
+                      <RotateCcw className="h-3.5 w-3.5" />
+                      Annuler la délégation
+                    </button>
+                  </>
                 )}
-                <div className="my-1 h-px bg-border" />
-                <button
-                  onClick={handleSupprimer}
-                  className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left text-destructive"
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                  Supprimer
-                </button>
+                {!isFini && !isDeleguee && (
+                  <>
+                    <button
+                      onClick={() => { setMenuOpen(false); setEditOpen(true); }}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                    >
+                      <Pencil className="h-3.5 w-3.5 text-blue-600" />
+                      Modifier
+                    </button>
+                    {visite.statut !== "annulee" && (
+                      <button
+                        onClick={handleAnnuler}
+                        className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left"
+                      >
+                        <XCircle className="h-3.5 w-3.5 text-orange-500" />
+                        Annuler la visite
+                      </button>
+                    )}
+                  </>
+                )}
+                {!isDeleguee && (
+                  <>
+                    <div className="my-1 h-px bg-border" />
+                    <button
+                      onClick={handleSupprimer}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 hover:bg-muted transition-colors text-left text-destructive"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                      Supprimer
+                    </button>
+                  </>
+                )}
               </div>
             </>
           )}
@@ -212,6 +318,13 @@ export default function VisiteCard({ visite, patientsActifs: _ }: VisiteCardProp
         open={editOpen}
         onOpenChange={setEditOpen}
         visite={visite}
+      />
+
+      <DelegationForm
+        open={deleguerOpen}
+        onOpenChange={setDeleguerOpen}
+        visite={visite}
+        partenaires={partenaires}
       />
     </>
   );

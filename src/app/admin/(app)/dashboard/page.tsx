@@ -5,12 +5,13 @@ import { eq, count, gte, and, desc } from "drizzle-orm";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import Link from "next/link";
-import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3, Users, CalendarDays } from "lucide-react";
+import { ArrowRight, Inbox, Clock, CheckCircle2, BarChart3, Users, CalendarDays, Share2, Handshake } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DemandeStatusBadge from "@/components/admin/DemandeStatusBadge";
 import PatientAvatar from "@/components/admin/PatientAvatar";
 import VisiteStatusBadge from "@/components/admin/tournee/VisiteStatusBadge";
 import { getProchesVisites, getStatsVisites } from "@/lib/actions/visites";
+import { getDelegationsRecentes } from "@/lib/actions/delegations";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -87,12 +88,13 @@ function RelativeTime({ date }: { date: Date | null }) {
 
 export default async function DashboardPage() {
   const session = await auth();
-  const [stats, recentDemandes, recentPatients, prochesVisites, statsVisites] = await Promise.all([
+  const [stats, recentDemandes, recentPatients, prochesVisites, statsVisites, delegationsRecentes] = await Promise.all([
     getStats(),
     getRecentDemandes(),
     getRecentPatients(),
     getProchesVisites(3),
     getStatsVisites(),
+    getDelegationsRecentes(3),
   ]);
 
   const today = format(new Date(), "EEEE d MMMM yyyy", { locale: fr });
@@ -273,6 +275,63 @@ export default async function DashboardPage() {
                   </span>
                 </Link>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Délégations récentes */}
+      {delegationsRecentes.length > 0 && (
+        <Card className="border-border/50">
+          <CardHeader className="flex flex-row items-center justify-between pb-4">
+            <CardTitle className="text-base font-semibold flex items-center gap-2">
+              <Handshake className="h-4 w-4 text-purple-600" />
+              Délégations récentes
+            </CardTitle>
+            <Link
+              href="/admin/partenaires"
+              className="flex items-center gap-1 text-xs text-primary hover:underline"
+            >
+              Voir les partenaires <ArrowRight className="h-3 w-3" />
+            </Link>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <div className="space-y-0">
+              {delegationsRecentes.map((d) => {
+                const statutConfig: Record<string, { label: string; className: string }> = {
+                  envoyee: { label: "Envoyée", className: "bg-blue-50 text-blue-700 border-blue-200" },
+                  acceptee: { label: "Acceptée", className: "bg-green-50 text-green-700 border-green-200" },
+                  refusee: { label: "Refusée", className: "bg-red-50 text-red-700 border-red-200" },
+                  completee: { label: "Complétée", className: "bg-gray-50 text-gray-600 border-gray-200" },
+                };
+                const conf = statutConfig[d.statut ?? "envoyee"] ?? statutConfig.envoyee;
+                return (
+                  <div
+                    key={d.id}
+                    className="flex items-center gap-3 py-3 -mx-2 px-2 rounded-lg"
+                  >
+                    <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs font-semibold shrink-0">
+                      <Share2 className="h-3.5 w-3.5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-foreground truncate">
+                        {d.patient_prenom} {d.patient_nom}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {d.partenaire_prenom} {d.partenaire_nom}
+                        {d.date_visite_prevue && (
+                          <> · {format(new Date(d.date_visite_prevue), "d MMM", { locale: fr })}</>
+                        )}
+                      </p>
+                    </div>
+                    <span
+                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border ${conf.className} shrink-0`}
+                    >
+                      {conf.label}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>

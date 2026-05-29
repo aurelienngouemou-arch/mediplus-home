@@ -28,6 +28,7 @@ interface AdminShellProps {
   newDemandesCount: number;
   patientsActifsCount: number;
   visitesDuJour?: number;
+  partenairesActifsCount?: number;
   children: React.ReactNode;
 }
 
@@ -195,6 +196,7 @@ export default function AdminShell({
   newDemandesCount,
   patientsActifsCount,
   visitesDuJour = 0,
+  partenairesActifsCount = 0,
   children,
 }: AdminShellProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -220,7 +222,12 @@ export default function AdminShell({
       icon: CalendarDays,
       badge: visitesDuJour > 0 ? visitesDuJour : undefined,
     },
-    { label: "Mes collègues", href: "/admin/partenaires", icon: Handshake, disabled: true },
+    {
+      label: "Mes collègues",
+      href: "/admin/partenaires",
+      icon: Handshake,
+      badge: partenairesActifsCount > 0 ? partenairesActifsCount : undefined,
+    },
   ];
 
   const currentPageLabel =
