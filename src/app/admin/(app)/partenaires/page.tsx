@@ -91,7 +91,7 @@ export default async function PartenairesPage({
         {statCards.map((s) => (
           <Card key={s.label} className="border-border/50">
             <CardContent className="p-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center sm:justify-start gap-3">
                 <div className={`rounded-lg p-2 shrink-0 ${s.bg}`}>
                   <s.icon className={`h-4 w-4 ${s.color}`} />
                 </div>
