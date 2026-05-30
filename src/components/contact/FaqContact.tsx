@@ -25,7 +25,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Travaillez-vous avec ma mutuelle ?",
-    a: "Nous sommes agréés INAMI et conventionnés avec l'ensemble des mutuelles belges (Mutualité chrétienne, Solidaris, Mutualité libérale, Mutualité neutre, CAAMI, etc.). Nous proposons le tiers payant sur demande, ce qui signifie que vous n'avancez pas les frais remboursables.",
+    a: "Nous travaillons avec l'ensemble des mutuelles belges (Mutualité chrétienne, Solidaris, Mutualité libérale, Mutualité neutre, CAAMI, etc.). Nous proposons le tiers payant sur demande, ce qui signifie que vous n'avancez pas les frais remboursables.",
   },
 ];
 

@@ -2,13 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Clock, MapPin } from "lucide-react";
 
 interface HeroZoneImageProps {
   slug: string;
-  postalCode: string;
   name: string;
-  interventionTime: string;
 }
 
 const ZONE_IMAGES: Record<
@@ -31,13 +28,8 @@ const ZONE_IMAGES: Record<
 
 const EASE_OUT = [0.21, 0.47, 0.32, 0.98] as const;
 
-export default function HeroZoneImage({
-  slug,
-  postalCode,
-  name,
-  interventionTime,
-}: HeroZoneImageProps) {
-  const image = ZONE_IMAGES[slug] ?? { src: "/hero-nurse.png", alt: "Infirmier à domicile" };
+export default function HeroZoneImage({ slug, name }: HeroZoneImageProps) {
+  const image = ZONE_IMAGES[slug] ?? { src: "/hero-nurse.png", alt: `Infirmier à domicile à ${name}` };
 
   return (
     <motion.div
@@ -56,38 +48,6 @@ export default function HeroZoneImage({
         quality={90}
         className="object-cover"
       />
-
-      {/* Card bottom-left: postal code + name */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.5 }}
-        className="absolute bottom-4 left-4 flex items-center gap-2 bg-white border border-border/50 rounded-xl px-3 py-2.5 shadow-md"
-        aria-hidden="true"
-      >
-        <MapPin className="size-4 text-primary shrink-0" />
-        <div className="leading-tight">
-          <p className="text-xs text-muted-foreground">Code postal</p>
-          <p className="text-sm font-semibold text-foreground">
-            {postalCode} · {name}
-          </p>
-        </div>
-      </motion.div>
-
-      {/* Card top-right: intervention time */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.7 }}
-        className="absolute top-4 right-4 flex items-center gap-2 bg-primary text-white rounded-xl px-3 py-2.5 shadow-md"
-        aria-hidden="true"
-      >
-        <Clock className="size-4 shrink-0" />
-        <div className="leading-tight">
-          <p className="text-xs opacity-80">Intervention</p>
-          <p className="text-sm font-semibold">{interventionTime}</p>
-        </div>
-      </motion.div>
     </motion.div>
   );
 }

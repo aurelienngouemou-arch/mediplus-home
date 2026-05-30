@@ -34,8 +34,7 @@ export default function CtaZone({ zone }: CtaZoneProps) {
           </h2>
 
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            Nous intervenons {zone.interventionTime} · 7j/7 · INAMI agréé ·
-            Toutes mutuelles
+            Disponible 7j/7 · Toutes les mutuelles belges
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

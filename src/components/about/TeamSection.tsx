@@ -8,7 +8,6 @@ import {
   HandHeart,
   HeartPulse,
   ClipboardList,
-  Clock,
   ArrowRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -21,7 +20,6 @@ import {
 interface TeamProfile {
   role: string;
   specialty: string;
-  experience: string;
   icon: LucideIcon;
 }
 
@@ -29,25 +27,21 @@ const TEAM_PROFILES: TeamProfile[] = [
   {
     role: "Infirmier(ère) référent(e)",
     specialty: "Soins généraux & plaies",
-    experience: "12 ans d'expérience",
     icon: Stethoscope,
   },
   {
     role: "Infirmier(ère) spécialisé(e)",
     specialty: "Gériatrie & soins palliatifs",
-    experience: "9 ans d'expérience",
     icon: HandHeart,
   },
   {
     role: "Infirmier(ère) spécialisé(e)",
     specialty: "Maladies chroniques & diabète",
-    experience: "8 ans d'expérience",
     icon: HeartPulse,
   },
   {
     role: "Infirmier(ère) coordinateur(trice)",
     specialty: "Coordination & planification",
-    experience: "11 ans d'expérience",
     icon: ClipboardList,
   },
 ];
@@ -62,8 +56,8 @@ export default function TeamSection() {
             Notre équipe
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            Des infirmier(ère)s diplômé(e)s, conventionné(e)s INAMI, qui prennent
-            le temps qu&apos;il faut pour chaque patient.
+            Des infirmier(ère)s diplômé(e)s qui prennent le temps qu&apos;il faut
+            pour chaque patient.
           </p>
         </FadeIn>
 
@@ -114,12 +108,6 @@ export default function TeamSection() {
                     <p className="text-sm text-muted-foreground mt-2">
                       {profile.specialty}
                     </p>
-                    <div className="flex items-center justify-center gap-1.5 mt-3">
-                      <Clock className="w-3.5 h-3.5 text-primary flex-shrink-0" aria-hidden="true" />
-                      <span className="text-xs text-primary font-medium">
-                        {profile.experience}
-                      </span>
-                    </div>
                   </div>
                 </motion.div>
               </StaggerItem>

@@ -165,7 +165,7 @@ export default async function ServicePage({
             {/* Mini-stats */}
             <div className="flex flex-wrap gap-3">
               {[
-                { icon: CheckCircle2, label: "Remboursé INAMI" },
+                { icon: CheckCircle2, label: "Toutes les mutuelles belges" },
                 { icon: CheckCircle2, label: "Disponible 7j/7" },
                 { icon: CheckCircle2, label: "À votre domicile" },
               ].map(({ icon: StatIcon, label }) => (

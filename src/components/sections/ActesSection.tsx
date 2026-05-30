@@ -18,7 +18,7 @@ export default function ActesSection() {
             Tous les actes infirmiers à domicile
           </h2>
           <p className="text-muted-foreground">
-            Conventionnés INAMI, remboursés par votre mutuelle.
+            Voici ce que nous proposons à nos patients
           </p>
         </FadeIn>
 

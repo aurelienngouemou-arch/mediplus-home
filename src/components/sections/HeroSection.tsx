@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, MapPin, Shield, Clock, Star, Heart } from "lucide-react";
+import { Phone, MapPin, Clock, Heart } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 
 const EASE = [0.21, 0.47, 0.32, 0.98] as const;
@@ -29,7 +29,7 @@ function WhatsAppIcon() {
 }
 
 const TRUST_ITEMS = [
-  { icon: Shield, label: "INAMI agréé" },
+  { icon: Clock, label: "24h/24" },
   { icon: Clock, label: "7j/7" },
   { icon: MapPin, label: "À domicile" },
 ];
@@ -64,10 +64,15 @@ export default function HeroSection() {
               className="font-serif text-4xl sm:text-5xl lg:text-[56px] font-semibold text-foreground leading-[1.1] tracking-tight"
             >
               Des soins infirmiers{" "}
-              <span className="text-primary">humains</span>,{" "}
+              <span className="text-primary">à domicile</span>{" "}
               <br className="hidden sm:block" />
               chez vous.
             </motion.h1>
+
+            {/* Sous-slogan */}
+            <motion.p {...anim(0.15)} className="text-sm text-muted-foreground font-medium tracking-wide -mt-2">
+              Soins à domicile en Belgique
+            </motion.p>
 
             {/* Sous-titre */}
             <motion.p {...anim(0.2)} className="text-lg text-muted-foreground leading-relaxed max-w-lg">
@@ -164,36 +169,6 @@ export default function HeroSection() {
               </div>
             </motion.div>
 
-            {/* Carte flottante — note */}
-            <motion.div
-              initial={{ opacity: 0, y: 10, x: -10 }}
-              animate={{ opacity: 1, y: 0, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.75, ease: EASE }}
-              className="hidden sm:flex absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white rounded-2xl shadow-xl shadow-slate-200/70 border border-slate-100 p-3.5 items-center gap-3"
-            >
-              <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
-                <Star className="w-5 h-5 text-amber-500 fill-amber-500" aria-hidden="true" />
-              </div>
-              <div>
-                <div className="flex gap-0.5 mb-0.5" aria-label="Note 4.9 sur 5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3 h-3 text-amber-400 fill-amber-400" aria-hidden="true" />
-                  ))}
-                </div>
-                <p className="text-xs font-semibold text-slate-800">4.9 · Avis patients</p>
-              </div>
-            </motion.div>
-
-            {/* Carte flottante — compteur */}
-            <motion.div
-              initial={{ opacity: 0, y: -10, x: 10 }}
-              animate={{ opacity: 1, y: 0, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.9, ease: EASE }}
-              className="hidden sm:block absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-primary text-white rounded-2xl shadow-xl shadow-primary/30 px-5 py-4"
-            >
-              <p className="text-2xl font-bold leading-none tracking-tight">+500</p>
-              <p className="text-xs opacity-75 mt-1 font-medium">patients soignés</p>
-            </motion.div>
           </motion.div>
 
         </div>

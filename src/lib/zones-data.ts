@@ -58,7 +58,7 @@ export const ZONES_DATA: Record<string, ZoneData> = {
     introText: [
       "Overijse n'est pas une commune comme les autres. Entre ses vignobles historiques, ses hameaux pittoresques de Jezus-Eik et Maleizen, et sa population à la fois néerlandophone et francophone, cette terre demande des soignants qui savent s'adapter.",
       "Notre équipe connaît chaque coin d'Overijse : les rues pavées du centre, les chemins de campagne vers Tombeek, les résidences d'Eizer. Nous parlons votre langue — Nederlands of Frans — et nous adaptons nos visites à votre rythme.",
-      "Que vous habitiez près de l'IJse ou dans les hauteurs d'Overijse, un infirmier vous rejoint en moins de 25 minutes. Et toujours, c'est le même soignant qui revient.",
+      "Que vous habitiez près de l'IJse ou dans les hauteurs d'Overijse, notre équipe est là pour vous. Et toujours, c'est le même soignant qui revient.",
     ],
     testimonials: [
       {
@@ -80,7 +80,7 @@ export const ZONES_DATA: Record<string, ZoneData> = {
       {
         question: "Intervenez-vous dans tous les hameaux d'Overijse ?",
         answer:
-          "Oui, nous couvrons le centre, Jezus-Eik, Maleizen, Tombeek, Eizer et tous les quartiers résidentiels d'Overijse. Nos délais d'intervention varient de 15 à 30 minutes selon l'éloignement.",
+          "Oui, nous couvrons le centre, Jezus-Eik, Maleizen, Tombeek, Eizer et tous les quartiers résidentiels d'Overijse.",
       },
       {
         question: "Mes soins peuvent-ils se faire en néerlandais ?",
@@ -138,7 +138,7 @@ export const ZONES_DATA: Record<string, ZoneData> = {
     introText: [
       "Hoeilaart est une commune où l'on choisit de vivre pour la qualité de l'air, le calme et la nature. C'est aussi une commune avec une population âgée importante, qui a besoin d'un suivi médical de proximité, fiable, rassurant.",
       "Notre équipe intervient dans tout Hoeilaart : du centre historique aux quartiers résidentiels de Groenendaal, en passant par les chemins paisibles de Sloesveld. Nous connaissons les familles, les habitudes, les médecins du coin.",
-      "Ce qui nous distingue ? Nous prenons le temps. Une visite chez vous n'est pas une formalité de 10 minutes. C'est un moment d'écoute, d'attention, et bien sûr de soin médical rigoureux. Le tout, en moins de 20 minutes après votre appel.",
+      "Ce qui nous distingue ? Nous prenons le temps. Une visite chez vous n'est pas une formalité. C'est un moment d'écoute, d'attention, et bien sûr de soin médical rigoureux.",
     ],
     testimonials: [
       {
@@ -160,7 +160,7 @@ export const ZONES_DATA: Record<string, ZoneData> = {
       {
         question: "Couvrez-vous toute la commune de Hoeilaart ?",
         answer:
-          "Oui, du centre jusqu'à Groenendaal et Sloesveld, nous intervenons sur l'ensemble du territoire communal en moins de 20 minutes.",
+          "Oui, du centre jusqu'à Groenendaal et Sloesveld, nous intervenons sur l'ensemble du territoire communal.",
       },
       {
         question: "Êtes-vous habitués aux soins pour personnes âgées ?",
@@ -221,11 +221,11 @@ export const ZONES_DATA: Record<string, ZoneData> = {
       "Bertem",
     ],
     shortDescription:
-      "Commune internationale aux portes de Bruxelles. Notre équipe trilingue FR/NL/EN accompagne familles belges et expatriés, avec le délai d'intervention le plus court de notre zone.",
+      "Commune internationale aux portes de Bruxelles. Notre équipe trilingue FR/NL/EN accompagne familles belges et expatriés dans tous les quartiers de Tervuren.",
     introText: [
       "Tervuren ne ressemble à aucune autre commune du Brabant flamand. Avec ses écoles européennes, sa proximité immédiate de Bruxelles et son AfricaMuseum emblématique, c'est une terre de rencontres entre familles belges installées depuis des générations et nouveaux arrivants du monde entier.",
       "Cette diversité, nous l'avons faite nôtre. Notre équipe trilingue FR/NL/EN comprend les besoins spécifiques de chacun : les habitudes culturelles différentes, les exigences des assurances internationales, les attentes en matière de communication médicale claire et précise.",
-      "De Vossem à Duisburg, en passant par Moorsel et Sint-Joris-Weert, nous couvrons l'ensemble du territoire de Tervuren. Avec un délai d'intervention de 18 minutes en moyenne — le plus court de notre zone.",
+      "De Vossem à Duisburg, en passant par Moorsel et Sint-Joris-Weert, nous couvrons l'ensemble du territoire de Tervuren.",
     ],
     testimonials: [
       {
@@ -257,7 +257,7 @@ export const ZONES_DATA: Record<string, ZoneData> = {
       {
         question: "Quels quartiers de Tervuren desservez-vous ?",
         answer:
-          "L'ensemble du territoire communal : centre de Tervuren, Vossem, Duisburg, Moorsel et Sint-Joris-Weert. Notre délai moyen d'intervention est de 18 minutes, le plus court de notre zone.",
+          "L'ensemble du territoire communal : centre de Tervuren, Vossem, Duisburg, Moorsel et Sint-Joris-Weert.",
       },
       {
         question: "Pouvez-vous coordonner avec un médecin étranger ?",

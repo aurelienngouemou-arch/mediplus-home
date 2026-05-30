@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, MapPin, Clock, Navigation, Grape, Trees, Globe } from "lucide-react";
+import { ChevronRight, Grape, Trees, Globe } from "lucide-react";
 import type { ZoneData } from "@/lib/zones-data";
 import FadeIn from "@/components/animations/FadeIn";
 import HeroZoneImage from "@/components/zones/HeroZoneImage";
@@ -103,44 +103,12 @@ export default function HeroZone({ zone }: HeroZoneProps) {
               </div>
             </FadeIn>
 
-            {/* Mini stats */}
-            <FadeIn direction="up" delay={0.25}>
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 bg-white border border-border rounded-xl px-4 py-2.5 shadow-sm">
-                  <MapPin className="size-4 text-primary shrink-0" aria-hidden="true" />
-                  <span className="text-sm text-muted-foreground">
-                    Code postal :{" "}
-                    <strong className="text-foreground">{zone.postalCode}</strong>
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 bg-white border border-border rounded-xl px-4 py-2.5 shadow-sm">
-                  <Clock className="size-4 text-primary shrink-0" aria-hidden="true" />
-                  <span className="text-sm text-muted-foreground">
-                    Délai d&apos;intervention :{" "}
-                    <strong className="text-foreground">
-                      {zone.interventionTime}
-                    </strong>
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 bg-white border border-border rounded-xl px-4 py-2.5 shadow-sm">
-                  <Navigation className="size-4 text-primary shrink-0" aria-hidden="true" />
-                  <span className="text-sm text-muted-foreground">
-                    Bruxelles :{" "}
-                    <strong className="text-foreground">
-                      {zone.distanceBrussels}
-                    </strong>
-                  </span>
-                </div>
-              </div>
-            </FadeIn>
           </div>
 
           {/* Right column — zone image */}
           <HeroZoneImage
             slug={zone.slug}
-            postalCode={zone.postalCode}
             name={zone.name}
-            interventionTime={zone.interventionTime}
           />
         </div>
       </div>

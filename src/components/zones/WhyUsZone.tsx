@@ -24,8 +24,8 @@ export default function WhyUsZone({ zone }: WhyUsZoneProps) {
   const cards = [
     {
       Icon: Clock,
-      title: `Proximité · ${zone.interventionTime}`,
-      description: `Nos soignants sont basés à proximité de ${zone.name}. Délai moyen d'intervention : ${zone.interventionTime}, parfois moins selon la disponibilité.`,
+      title: "Disponibilité 7j/7",
+      description: `Nos soignants interviennent à ${zone.name} du lundi au vendredi de 7h à 20h, et le week-end de 8h à 18h.`,
     },
     {
       Icon: Languages,
@@ -34,15 +34,15 @@ export default function WhyUsZone({ zone }: WhyUsZoneProps) {
     },
     {
       Icon: ShieldCheck,
-      title: "INAMI agréé · Toutes mutuelles",
+      title: "Toutes les Mutuelles Belges",
       description:
-        "Nos infirmiers sont agréés par l'INAMI. Remboursement garanti par toutes les mutuelles belges selon votre statut (ordinaire, BIM, VIPO).",
+        "Nos soins sont remboursés par toutes les mutuelles belges selon votre statut (ordinaire, BIM, VIPO). Tiers payant disponible sur demande.",
     },
     {
       Icon: CalendarDays,
-      title: "7j/7 · Soir & week-end",
+      title: "Suivi personnalisé",
       description:
-        "Disponibles du lundi au vendredi de 7h à 20h, le week-end de 8h à 18h. Parce que la santé n'attend pas le lundi.",
+        "Un même soignant revient chez vous pour garantir la continuité des soins et une relation de confiance durable.",
     },
   ];
 

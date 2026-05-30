@@ -19,7 +19,7 @@ export default function ReimbursementSection({
               </div>
               <div className="flex-1">
                 <h2 className="font-serif text-2xl font-semibold text-foreground mb-4">
-                  Remboursement & prise en charge INAMI
+                  Remboursement & prise en charge
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   {reimbursement}
@@ -27,8 +27,8 @@ export default function ReimbursementSection({
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {[
-                    { icon: ShieldCheck, label: "INAMI agréé", desc: "Tous actes conventionnés" },
-                    { icon: ShieldCheck, label: "Toutes mutuelles", desc: "Affilié & non affilié" },
+                    { icon: ShieldCheck, label: "Toutes les Mutuelles Belges", desc: "Mutualités affiliées et non affiliées" },
+                    { icon: ShieldCheck, label: "Disponible 7j/7", desc: "Week-end et jours fériés" },
                     { icon: Info, label: "Tiers payant", desc: "Sur demande disponible" },
                   ].map(({ icon: Icon, label, desc }) => (
                     <div

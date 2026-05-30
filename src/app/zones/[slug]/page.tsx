@@ -30,16 +30,16 @@ export async function generateMetadata({
 
   const META_DESCRIPTIONS: Record<string, string> = {
     overijse:
-      "Infirmier à domicile à Overijse (3090). Équipe bilingue FR/NL, INAMI agréée, intervention en 25 min dans le centre, Jezus-Eik, Maleizen et Tombeek. Soins remboursés.",
+      "Infirmier à domicile à Overijse. Équipe bilingue FR/NL, disponible 7j/7 dans le centre, Jezus-Eik, Maleizen et Tombeek. Toutes les mutuelles belges.",
     hoeilaart:
-      "Infirmier à domicile à Hoeilaart (1560). Soins infirmiers 7j/7 dans tout Hoeilaart, Groenendaal et Sloesveld. Équipe locale, INAMI agréée. Intervention en 20 min.",
+      "Infirmier à domicile à Hoeilaart. Soins infirmiers 7j/7 dans tout Hoeilaart, Groenendaal et Sloesveld. Équipe locale, toutes les mutuelles belges.",
     tervuren:
-      "Home nursing in Tervuren (3080). Trilingual team FR/NL/EN, fast response time (18 min), accepting Belgian mutual insurance and international health plans. Centre, Vossem, Duisburg, Moorsel.",
+      "Home nursing in Tervuren. Trilingual team FR/NL/EN, accepting Belgian mutual insurance and international health plans. Centre, Vossem, Duisburg, Moorsel.",
   };
 
   const description =
     META_DESCRIPTIONS[zone.slug] ??
-    `Soins infirmiers à domicile à ${zone.name} (${zone.postalCode}). Infirmier INAMI agréé, toutes mutuelles. Intervention en ${zone.interventionTime}. Disponible 7j/7.`;
+    `Soins infirmiers à domicile à ${zone.name}. Toutes les mutuelles belges. Disponible 7j/7.`;
   const url = `${SITE_URL}/zones/${zone.slug}`;
 
   return {

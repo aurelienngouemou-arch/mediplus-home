@@ -12,7 +12,7 @@ import {
 export const metadata = createMetadata({
   title: "Nos soins infirmiers à domicile",
   description:
-    "Découvrez nos 8 services de soins infirmiers à domicile : soins généraux, troubles de la mémoire, maladies chroniques, soins palliatifs et plus encore. INAMI agréé.",
+    "Découvrez nos 8 services de soins infirmiers à domicile : soins généraux, troubles de la mémoire, maladies chroniques, soins palliatifs et plus encore. Toutes les mutuelles belges.",
   path: "/services",
 });
 
@@ -41,15 +41,14 @@ export default function ServicesPage() {
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Une équipe d&apos;infirmiers qualifiés et disponibles 7j/7 dans la région
-              d&apos;Overijse, Hoeilaart et Tervuren. Tous nos soins sont remboursés par
-              l&apos;INAMI et toutes les mutuelles belges.
+              d&apos;Overijse, Hoeilaart et Tervuren. Toutes les mutuelles belges.
             </p>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.15} className="flex flex-wrap justify-center gap-4 mt-8">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-accent" />
-              Remboursé INAMI
+              Toutes les mutuelles belges
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-accent" />

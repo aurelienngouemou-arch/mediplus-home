@@ -7,13 +7,12 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import ActesSection from "@/components/sections/ActesSection";
 import ZonesSection from "@/components/sections/ZonesSection";
 import ProcessSection from "@/components/sections/ProcessSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
   title: "Infirmier à domicile | Overijse, Hoeilaart, Tervuren",
   description:
-    "Soins infirmiers professionnels à domicile. Disponible 7j/7 à Overijse, Hoeilaart et Tervuren. INAMI agréé, remboursement mutuelle.",
+    "Soins infirmiers professionnels à domicile. Disponible 7j/7 à Overijse, Hoeilaart et Tervuren. Toutes les mutuelles belges.",
   alternates: {
     canonical: getBaseUrl(),
   },
@@ -71,7 +70,6 @@ export default function HomePage() {
       <ActesSection />
       <ZonesSection />
       <ProcessSection />
-      <TestimonialsSection />
       <CTASection />
     </>
   );

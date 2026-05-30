@@ -5,13 +5,11 @@ import FadeIn from "@/components/animations/FadeIn";
 import StorySection from "@/components/about/StorySection";
 import ValuesSection from "@/components/about/ValuesSection";
 import TeamSection from "@/components/about/TeamSection";
-import StatsSection from "@/components/about/StatsSection";
-import CertificationsSection from "@/components/about/CertificationsSection";
 
 export const metadata = createMetadata({
   title: "À propos · Notre équipe d'infirmiers à domicile",
   description:
-    "Découvrez notre équipe d'infirmiers à domicile agréés INAMI, nos valeurs, notre histoire et nos certifications. Au service des patients d'Overijse, Hoeilaart et Tervuren.",
+    "Découvrez notre équipe d'infirmiers à domicile, nos valeurs et notre histoire. Au service des patients d'Overijse, Hoeilaart et Tervuren.",
   path: "/a-propos",
 });
 
@@ -50,8 +48,6 @@ export default function AboutPage() {
       <StorySection />
       <ValuesSection />
       <TeamSection />
-      <StatsSection />
-      <CertificationsSection />
 
       {/* CTA final */}
       <section className="py-16 md:py-20 bg-muted">
@@ -71,6 +67,11 @@ export default function AboutPage() {
               <MessageCircle className="w-4 h-4" aria-hidden="true" />
               Nous contacter
             </Link>
+            <div className="flex flex-wrap justify-center gap-4 mt-6 text-xs text-muted-foreground">
+              <span>Toutes les Mutuelles Belges</span>
+              <span>·</span>
+              <span>Conformité RGPD</span>
+            </div>
           </FadeIn>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Clock, MapPin, Users, Phone } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { ALL_ZONES } from "@/lib/zones-data";
 import { SITE_URL } from "@/lib/constants";
 import StylizedMap from "@/components/maps/StylizedMap";
@@ -13,14 +13,14 @@ import {
 export const metadata: Metadata = {
   title: "Zones d'intervention — Overijse, Hoeilaart, Tervuren",
   description:
-    "Infirmier à domicile INAMI agréé dans les communes d'Overijse, Hoeilaart et Tervuren (Brabant flamand). Intervention 7j/7. Toutes mutuelles.",
+    "Infirmier à domicile dans les communes d'Overijse, Hoeilaart et Tervuren (Brabant flamand). Disponible 7j/7. Toutes les mutuelles belges.",
   alternates: {
     canonical: `${SITE_URL}/zones`,
   },
   openGraph: {
     title: "Zones d'intervention — Overijse, Hoeilaart, Tervuren",
     description:
-      "Soins infirmiers à domicile dans les communes d'Overijse, Hoeilaart et Tervuren. Disponible 7j/7, INAMI agréé.",
+      "Soins infirmiers à domicile dans les communes d'Overijse, Hoeilaart et Tervuren. Disponible 7j/7. Toutes les mutuelles belges.",
     url: `${SITE_URL}/zones`,
     type: "website",
     locale: "fr_BE",
@@ -58,7 +58,7 @@ export default function ZonesPage() {
 
           <FadeIn direction="up" delay={0.1}>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-              Nos infirmiers INAMI agréés interviennent à domicile dans les
+              Nos infirmiers interviennent à domicile dans les
               communes d&apos;Overijse, Hoeilaart et Tervuren — en français, en
               néerlandais et en anglais.
             </p>
@@ -98,14 +98,9 @@ export default function ZonesPage() {
                 <div className="group flex flex-col h-full bg-card rounded-2xl border border-border shadow-sm hover:shadow-md hover:border-primary/30 transition-all overflow-hidden">
                   {/* Card header */}
                   <div className="bg-gradient-to-br from-primary/8 to-secondary/5 p-6 border-b border-border">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="font-serif text-2xl font-bold text-foreground">
-                        {zone.name}
-                      </h3>
-                      <span className="text-xs font-semibold bg-primary/10 text-primary rounded-full px-2.5 py-1">
-                        {zone.postalCode}
-                      </span>
-                    </div>
+                    <h3 className="font-serif text-2xl font-bold text-foreground mb-1">
+                      {zone.name}
+                    </h3>
                     <p className="text-sm text-muted-foreground">
                       {zone.region}
                     </p>
@@ -116,36 +111,6 @@ export default function ZonesPage() {
                     <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                       {zone.shortDescription}
                     </p>
-
-                    <div className="space-y-2.5">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="size-4 text-primary shrink-0" aria-hidden="true" />
-                        <span>
-                          Délai d&apos;intervention :{" "}
-                          <strong className="text-foreground">
-                            {zone.interventionTime}
-                          </strong>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <MapPin className="size-4 text-primary shrink-0" aria-hidden="true" />
-                        <span>
-                          Bruxelles :{" "}
-                          <strong className="text-foreground">
-                            {zone.distanceBrussels}
-                          </strong>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Users className="size-4 text-primary shrink-0" aria-hidden="true" />
-                        <span>
-                          Population :{" "}
-                          <strong className="text-foreground">
-                            {zone.population}
-                          </strong>
-                        </span>
-                      </div>
-                    </div>
 
                     <Link
                       href={`/zones/${zone.slug}`}

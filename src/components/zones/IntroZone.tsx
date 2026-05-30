@@ -19,7 +19,7 @@ export default function IntroZone({ zone }: IntroZoneProps) {
           <FadeIn direction="left">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 bg-muted text-primary rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-                {zone.region} · {zone.population} hab.
+                {zone.region}
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-foreground leading-tight">
                 {zone.introTitle}
@@ -31,6 +31,9 @@ export default function IntroZone({ zone }: IntroZoneProps) {
                   </p>
                 ))}
               </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Nos infirmiers interviennent à domicile dans les communes d&apos;Overijse, Hoeilaart et Tervuren — en français, en néerlandais et en anglais.
+              </p>
               <div className="flex flex-wrap gap-2 pt-2">
                 {zone.languages.map((lang) => (
                   <span
@@ -41,10 +44,10 @@ export default function IntroZone({ zone }: IntroZoneProps) {
                   </span>
                 ))}
                 <span className="inline-flex items-center bg-muted text-muted-foreground rounded-full px-3 py-0.5 text-sm">
-                  INAMI agréé
+                  7j/7
                 </span>
                 <span className="inline-flex items-center bg-muted text-muted-foreground rounded-full px-3 py-0.5 text-sm">
-                  7j/7
+                  Toutes les mutuelles belges
                 </span>
               </div>
             </div>

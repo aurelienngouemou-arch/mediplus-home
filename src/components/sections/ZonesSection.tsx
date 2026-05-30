@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, ArrowRight, Clock } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 import FadeIn from "@/components/animations/FadeIn";
 import {
   StaggerContainer,
@@ -9,8 +9,6 @@ import {
 interface ZoneDetail {
   name: string;
   slug: string;
-  postalCode: string;
-  distance: string;
   description: string;
   color: string;
 }
@@ -19,8 +17,6 @@ const FEATURED_ZONES: ZoneDetail[] = [
   {
     name: "Overijse",
     slug: "overijse",
-    postalCode: "3090",
-    distance: "~20 km de Bruxelles",
     description:
       "Interventions quotidiennes dans toute la commune et les hameaux environnants.",
     color: "from-primary/10 to-primary/5",
@@ -28,8 +24,6 @@ const FEATURED_ZONES: ZoneDetail[] = [
   {
     name: "Hoeilaart",
     slug: "hoeilaart",
-    postalCode: "1560",
-    distance: "~17 km de Bruxelles",
     description:
       "Couverture complète de Hoeilaart et des quartiers résidentiels adjacents.",
     color: "from-secondary/10 to-secondary/5",
@@ -37,8 +31,6 @@ const FEATURED_ZONES: ZoneDetail[] = [
   {
     name: "Tervuren",
     slug: "tervuren",
-    postalCode: "3080",
-    distance: "~14 km de Bruxelles",
     description:
       "Présence régulière à Tervuren, Vossem et Sint-Joris-Weert.",
     color: "from-accent/10 to-accent/5",
@@ -115,8 +107,7 @@ export default function ZonesSection() {
             Nous intervenons dans votre commune
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Basés dans la région sud-est de Bruxelles, nous sommes chez vous
-            en moins de 30 minutes.
+            Nous intervenons dans les communes d&apos;Overijse, Hoeilaart et Tervuren
           </p>
         </FadeIn>
 
@@ -142,18 +133,9 @@ export default function ZonesSection() {
                     <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-2 flex-wrap mb-1">
-                      <h3 className="font-semibold text-foreground text-base">
-                        {zone.name}
-                      </h3>
-                      <span className="text-xs text-muted-foreground font-mono bg-white/60 px-2 py-0.5 rounded-full border border-border">
-                        {zone.postalCode}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
-                      <Clock className="w-3 h-3" aria-hidden="true" />
-                      {zone.distance}
-                    </div>
+                    <h3 className="font-semibold text-foreground text-base mb-2">
+                      {zone.name}
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       {zone.description}
                     </p>

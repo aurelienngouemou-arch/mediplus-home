@@ -130,7 +130,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "Les soins infirmiers généraux à domicile sont remboursés par l'INAMI (Institut national d'assurance maladie-invalidité) et toutes les mutuelles belges agréées. Selon votre situation (pensionné, bénéficiaire de l'intervention majorée, patient en ALD), votre ticket modérateur peut être très faible, voire nul. Nous nous occupons de toutes les formalités administratives : attestation de soins, envoi à votre mutuelle et, si vous êtes en tiers payant, facturation directe à votre organisme assureur.",
+      "Les soins infirmiers généraux à domicile sont remboursés par toutes les mutuelles belges agréées. Selon votre situation (pensionné, bénéficiaire de l'intervention majorée, patient en ALD), votre ticket modérateur peut être très faible, voire nul. Nous nous occupons de toutes les formalités administratives : attestation de soins, envoi à votre mutuelle et, si vous êtes en tiers payant, facturation directe à votre organisme assureur.",
     relatedServices: [
       "post-hospitalisation",
       "suivi-long-terme",
@@ -234,11 +234,11 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
       {
         q: "Y a-t-il un remboursement spécifique pour la démence ?",
-        a: "Oui. Certains actes infirmiers bénéficient d'un remboursement majoré pour les patients avec un diagnostic de démence. Nous vous aidons à constituer le dossier auprès de l'INAMI.",
+        a: "Oui. Certains actes infirmiers bénéficient d'un remboursement majoré pour les patients avec un diagnostic de démence. Nous vous aidons à constituer le dossier auprès de votre mutuelle.",
       },
     ],
     reimbursement:
-      "L'accompagnement infirmier des troubles de la mémoire est pris en charge par l'INAMI dans le cadre des soins infirmiers à domicile. Pour les patients avec un diagnostic médical de démence, certains forfaits spécifiques permettent un remboursement majoré. Les actes de stimulation cognitive réalisés par un infirmier dans le cadre d'un programme thérapeutique sont également remboursables. Votre mutuelle peut également contribuer aux coûts via des assurances complémentaires. Nous vous accompagnons dans toutes ces démarches.",
+      "L'accompagnement infirmier des troubles de la mémoire est pris en charge dans le cadre des soins infirmiers à domicile par toutes les mutuelles belges. Pour les patients avec un diagnostic médical de démence, certains forfaits spécifiques permettent un remboursement majoré. Les actes de stimulation cognitive réalisés par un infirmier dans le cadre d'un programme thérapeutique sont également remboursables. Votre mutuelle peut également contribuer aux coûts via des assurances complémentaires. Nous vous accompagnons dans toutes ces démarches.",
     relatedServices: ["soins-seniors", "suivi-long-terme", "soins-palliatifs"],
   },
 
@@ -330,7 +330,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
       {
         q: "Une intervention rapide coûte-t-elle plus cher ?",
-        a: "Les actes infirmiers urgents réalisés sur prescription sont remboursés aux mêmes tarifs INAMI que les soins programmés. Un forfait de déplacement peut s'appliquer selon les conditions.",
+        a: "Les actes infirmiers urgents réalisés sur prescription sont remboursés aux mêmes tarifs que les soins programmés. Un forfait de déplacement peut s'appliquer selon les conditions.",
       },
       {
         q: "Puis-je demander une intervention rapide même si je n'ai pas de dossier chez vous ?",
@@ -338,7 +338,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "Les interventions infirmières urgentes réalisées sur prescription médicale sont remboursées par l'INAMI aux tarifs conventionnés habituels. Il n'y a pas de majoration de tarif pour l'urgence dans le cadre des soins à domicile conventionnés. Si l'intervention est demandée sans prescription initiale, votre médecin peut régulariser la prescription après coup pour permettre le remboursement. Nous vous informons systématiquement du cadre tarifaire avant d'intervenir.",
+      "Les interventions infirmières urgentes réalisées sur prescription médicale sont remboursées aux tarifs conventionnés habituels par votre mutuelle. Il n'y a pas de majoration de tarif pour l'urgence dans le cadre des soins à domicile conventionnés. Si l'intervention est demandée sans prescription initiale, votre médecin peut régulariser la prescription après coup pour permettre le remboursement. Nous vous informons systématiquement du cadre tarifaire avant d'intervenir.",
     relatedServices: [
       "soins-generaux",
       "post-hospitalisation",
@@ -443,7 +443,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
       {
         q: "Le suivi long terme est-il plus coûteux ?",
-        a: "Non. Les actes infirmiers sont remboursés aux tarifs INAMI habituels, quelle que soit la durée du suivi. Les frais supplémentaires éventuels (coordination, déplacements) sont clarifiés dès le départ.",
+        a: "Non. Les actes infirmiers sont remboursés aux tarifs conventionnés habituels, quelle que soit la durée du suivi. Les frais supplémentaires éventuels (coordination, déplacements) sont clarifiés dès le départ.",
       },
       {
         q: "Puis-je suspendre temporairement le suivi en cas d'hospitalisation ?",
@@ -451,7 +451,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "Le suivi infirmier à long terme bénéficie d'un cadre de remboursement INAMI spécifique pour les patients nécessitant des soins chroniques. Pour les patients en dépendance lourde (dépendance Katz), des forfaits de soins spécifiques permettent une prise en charge plus complète. Les patients bénéficiant de l'ALD (Affection de Longue Durée) ou de l'intervention majorée de la mutuelle ont un ticket modérateur réduit, parfois nul. Nous vous aidons à identifier le statut le plus avantageux pour votre situation.",
+      "Le suivi infirmier à long terme bénéficie d'un cadre de remboursement spécifique pour les patients nécessitant des soins chroniques. Pour les patients en dépendance lourde (dépendance Katz), des forfaits de soins spécifiques permettent une prise en charge plus complète. Les patients bénéficiant de l'ALD (Affection de Longue Durée) ou de l'intervention majorée de la mutuelle ont un ticket modérateur réduit, parfois nul. Nous vous aidons à identifier le statut le plus avantageux pour votre situation.",
     relatedServices: [
       "maladies-chroniques",
       "soins-seniors",
@@ -559,7 +559,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "Le suivi infirmier des maladies chroniques est largement remboursé par l'INAMI. Selon votre pathologie, des conventions spécifiques existent : le trajet de soins pour le diabète de type 2, la convention insuffisance rénale, etc. Ces conventions peuvent améliorer significativement votre remboursement. Les patients bénéficiaires de l'intervention majorée (BIM) ont un ticket modérateur réduit. Nous vous aidons à identifier et activer les mécanismes de remboursement les plus avantageux pour votre situation.",
+      "Le suivi infirmier des maladies chroniques est largement remboursé par votre mutuelle belge. Selon votre pathologie, des conventions spécifiques existent : le trajet de soins pour le diabète de type 2, la convention insuffisance rénale, etc. Ces conventions peuvent améliorer significativement votre remboursement. Les patients bénéficiaires de l'intervention majorée (BIM) ont un ticket modérateur réduit. Nous vous aidons à identifier et activer les mécanismes de remboursement les plus avantageux pour votre situation.",
     relatedServices: [
       "suivi-long-terme",
       "interventions-rapides",
@@ -647,7 +647,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     faq: [
       {
         q: "Comment évaluez-vous le degré de dépendance ?",
-        a: "Nous utilisons notamment l'échelle de Katz, qui évalue six activités de la vie quotidienne (toilette, habillage, mobilité, continence, alimentation, utilisation des toilettes). Cette évaluation détermine aussi le niveau de remboursement INAMI.",
+        a: "Nous utilisons notamment l'échelle de Katz, qui évalue six activités de la vie quotidienne (toilette, habillage, mobilité, continence, alimentation, utilisation des toilettes). Cette évaluation détermine aussi le niveau de remboursement de votre mutuelle.",
       },
       {
         q: "Travaillez-vous avec les aides à domicile et auxiliaires de vie ?",
@@ -663,11 +663,11 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
       {
         q: "Quelles aides financières existent pour les soins seniors ?",
-        a: "Plusieurs dispositifs coexistent : remboursement INAMI des soins infirmiers, allocations d'intégration, APA (Allocation d'aide à la personne âgée), interventions des mutuelles et du CPAS. Nous vous aidons à activer ceux auxquels vous avez droit.",
+        a: "Plusieurs dispositifs coexistent : remboursement mutuelle des soins infirmiers, allocations d'intégration, APA (Allocation d'aide à la personne âgée), interventions des mutuelles et du CPAS. Nous vous aidons à activer ceux auxquels vous avez droit.",
       },
     ],
     reimbursement:
-      "Les soins aux personnes âgées bénéficient d'un remboursement spécifique via les forfaits de soins infirmiers à domicile de l'INAMI, modulés selon le degré de dépendance (évaluation Katz). Plus la dépendance est importante, plus le forfait de remboursement est élevé. Les patients en forte dépendance (Katz B, C ou Cd) peuvent bénéficier d'un forfait journalier couvrant une grande partie des soins. Les personnes bénéficiaires de l'intervention majorée (BIM/VIPO) ont un ticket modérateur réduit. Nous réalisons gratuitement l'évaluation Katz et vous aidons à obtenir le statut le plus favorable.",
+      "Les soins aux personnes âgées bénéficient d'un remboursement spécifique via les forfaits de soins infirmiers à domicile, modulés selon le degré de dépendance (évaluation Katz). Plus la dépendance est importante, plus le forfait de remboursement est élevé. Les patients en forte dépendance (Katz B, C ou Cd) peuvent bénéficier d'un forfait journalier couvrant une grande partie des soins. Les personnes bénéficiaires de l'intervention majorée (BIM/VIPO) ont un ticket modérateur réduit. Nous réalisons gratuitement l'évaluation Katz et vous aidons à obtenir le statut le plus favorable.",
     relatedServices: [
       "troubles-memoire",
       "suivi-long-terme",
@@ -775,7 +775,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "La Belgique reconnaît et finance les soins palliatifs à domicile via plusieurs mécanismes spécifiques. L'INAMI prévoit un forfait de soins palliatifs à domicile qui couvre une grande partie des soins infirmiers, médicaux et paramédicaux. Le médecin référent peut activer une fonction palliative permettant d'accéder à des ressources supplémentaires. Les aidants proches peuvent bénéficier du congé palliatif (interruption de carrière avec allocation). Nous vous accompagnons dans toutes ces démarches administratives, souvent complexes mais cruciales pour vous permettre de vous concentrer sur l'essentiel.",
+      "La Belgique reconnaît et finance les soins palliatifs à domicile via plusieurs mécanismes spécifiques. Un forfait de soins palliatifs à domicile est prévu, couvrant une grande partie des soins infirmiers, médicaux et paramédicaux. Le médecin référent peut activer une fonction palliative permettant d'accéder à des ressources supplémentaires. Les aidants proches peuvent bénéficier du congé palliatif (interruption de carrière avec allocation). Nous vous accompagnons dans toutes ces démarches administratives, souvent complexes mais cruciales pour vous permettre de vous concentrer sur l'essentiel.",
     relatedServices: [
       "soins-seniors",
       "troubles-memoire",
@@ -883,7 +883,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
       },
     ],
     reimbursement:
-      "Les soins post-hospitalisation sont remboursés par l'INAMI dans le cadre des soins infirmiers à domicile. Les actes réalisés (pansements, prélèvements, injections, surveillance) sont tous remboursables sur prescription médicale. Pour les patients sortant d'une hospitalisation longue, le forfait de soins dépendance peut s'appliquer si les critères Katz sont remplis. Les mutuelles proposent souvent des interventions complémentaires pour la convalescence à domicile. Nous nous chargeons de constituer tous les dossiers de remboursement.",
+      "Les soins post-hospitalisation sont remboursés dans le cadre des soins infirmiers à domicile par toutes les mutuelles belges. Les actes réalisés (pansements, prélèvements, injections, surveillance) sont tous remboursables sur prescription médicale. Pour les patients sortant d'une hospitalisation longue, le forfait de soins dépendance peut s'appliquer si les critères Katz sont remplis. Les mutuelles proposent souvent des interventions complémentaires pour la convalescence à domicile. Nous nous chargeons de constituer tous les dossiers de remboursement.",
     relatedServices: [
       "soins-generaux",
       "interventions-rapides",
