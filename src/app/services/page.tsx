@@ -56,10 +56,6 @@ export default function ServicesPage() {
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-accent" />
-              Toutes mutuelles
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-accent" />
               Intervention rapide
             </div>
           </FadeIn>
