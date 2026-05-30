@@ -1,0 +1,350 @@
+{
+  "common": {
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "submit": "Send",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "learnMore": "Learn more",
+    "bookAppointment": "Book an appointment",
+    "contact": "Contact",
+    "required": "required",
+    "optional": "optional",
+    "close": "Close",
+    "open": "Open",
+    "allMutualities": "All Belgian Health Insurance",
+    "available247": "Available 7/7",
+    "rapidIntervention": "Rapid response",
+    "atHome": "At your home",
+    "discover": "Discover",
+    "callUs": "Call us",
+    "writeWhatsApp": "Write on WhatsApp",
+    "sendMessage": "Send a message",
+    "sendAnotherMessage": "Send another message"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Our services",
+    "zones": "Service areas",
+    "about": "About us",
+    "contact": "Contact",
+    "bookAppointment": "Book now",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "fr": "Français",
+    "nl": "Nederlands",
+    "en": "English",
+    "fr_short": "FR",
+    "nl_short": "NL",
+    "en_short": "EN"
+  },
+  "hero": {
+    "badge": "Home nursing care",
+    "titlePre": "Nursing care",
+    "titleHighlight": "at home",
+    "titlePost": "for you.",
+    "subtitle": "Home care in Belgium",
+    "description": "Our team serves Overijse, Hoeilaart and Tervuren with professionalism and compassion, at every step of your recovery.",
+    "ctaBook": "Book an appointment",
+    "ctaWhatsApp": "WhatsApp",
+    "imageAlt": "Smiling nurse caring for an elderly lady at home",
+    "imageBadge": "Human care, medical expertise",
+    "trust24h": "24/7",
+    "trust7j": "7/7",
+    "trustHome": "At home"
+  },
+  "trustBar": {
+    "label": "All Belgian Health Insurance",
+    "sublabel": "Agreement with all Belgian health insurance funds"
+  },
+  "servicesSection": {
+    "label": "Medical expertise",
+    "title": "Our care services",
+    "subtitle": "Medical expertise tailored to every situation.",
+    "viewAll": "View all care services",
+    "learnMore": "Learn more"
+  },
+  "services": {
+    "soins-generaux": {
+      "name": "General home nursing care",
+      "shortName": "General care",
+      "description": "Daily basic care: dressings, injections, infusions, blood pressure monitoring. Everything you need, at home.",
+      "heroTitle": "General home nursing care in Belgium",
+      "heroSubtitle": "Hospital-quality daily care in the comfort of your home. Dressings, injections, infusions, monitoring: we take care of you every day.",
+      "heroBadge": "Service · General care"
+    },
+    "troubles-memoire": {
+      "name": "Memory disorder care",
+      "shortName": "Memory disorders",
+      "description": "Specialised support for patients with Alzheimer's or cognitive impairments, with a gentle and patient approach.",
+      "heroTitle": "Home nursing care for memory disorders",
+      "heroSubtitle": "A gentle and expert presence for patients with Alzheimer's or cognitive impairments. We accompany with patience, kindness and professionalism.",
+      "heroBadge": "Service · Memory disorders"
+    },
+    "interventions-rapides": {
+      "name": "Rapid nursing interventions",
+      "shortName": "Rapid interventions",
+      "description": "Immediate availability for urgent home care: we can be with you within the hour if needed.",
+      "heroTitle": "Rapid nursing interventions at home",
+      "heroSubtitle": "Immediate availability for your urgent needs. Our nurses can intervene within the hour in Overijse, Hoeilaart and Tervuren.",
+      "heroBadge": "Service · Rapid interventions"
+    },
+    "suivi-long-terme": {
+      "name": "Long-term nursing follow-up",
+      "shortName": "Long-term follow-up",
+      "description": "A stable team that follows you over time, with the same reference nurse for true continuity of care.",
+      "heroTitle": "Long-term nursing follow-up at home",
+      "heroSubtitle": "A lasting relationship of trust. The same reference nurse, a stable team and seamless medical coordination for your long-term health.",
+      "heroBadge": "Service · Long-term follow-up"
+    },
+    "maladies-chroniques": {
+      "name": "Chronic disease management",
+      "shortName": "Chronic diseases",
+      "description": "Diabetes, hypertension, COPD, heart failure: daily management and therapeutic education.",
+      "heroTitle": "Home nursing care for chronic diseases",
+      "heroSubtitle": "Diabetes, hypertension, COPD, heart failure: expert management at home. Therapeutic education, continuous monitoring and real-time adjustments.",
+      "heroBadge": "Service · Chronic diseases"
+    },
+    "soins-seniors": {
+      "name": "Elderly care",
+      "shortName": "Elderly care",
+      "description": "Remaining at home, fall prevention, hygiene care and comprehensive geriatric support.",
+      "heroTitle": "Home nursing care for the elderly",
+      "heroSubtitle": "Staying at home, preserving independence and quality geriatric care. Because everyone deserves to age with dignity in their own environment.",
+      "heroBadge": "Service · Elderly care"
+    },
+    "soins-palliatifs": {
+      "name": "Palliative care at home",
+      "shortName": "Palliative care",
+      "description": "Comfort, dignity and human presence for end-of-life patients and their loved ones.",
+      "heroTitle": "Palliative care at home in Belgium",
+      "heroSubtitle": "Comfort, dignity and human presence for end-of-life patients and their families. Accompanying to the end, at home, surrounded by loved ones.",
+      "heroBadge": "Service · Palliative care"
+    },
+    "post-hospitalisation": {
+      "name": "Post-hospitalisation home care",
+      "shortName": "Post-hospitalisation",
+      "description": "Peaceful recovery after an operation: dressings, rehabilitation, monitoring and medical coordination.",
+      "heroTitle": "Post-hospitalisation home nursing care",
+      "heroSubtitle": "Safe return home after an operation or hospitalisation. Medical coordination, wound monitoring, complication surveillance and gradual rehabilitation.",
+      "heroBadge": "Service · Post-hospitalisation"
+    }
+  },
+  "actesSection": {
+    "label": "Nursing procedures",
+    "title": "All nursing procedures at home",
+    "subtitle": "What we offer our patients"
+  },
+  "actes": {
+    "injections": "Injections & vaccinations",
+    "perfusions": "Home infusions",
+    "pansements": "Wound care & dressings",
+    "prelevements": "Blood tests",
+    "stomie": "Stoma care",
+    "medicaments": "Medication management",
+    "hygiene": "Hygiene care & bathing",
+    "post-op": "Post-operative recovery"
+  },
+  "zonesSection": {
+    "label": "Service area",
+    "title": "We serve your municipality",
+    "subtitle": "We serve the municipalities of Overijse, Hoeilaart and Tervuren",
+    "mapCaption": "Schematic map — main service area",
+    "overijse": "Daily visits throughout the municipality and surrounding hamlets.",
+    "hoeilaart": "Full coverage of Hoeilaart and adjacent residential areas.",
+    "tervuren": "Regular presence in Tervuren, Vossem and Sint-Joris-Weert.",
+    "neighborsQuestion": "Do you live in a neighbouring village?",
+    "contactUs": "Contact us",
+    "neighborsText": "to check if we serve your area."
+  },
+  "processSection": {
+    "label": "How it works",
+    "title": "As simple as a phone call",
+    "subtitle": "From your first call to the start of care, we guide every step with clarity.",
+    "step1Title": "Get in touch",
+    "step1Desc": "Call us, send a WhatsApp or fill in the online form. We respond within 2 hours.",
+    "step2Title": "Home assessment",
+    "step2Desc": "A nurse visits you free of charge to assess your needs and draw up a personalised care plan.",
+    "step3Title": "Personalised care",
+    "step3Desc": "We start your care according to your schedule. Full flexibility, 7/7, with continuous follow-up."
+  },
+  "ctaSection": {
+    "availability": "Available 7/7",
+    "title": "Need home care today?",
+    "subtitle": "Our team is reachable 7 days a week, from 7am to 8pm on weekdays and from 8am to 6pm at weekends. Response within 2 hours guaranteed.",
+    "formLink": "fill in our contact form",
+    "orText": "Or"
+  },
+  "footer": {
+    "tagline": "Professional nursing care at home in Belgium",
+    "zonesTitle": "Service areas",
+    "servicesTitle": "Our services",
+    "contactTitle": "Contact",
+    "rights": "All rights reserved.",
+    "legal": "Legal notice",
+    "privacy": "Privacy policy"
+  },
+  "contactPage": {
+    "heroBadge": "Contact",
+    "heroTitle": "Contact us",
+    "heroSubtitle": "We respond within 2 hours. Available Monday to Sunday.",
+    "heroResponseTime": "2 hours",
+    "formTitle": "Send a message",
+    "formSubtitle": "All fields marked with a * are required.",
+    "infoTitle": "Our contact details",
+    "emergencyLabel": "Non life-threatening medical emergency",
+    "emergencyTitle": "Need urgent care? Call us directly.",
+    "emergencyText": "For any life-threatening emergency, call 112 immediately. For urgent non-vital care, our team responds within the hour.",
+    "form": {
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Marie Dupont",
+      "phone": "Phone",
+      "phonePlaceholder": "+32 470 00 00 00",
+      "email": "Email",
+      "emailPlaceholder": "marie@example.com",
+      "commune": "Municipality",
+      "communePlaceholder": "Select…",
+      "communeOther": "Other municipality",
+      "requestType": "Request type",
+      "requestTypePlaceholder": "Select…",
+      "requestTypeAppointment": "Book an appointment",
+      "requestTypeInfo": "Information request",
+      "requestTypeQuote": "Personalised quote",
+      "requestTypeOther": "Other",
+      "message": "Message",
+      "messagePlaceholder": "Describe your situation or need in a few words…",
+      "rgpdConsentText": "I agree that my data will be used to process my request, in accordance with the",
+      "rgpdConsent": "I agree that my data will be used to process my request, in accordance with the privacy policy.",
+      "rgpdLink": "privacy policy",
+      "submit": "Send my request",
+      "submitting": "Sending…",
+      "successTitle": "Message sent!",
+      "successText": "Thank you for your message. We will contact you within 2 hours at the details you provided.",
+      "errorTextPre": "An error occurred. Please try again or",
+      "errorText": "An error occurred. Please try again or call us directly.",
+      "errorLink": "call us directly",
+      "errors": {
+        "fullName": "Please enter your full name",
+        "phone": "Invalid Belgian phone number (e.g.: +32 470 00 00 00)",
+        "email": "Invalid email address",
+        "commune": "Please select a municipality",
+        "requestType": "Please select a request type",
+        "rgpdConsent": "You must accept the privacy policy"
+      }
+    }
+  },
+  "aboutPage": {
+    "heroBadge": "Our team",
+    "heroTitle": "A team of nurses at the service of your health",
+    "heroSubtitle": "We are healthcare professionals passionate about home care, committed to the residents of Overijse, Hoeilaart and Tervuren.",
+    "ctaTitle": "Let's discuss your needs",
+    "ctaSubtitle": "Every situation is unique. Contact us for a free, no-obligation conversation with a nurse from our team.",
+    "ctaButton": "Contact us",
+    "ctaBadge1": "All Belgian Health Insurance",
+    "ctaBadge2": "GDPR compliant"
+  },
+  "servicesPage": {
+    "heroBadge": "Home nursing care",
+    "heroTitle": "Our home nursing care",
+    "heroBadgeAll": "All Belgian health insurance",
+    "heroBadge7j": "Available 7/7",
+    "heroBadgeRapid": "Rapid response",
+    "ctaTitle": "Do you have a specific need?",
+    "ctaSubtitle": "Every situation is unique. Contact us for a free, no-obligation conversation — we will assess the most appropriate care together.",
+    "ctaContact": "Contact us",
+    "learnMore": "Learn more"
+  },
+  "zonesPage": {
+    "heroBadge": "Flemish Brabant · Belgium",
+    "heroTitle": "Our service areas in Belgium",
+    "heroSubtitle": "Our nurses visit homes in Overijse, Hoeilaart and Tervuren — in French, Dutch and English.",
+    "mapLabel": "Map of the 3 service areas: Overijse, Hoeilaart, Tervuren",
+    "sectionTitle": "Three municipalities, one dedicated team",
+    "sectionSubtitle": "Each municipality has its own characteristics. Discover our presence and commitments in each area.",
+    "discoverBtn": "Discover",
+    "outOfZoneTitle": "Not in our service area?",
+    "outOfZoneSubtitle": "We also cover neighbouring municipalities and assess each request on a case-by-case basis. Contact us to check if we can serve your area.",
+    "outOfZoneContact": "Contact us",
+    "outOfZoneCall": "Call directly"
+  },
+  "servicePage": {
+    "breadcrumbHome": "Home",
+    "breadcrumbServices": "Services",
+    "badgeMutual": "All Belgian health insurance",
+    "badgeAvailable": "Available 7/7",
+    "badgeHome": "At your home",
+    "ctaBook": "Book an appointment",
+    "ctaCall": "Call",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaTitle": "Need {service}?",
+    "ctaSubtitle": "Contact us today. We respond within 2 hours and arrange a free assessment at your home."
+  },
+  "zonePage": {
+    "ctaBook": "Book an appointment",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaCall": "Call"
+  },
+  "contactInfo": {
+    "hoursTitle": "Opening hours",
+    "hoursWeekdays": "Mon–Fri: 7am–8pm",
+    "hoursWeekend": "Sat–Sun: 8am–6pm",
+    "responseTime": "Response within 2h",
+    "coverageTitle": "Coverage area",
+    "coverageText": "Overijse, Hoeilaart and Tervuren",
+    "mutualitiesTitle": "Health insurance",
+    "mutualitiesText": "All Belgian health insurance accepted",
+    "languagesTitle": "Languages",
+    "languagesText": "FR · NL · EN"
+  },
+  "faqContact": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "q": "Do I need a medical prescription to use your services?",
+        "a": "For procedures reimbursed by your health insurance (dressings, injections, infusions), a medical prescription is required. For comfort care or an initial assessment, you can contact us directly without a prescription."
+      },
+      {
+        "q": "How quickly do you respond?",
+        "a": "For standard requests, we respond within 2 hours and schedule a visit within 24-48 hours. For urgent cases, we respond within the hour subject to availability."
+      },
+      {
+        "q": "What are your fees?",
+        "a": "Our care is agreed and reimbursed by all Belgian health insurance funds. Your personal contribution depends on your status. We will inform you of fees before any intervention."
+      },
+      {
+        "q": "Do you operate at weekends?",
+        "a": "Yes, 7 days a week, including Saturday and Sunday. Our hours are 7am-8pm on weekdays and 8am-6pm at weekends."
+      },
+      {
+        "q": "What happens at the first visit?",
+        "a": "The first visit is a free, no-obligation assessment. A nurse visits you at home to assess your needs, answer your questions and draw up a personalised care plan."
+      }
+    ]
+  },
+  "metadata": {
+    "home": {
+      "title": "Home nursing care | Overijse, Hoeilaart, Tervuren",
+      "description": "Professional nursing care at home. Available 7/7 in Overijse, Hoeilaart and Tervuren. All Belgian health insurance accepted."
+    },
+    "services": {
+      "title": "Our home nursing care services",
+      "description": "Discover our 8 home nursing care services: general care, memory disorders, chronic diseases, palliative care and more. All Belgian health insurance."
+    },
+    "zones": {
+      "title": "Service areas — Overijse, Hoeilaart, Tervuren",
+      "description": "Home nursing in Overijse, Hoeilaart and Tervuren (Flemish Brabant). Available 7/7. All Belgian health insurance."
+    },
+    "about": {
+      "title": "About us · Our home nursing team",
+      "description": "Discover our home nursing team, our values and our story. Serving the patients of Overijse, Hoeilaart and Tervuren."
+    },
+    "contact": {
+      "title": "Contact · Home nursing Belgium",
+      "description": "Contact our home nursing team. Response within 2 hours. Available 7/7 in Overijse, Hoeilaart and Tervuren. Free quote."
+    }
+  }
+}

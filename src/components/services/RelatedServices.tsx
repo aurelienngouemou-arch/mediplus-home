@@ -1,21 +1,20 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { getServiceData } from "@/lib/services-data";
+import { Link } from "@/i18n/navigation";
 import FadeIn from "@/components/animations/FadeIn";
-import {
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/animations/StaggerContainer";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
 interface RelatedServicesProps {
   relatedSlugs: string[];
   currentSlug: string;
 }
 
-export default function RelatedServices({
+export default async function RelatedServices({
   relatedSlugs,
   currentSlug,
 }: RelatedServicesProps) {
+  const t = await getTranslations();
   const related = relatedSlugs
     .filter((s) => s !== currentSlug)
     .map(getServiceData)
@@ -29,10 +28,10 @@ export default function RelatedServices({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn direction="up" className="text-center mb-12">
           <p className="text-sm font-medium text-accent uppercase tracking-widest mb-3">
-            À découvrir aussi
+            {t("servicesSection.label")}
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-foreground">
-            Vous pourriez aussi être intéressé par
+            {t("servicesSection.title")}
           </h2>
         </FadeIn>
 
@@ -54,14 +53,14 @@ export default function RelatedServices({
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                      {service.shortName}
+                      {t(`services.${service.slug}.shortName`)}
                     </h3>
                     <p className="text-sm text-muted-foreground line-clamp-2">
-                      {service.heroSubtitle}
+                      {t(`services.${service.slug}.heroSubtitle`)}
                     </p>
                   </div>
                   <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                    En savoir plus
+                    {t("servicesSection.learnMore")}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>

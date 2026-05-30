@@ -5,30 +5,33 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ContactFormData } from "@/types";
 
 const phoneRegex = /^(\+32|0032|0)[1-9][0-9]{7,8}$/;
 
-const contactSchema = z.object({
-  fullName: z.string().min(2, "Veuillez entrer votre nom complet"),
-  phone: z.string().regex(phoneRegex, "Numéro de téléphone belge invalide (ex: +32 470 00 00 00)"),
-  email: z.email("Adresse email invalide"),
-  commune: z.enum(["overijse", "hoeilaart", "tervuren", "autre"], {
-    error: "Veuillez sélectionner une commune",
-  }),
-  requestType: z.enum(["rendez-vous", "information", "devis", "autre"], {
-    error: "Veuillez sélectionner un type de demande",
-  }),
-  message: z.string().optional(),
-  rgpdConsent: z.boolean().refine((v) => v === true, {
-    message: "Vous devez accepter la politique de confidentialité",
-  }),
-});
-
 type FormState = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
+  const t = useTranslations("contactPage.form");
+  const tc = useTranslations("common");
   const [formState, setFormState] = useState<FormState>("idle");
+
+  const contactSchema = z.object({
+    fullName: z.string().min(2, t("errors.fullName")),
+    phone: z.string().regex(phoneRegex, t("errors.phone")),
+    email: z.email(t("errors.email")),
+    commune: z.enum(["overijse", "hoeilaart", "tervuren", "autre"], {
+      error: t("errors.commune"),
+    }),
+    requestType: z.enum(["rendez-vous", "information", "devis", "autre"], {
+      error: t("errors.requestType"),
+    }),
+    message: z.string().optional(),
+    rgpdConsent: z.boolean().refine((v) => v === true, {
+      message: t("errors.rgpdConsent"),
+    }),
+  });
 
   const {
     register,
@@ -56,10 +59,7 @@ export default function ContactForm() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       setFormState("success");
       reset();
     } catch {
@@ -73,18 +73,13 @@ export default function ContactForm() {
         <div className="w-14 h-14 mx-auto rounded-full bg-accent/15 flex items-center justify-center mb-4">
           <CheckCircle2 className="w-7 h-7 text-accent" aria-hidden="true" />
         </div>
-        <h3 className="font-semibold text-foreground text-lg mb-2">
-          Message envoyé !
-        </h3>
-        <p className="text-muted-foreground leading-relaxed mb-4">
-          Merci pour votre message. Nous vous contactons en moins de 2 heures
-          aux coordonnées que vous avez fournies.
-        </p>
+        <h3 className="font-semibold text-foreground text-lg mb-2">{t("successTitle")}</h3>
+        <p className="text-muted-foreground leading-relaxed mb-4">{t("successText")}</p>
         <button
           onClick={() => setFormState("idle")}
           className="text-sm text-primary underline hover:no-underline"
         >
-          Envoyer un autre message
+          {tc("sendAnotherMessage")}
         </button>
       </div>
     );
@@ -92,13 +87,10 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
-      {/* Nom complet */}
+      {/* Full name */}
       <div>
-        <label
-          htmlFor="fullName"
-          className="block text-sm font-medium text-foreground mb-1.5"
-        >
-          Nom complet <span className="text-destructive" aria-hidden="true">*</span>
+        <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-1.5">
+          {t("fullName")} <span className="text-destructive" aria-hidden="true">*</span>
         </label>
         <input
           id="fullName"
@@ -108,7 +100,7 @@ export default function ContactForm() {
           aria-invalid={!!errors.fullName}
           aria-describedby={errors.fullName ? "fullName-error" : undefined}
           className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition"
-          placeholder="Marie Dupont"
+          placeholder={t("fullNamePlaceholder")}
           {...register("fullName")}
         />
         {errors.fullName && (
@@ -118,14 +110,11 @@ export default function ContactForm() {
         )}
       </div>
 
-      {/* Téléphone + Email en grille */}
+      {/* Phone + Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-foreground mb-1.5"
-          >
-            Téléphone <span className="text-destructive" aria-hidden="true">*</span>
+          <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1.5">
+            {t("phone")} <span className="text-destructive" aria-hidden="true">*</span>
           </label>
           <input
             id="phone"
@@ -135,7 +124,7 @@ export default function ContactForm() {
             aria-invalid={!!errors.phone}
             aria-describedby={errors.phone ? "phone-error" : undefined}
             className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition"
-            placeholder="+32 470 00 00 00"
+            placeholder={t("phonePlaceholder")}
             {...register("phone")}
           />
           {errors.phone && (
@@ -146,11 +135,8 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-foreground mb-1.5"
-          >
-            Email <span className="text-destructive" aria-hidden="true">*</span>
+          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
+            {t("email")} <span className="text-destructive" aria-hidden="true">*</span>
           </label>
           <input
             id="email"
@@ -160,7 +146,7 @@ export default function ContactForm() {
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-error" : undefined}
             className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition"
-            placeholder="marie@exemple.com"
+            placeholder={t("emailPlaceholder")}
             {...register("email")}
           />
           {errors.email && (
@@ -171,14 +157,11 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Commune + Type en grille */}
+      {/* Commune + Request type */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label
-            htmlFor="commune"
-            className="block text-sm font-medium text-foreground mb-1.5"
-          >
-            Commune <span className="text-destructive" aria-hidden="true">*</span>
+          <label htmlFor="commune" className="block text-sm font-medium text-foreground mb-1.5">
+            {t("commune")} <span className="text-destructive" aria-hidden="true">*</span>
           </label>
           <select
             id="commune"
@@ -189,13 +172,11 @@ export default function ContactForm() {
             {...register("commune")}
             defaultValue=""
           >
-            <option value="" disabled>
-              Sélectionnez…
-            </option>
+            <option value="" disabled>{t("communePlaceholder")}</option>
             <option value="overijse">Overijse</option>
             <option value="hoeilaart">Hoeilaart</option>
             <option value="tervuren">Tervuren</option>
-            <option value="autre">Autre commune</option>
+            <option value="autre">{t("communeOther")}</option>
           </select>
           {errors.commune && (
             <p id="commune-error" role="alert" className="mt-1 text-xs text-destructive">
@@ -205,11 +186,8 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="requestType"
-            className="block text-sm font-medium text-foreground mb-1.5"
-          >
-            Type de demande <span className="text-destructive" aria-hidden="true">*</span>
+          <label htmlFor="requestType" className="block text-sm font-medium text-foreground mb-1.5">
+            {t("requestType")} <span className="text-destructive" aria-hidden="true">*</span>
           </label>
           <select
             id="requestType"
@@ -220,13 +198,11 @@ export default function ContactForm() {
             {...register("requestType")}
             defaultValue=""
           >
-            <option value="" disabled>
-              Sélectionnez…
-            </option>
-            <option value="rendez-vous">Prendre rendez-vous</option>
-            <option value="information">Demande d&apos;information</option>
-            <option value="devis">Devis personnalisé</option>
-            <option value="autre">Autre</option>
+            <option value="" disabled>{t("requestTypePlaceholder")}</option>
+            <option value="rendez-vous">{t("requestTypeAppointment")}</option>
+            <option value="information">{t("requestTypeInfo")}</option>
+            <option value="devis">{t("requestTypeQuote")}</option>
+            <option value="autre">{t("requestTypeOther")}</option>
           </select>
           {errors.requestType && (
             <p id="requestType-error" role="alert" className="mt-1 text-xs text-destructive">
@@ -238,23 +214,20 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label
-          htmlFor="message"
-          className="block text-sm font-medium text-foreground mb-1.5"
-        >
-          Message{" "}
-          <span className="text-muted-foreground font-normal">(optionnel)</span>
+        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
+          {t("message")}{" "}
+          <span className="text-muted-foreground font-normal">({tc("optional")})</span>
         </label>
         <textarea
           id="message"
           rows={4}
           className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition resize-none"
-          placeholder="Décrivez votre situation ou votre besoin en quelques mots…"
+          placeholder={t("messagePlaceholder")}
           {...register("message")}
         />
       </div>
 
-      {/* Consentement RGPD */}
+      {/* RGPD */}
       <div className="flex items-start gap-3">
         <input
           id="rgpdConsent"
@@ -267,12 +240,9 @@ export default function ContactForm() {
         />
         <div>
           <label htmlFor="rgpdConsent" className="text-sm text-muted-foreground">
-            J&apos;accepte que mes données soient utilisées pour traiter ma demande, conformément
-            à la{" "}
-            <a href="#" className="text-primary underline hover:no-underline">
-              politique de confidentialité
-            </a>
-            . <span className="text-destructive" aria-hidden="true">*</span>
+            {t("rgpdConsentText")}{" "}
+            <a href="#" className="text-primary underline hover:no-underline">{t("rgpdLink")}</a>.{" "}
+            <span className="text-destructive" aria-hidden="true">*</span>
           </label>
           {errors.rgpdConsent && (
             <p id="rgpd-error" role="alert" className="mt-1 text-xs text-destructive">
@@ -283,12 +253,15 @@ export default function ContactForm() {
       </div>
 
       {formState === "error" && (
-        <div className="flex items-start gap-2 rounded-lg bg-destructive/[0.08] border border-destructive/20 px-4 py-3 text-sm text-destructive" role="alert">
+        <div
+          className="flex items-start gap-2 rounded-lg bg-destructive/[0.08] border border-destructive/20 px-4 py-3 text-sm text-destructive"
+          role="alert"
+        >
           <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
           <span>
-            Une erreur s&apos;est produite. Veuillez réessayer ou{" "}
+            {t("errorTextPre")}{" "}
             <a href="tel:+32486364888" className="underline hover:no-underline font-medium">
-              nous appeler directement
+              {t("errorLink")}
             </a>
             .
           </span>
@@ -303,10 +276,10 @@ export default function ContactForm() {
         {formState === "submitting" ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-            Envoi en cours…
+            {t("submitting")}
           </>
         ) : (
-          "Envoyer ma demande"
+          t("submit")
         )}
       </button>
     </form>

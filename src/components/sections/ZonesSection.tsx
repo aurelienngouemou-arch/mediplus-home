@@ -1,41 +1,16 @@
-import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import FadeIn from "@/components/animations/FadeIn";
-import {
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/animations/StaggerContainer";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
-interface ZoneDetail {
-  name: string;
-  slug: string;
-  description: string;
-  color: string;
-}
+const ZONE_SLUGS = ["overijse", "hoeilaart", "tervuren"] as const;
 
-const FEATURED_ZONES: ZoneDetail[] = [
-  {
-    name: "Overijse",
-    slug: "overijse",
-    description:
-      "Interventions quotidiennes dans toute la commune et les hameaux environnants.",
-    color: "from-primary/10 to-primary/5",
-  },
-  {
-    name: "Hoeilaart",
-    slug: "hoeilaart",
-    description:
-      "Couverture complète de Hoeilaart et des quartiers résidentiels adjacents.",
-    color: "from-secondary/10 to-secondary/5",
-  },
-  {
-    name: "Tervuren",
-    slug: "tervuren",
-    description:
-      "Présence régulière à Tervuren, Vossem et Sint-Joris-Weert.",
-    color: "from-accent/10 to-accent/5",
-  },
-];
+const ZONE_COLORS: Record<string, string> = {
+  overijse: "from-primary/10 to-primary/5",
+  hoeilaart: "from-secondary/10 to-secondary/5",
+  tervuren: "from-accent/10 to-accent/5",
+};
 
 function RegionMap() {
   return (
@@ -45,7 +20,6 @@ function RegionMap() {
       aria-label="Carte simplifiée de la région desservie"
       role="img"
     >
-      {/* Fond région */}
       <path
         d="M70,30 L160,15 L250,35 L295,90 L290,170 L260,235 L195,278 L120,270 L60,230 L28,160 L32,90 Z"
         fill="hsl(210,40%,96%)"
@@ -53,96 +27,73 @@ function RegionMap() {
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
-      {/* Routes principales */}
-      <path
-        d="M160,15 L160,278"
-        stroke="hsl(214,32%,82%)"
-        strokeWidth="1"
-        strokeDasharray="5,4"
-      />
-      <path
-        d="M28,150 L295,150"
-        stroke="hsl(214,32%,82%)"
-        strokeWidth="1"
-        strokeDasharray="5,4"
-      />
-      {/* Bruxelles label */}
+      <path d="M160,15 L160,278" stroke="hsl(214,32%,82%)" strokeWidth="1" strokeDasharray="5,4" />
+      <path d="M28,150 L295,150" stroke="hsl(214,32%,82%)" strokeWidth="1" strokeDasharray="5,4" />
       <circle cx="160" cy="70" r="18" fill="hsl(214,32%,91%)" stroke="hsl(214,32%,82%)" strokeWidth="1" />
-      <text x="160" y="66" textAnchor="middle" fontSize="7" fill="hsl(215,16%,47%)" fontFamily="sans-serif">
-        BXL
-      </text>
-
-      {/* Tervuren */}
+      <text x="160" y="66" textAnchor="middle" fontSize="7" fill="hsl(215,16%,47%)" fontFamily="sans-serif">BXL</text>
       <circle cx="210" cy="115" r="11" fill="hsl(197,83%,22%)" fillOpacity="0.2" stroke="hsl(197,83%,22%)" strokeWidth="1.5" />
       <circle cx="210" cy="115" r="4" fill="hsl(197,83%,22%)" />
       <text x="225" y="113" fontSize="9" fill="hsl(197,83%,22%)" fontFamily="sans-serif" fontWeight="600">Tervuren</text>
-
-      {/* Hoeilaart */}
       <circle cx="155" cy="175" r="11" fill="hsl(188,90%,31%)" fillOpacity="0.2" stroke="hsl(188,90%,31%)" strokeWidth="1.5" />
       <circle cx="155" cy="175" r="4" fill="hsl(188,90%,31%)" />
       <text x="170" y="173" fontSize="9" fill="hsl(188,90%,31%)" fontFamily="sans-serif" fontWeight="600">Hoeilaart</text>
-
-      {/* Overijse */}
       <circle cx="195" cy="215" r="11" fill="hsl(188,96%,44%)" fillOpacity="0.2" stroke="hsl(188,96%,38%)" strokeWidth="1.5" />
       <circle cx="195" cy="215" r="4" fill="hsl(188,96%,38%)" />
       <text x="210" y="213" fontSize="9" fill="hsl(188,96%,38%)" fontFamily="sans-serif" fontWeight="600">Overijse</text>
-
-      {/* Lignes de connexion entre communes */}
       <path d="M210,115 L155,175" stroke="hsl(197,83%,22%)" strokeWidth="0.5" strokeOpacity="0.3" strokeDasharray="3,3" />
       <path d="M155,175 L195,215" stroke="hsl(197,83%,22%)" strokeWidth="0.5" strokeOpacity="0.3" strokeDasharray="3,3" />
     </svg>
   );
 }
 
-export default function ZonesSection() {
+export default async function ZonesSection() {
+  const t = await getTranslations("zonesSection");
+
   return (
     <section className="py-16 md:py-24 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* En-tête */}
         <FadeIn direction="up" className="text-center mb-12 md:mb-16">
           <p className="text-sm font-medium text-accent uppercase tracking-widest mb-3">
-            Zone d&apos;intervention
+            {t("label")}
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground mb-4">
-            Nous intervenons dans votre commune
+            {t("title")}
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Nous intervenons dans les communes d&apos;Overijse, Hoeilaart et Tervuren
+            {t("subtitle")}
           </p>
         </FadeIn>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Carte */}
           <FadeIn direction="left">
             <div className="bg-white rounded-3xl border border-border shadow-sm p-6 aspect-square max-w-md mx-auto lg:max-w-none">
               <RegionMap />
               <p className="text-center text-xs text-muted-foreground mt-3">
-                Carte schématique — zone d&apos;intervention principale
+                {t("mapCaption")}
               </p>
             </div>
           </FadeIn>
 
-          {/* Cards zones */}
           <StaggerContainer staggerDelay={0.1} className="flex flex-col gap-4">
-            {FEATURED_ZONES.map((zone) => (
-              <StaggerItem key={zone.slug}>
+            {ZONE_SLUGS.map((slug) => (
+              <StaggerItem key={slug}>
                 <div
-                  className={`bg-gradient-to-r ${zone.color} border border-border rounded-2xl p-5 flex items-start gap-4 hover:shadow-md transition-all`}
+                  className={`bg-gradient-to-r ${ZONE_COLORS[slug]} border border-border rounded-2xl p-5 flex items-start gap-4 hover:shadow-md transition-all`}
                 >
                   <div className="w-10 h-10 rounded-xl bg-white/80 border border-border flex items-center justify-center shrink-0 shadow-sm">
                     <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-foreground text-base mb-2">
-                      {zone.name}
+                    <h3 className="font-semibold text-foreground text-base mb-2 capitalize">
+                      {slug.charAt(0).toUpperCase() + slug.slice(1)}
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      {zone.description}
+                      {t(slug)}
                     </p>
                   </div>
                   <Link
-                    href={`/zones/${zone.slug}`}
-                    aria-label={`Voir la page de la zone ${zone.name}`}
+                    href={`/zones/${slug}`}
+                    aria-label={`${slug}`}
                     className="shrink-0 w-8 h-8 rounded-full bg-white/60 border border-border flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all"
                   >
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -153,11 +104,11 @@ export default function ZonesSection() {
 
             <FadeIn direction="up" delay={0.3}>
               <p className="text-sm text-muted-foreground text-center lg:text-left pt-2">
-                Vous habitez dans un village voisin ?{" "}
+                {t("neighborsQuestion")}{" "}
                 <Link href="/contact" className="text-primary font-medium hover:underline">
-                  Contactez-nous
+                  {t("contactUs")}
                 </Link>{" "}
-                pour vérifier si nous intervenons chez vous.
+                {t("neighborsText")}
               </p>
             </FadeIn>
           </StaggerContainer>

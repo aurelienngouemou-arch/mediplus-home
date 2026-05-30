@@ -1,0 +1,350 @@
+{
+  "common": {
+    "phone": "Téléphone",
+    "email": "Email",
+    "address": "Adresse",
+    "submit": "Envoyer",
+    "cancel": "Annuler",
+    "loading": "Chargement…",
+    "learnMore": "En savoir plus",
+    "bookAppointment": "Prendre rendez-vous",
+    "contact": "Contact",
+    "required": "obligatoire",
+    "optional": "optionnel",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "allMutualities": "Toutes les mutuelles belges",
+    "available247": "Disponible 7j/7",
+    "rapidIntervention": "Intervention rapide",
+    "atHome": "À votre domicile",
+    "discover": "Découvrir",
+    "callUs": "Nous appeler",
+    "writeWhatsApp": "Écrire sur WhatsApp",
+    "sendMessage": "Envoyer un message",
+    "sendAnotherMessage": "Envoyer un autre message"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "services": "Nos services",
+    "zones": "Zones desservies",
+    "about": "À propos",
+    "contact": "Contact",
+    "bookAppointment": "Prendre RDV",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "languageSwitcher": {
+    "label": "Langue",
+    "fr": "Français",
+    "nl": "Nederlands",
+    "en": "English",
+    "fr_short": "FR",
+    "nl_short": "NL",
+    "en_short": "EN"
+  },
+  "hero": {
+    "badge": "Soins infirmiers à domicile",
+    "titlePre": "Des soins infirmiers",
+    "titleHighlight": "à domicile",
+    "titlePost": "chez vous.",
+    "subtitle": "Soins à domicile en Belgique",
+    "description": "Notre équipe intervient à Overijse, Hoeilaart et Tervuren avec professionnalisme et bienveillance, à chaque étape de votre rétablissement.",
+    "ctaBook": "Prendre rendez-vous",
+    "ctaWhatsApp": "WhatsApp",
+    "imageAlt": "Infirmière souriante prenant soin d'une dame senior à domicile",
+    "imageBadge": "Soins humains, expertise médicale",
+    "trust24h": "24h/24",
+    "trust7j": "7j/7",
+    "trustHome": "À domicile"
+  },
+  "trustBar": {
+    "label": "Toutes les mutuelles belges",
+    "sublabel": "Convention avec toutes les mutuelles belges"
+  },
+  "servicesSection": {
+    "label": "Expertise médicale",
+    "title": "Nos prises en charge",
+    "subtitle": "Une expertise médicale adaptée à chaque situation.",
+    "viewAll": "Voir toutes nos prises en charge",
+    "learnMore": "En savoir plus"
+  },
+  "services": {
+    "soins-generaux": {
+      "name": "Soins infirmiers généraux à domicile",
+      "shortName": "Soins généraux",
+      "description": "Soins de base et quotidiens : pansements, injections, perfusions, prise de tension. Tout ce dont vous avez besoin, chez vous.",
+      "heroTitle": "Soins infirmiers généraux à domicile en Belgique",
+      "heroSubtitle": "Des soins quotidiens de qualité hospitalière, dans le confort de votre domicile. Pansements, injections, perfusions, surveillance : nous prenons soin de vous chaque jour.",
+      "heroBadge": "Service · Soins généraux"
+    },
+    "troubles-memoire": {
+      "name": "Accompagnement des troubles de la mémoire",
+      "shortName": "Troubles de la mémoire",
+      "description": "Soutien spécialisé pour les patients atteints d'Alzheimer ou de troubles cognitifs, avec une approche douce et patiente.",
+      "heroTitle": "Accompagnement infirmier des troubles de la mémoire à domicile",
+      "heroSubtitle": "Une présence douce et experte pour les patients atteints d'Alzheimer ou de troubles cognitifs. Nous accompagnons avec patience, bienveillance et professionnalisme.",
+      "heroBadge": "Service · Troubles de la mémoire"
+    },
+    "interventions-rapides": {
+      "name": "Interventions infirmières rapides",
+      "shortName": "Interventions rapides",
+      "description": "Disponibilité immédiate pour les soins urgents à domicile : nous intervenons dans l'heure si nécessaire.",
+      "heroTitle": "Interventions infirmières rapides à domicile",
+      "heroSubtitle": "Disponibilité immédiate pour vos besoins urgents. Nos infirmiers peuvent intervenir en moins d'une heure dans les régions d'Overijse, Hoeilaart et Tervuren.",
+      "heroBadge": "Service · Interventions rapides"
+    },
+    "suivi-long-terme": {
+      "name": "Suivi infirmier à long terme",
+      "shortName": "Suivi long terme",
+      "description": "Une équipe stable qui vous suit dans la durée, avec le même infirmier référent pour une vraie continuité.",
+      "heroTitle": "Suivi infirmier à long terme à domicile",
+      "heroSubtitle": "Une relation de confiance qui s'inscrit dans la durée. Le même infirmier référent, une équipe stable, et une coordination médicale sans faille pour votre santé au long cours.",
+      "heroBadge": "Service · Suivi long terme"
+    },
+    "maladies-chroniques": {
+      "name": "Suivi des maladies chroniques",
+      "shortName": "Maladies chroniques",
+      "description": "Diabète, hypertension, BPCO, insuffisance cardiaque : gestion quotidienne et éducation thérapeutique.",
+      "heroTitle": "Suivi infirmier des maladies chroniques à domicile",
+      "heroSubtitle": "Diabète, hypertension, BPCO, insuffisance cardiaque : une gestion experte à domicile. Éducation thérapeutique, surveillance continue et ajustements en temps réel.",
+      "heroBadge": "Service · Maladies chroniques"
+    },
+    "soins-seniors": {
+      "name": "Soins aux personnes âgées",
+      "shortName": "Soins seniors",
+      "description": "Maintien à domicile, prévention des chutes, soins d'hygiène et accompagnement gériatrique global.",
+      "heroTitle": "Soins infirmiers à domicile pour personnes âgées",
+      "heroSubtitle": "Maintien à domicile, préservation de l'autonomie et soins gériatriques de qualité. Parce que chaque personne mérite de vieillir dignement dans son environnement.",
+      "heroBadge": "Service · Soins seniors"
+    },
+    "soins-palliatifs": {
+      "name": "Soins palliatifs et accompagnement à domicile",
+      "shortName": "Soins palliatifs",
+      "description": "Confort, dignité et présence humaine pour les patients en fin de vie et leurs proches.",
+      "heroTitle": "Soins palliatifs à domicile en Belgique",
+      "heroSubtitle": "Confort, dignité et présence humaine pour les patients en fin de vie et leurs familles. Accompagner jusqu'au bout, chez soi, entouré des siens.",
+      "heroBadge": "Service · Soins palliatifs"
+    },
+    "post-hospitalisation": {
+      "name": "Soins post-hospitalisation à domicile",
+      "shortName": "Post-hospitalisation",
+      "description": "Retour serein après une opération : pansements, rééducation, surveillance et coordination médicale.",
+      "heroTitle": "Soins infirmiers post-hospitalisation à domicile",
+      "heroSubtitle": "Retour à domicile sécurisé après une opération ou une hospitalisation. Coordination médicale, suivi des plaies, surveillance des complications et réadaptation progressive.",
+      "heroBadge": "Service · Post-hospitalisation"
+    }
+  },
+  "actesSection": {
+    "label": "Actes infirmiers",
+    "title": "Tous les actes infirmiers à domicile",
+    "subtitle": "Voici ce que nous proposons à nos patients"
+  },
+  "actes": {
+    "injections": "Injections & vaccinations",
+    "perfusions": "Perfusions à domicile",
+    "pansements": "Pansements & soins de plaies",
+    "prelevements": "Prélèvements sanguins",
+    "stomie": "Soins de stomie",
+    "medicaments": "Gestion des médicaments",
+    "hygiene": "Toilette & soins d'hygiène",
+    "post-op": "Récupération post-opératoire"
+  },
+  "zonesSection": {
+    "label": "Zone d'intervention",
+    "title": "Nous intervenons dans votre commune",
+    "subtitle": "Nous intervenons dans les communes d'Overijse, Hoeilaart et Tervuren",
+    "mapCaption": "Carte schématique — zone d'intervention principale",
+    "overijse": "Interventions quotidiennes dans toute la commune et les hameaux environnants.",
+    "hoeilaart": "Couverture complète de Hoeilaart et des quartiers résidentiels adjacents.",
+    "tervuren": "Présence régulière à Tervuren, Vossem et Sint-Joris-Weert.",
+    "neighborsQuestion": "Vous habitez dans un village voisin ?",
+    "contactUs": "Contactez-nous",
+    "neighborsText": "pour vérifier si nous intervenons chez vous."
+  },
+  "processSection": {
+    "label": "Comment ça marche",
+    "title": "Simple comme un coup de fil",
+    "subtitle": "De votre premier appel à la mise en place des soins, nous accompagnons chaque étape avec clarté.",
+    "step1Title": "Prenez contact",
+    "step1Desc": "Appelez-nous, envoyez un WhatsApp ou remplissez le formulaire en ligne. Nous vous répondons en moins de 2h.",
+    "step2Title": "Évaluation à domicile",
+    "step2Desc": "Un infirmier se déplace gratuitement pour évaluer vos besoins et établir un plan de soins personnalisé.",
+    "step3Title": "Soins personnalisés",
+    "step3Desc": "Nous démarrons les soins selon votre planning. Flexibilité totale, 7j/7, avec suivi continu."
+  },
+  "ctaSection": {
+    "availability": "Disponible 7j/7",
+    "title": "Besoin de soins à domicile dès aujourd'hui ?",
+    "subtitle": "Notre équipe est joignable 7 jours sur 7, de 7h à 20h en semaine et de 8h à 18h le weekend. Une réponse en moins de 2h garantie.",
+    "formLink": "remplissez notre formulaire de contact",
+    "orText": "Ou"
+  },
+  "footer": {
+    "tagline": "Soins infirmiers professionnels à domicile en Belgique",
+    "zonesTitle": "Zones desservies",
+    "servicesTitle": "Nos services",
+    "contactTitle": "Contact",
+    "rights": "Tous droits réservés.",
+    "legal": "Mentions légales",
+    "privacy": "Confidentialité"
+  },
+  "contactPage": {
+    "heroBadge": "Contact",
+    "heroTitle": "Contactez-nous",
+    "heroSubtitle": "Nous vous répondons en moins de 2 heures. Disponibles du lundi au dimanche.",
+    "heroResponseTime": "moins de 2 heures",
+    "formTitle": "Envoyer un message",
+    "formSubtitle": "Tous les champs marqués d'un * sont obligatoires.",
+    "infoTitle": "Nos coordonnées",
+    "emergencyLabel": "Urgence médicale non vitale",
+    "emergencyTitle": "Besoin urgent ? Appelez-nous directement.",
+    "emergencyText": "Pour toute urgence vitale, appelez le 112 immédiatement. Pour les soins urgents non vitaux, notre équipe intervient dans l'heure.",
+    "form": {
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Marie Dupont",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+32 470 00 00 00",
+      "email": "Email",
+      "emailPlaceholder": "marie@exemple.com",
+      "commune": "Commune",
+      "communePlaceholder": "Sélectionnez…",
+      "communeOther": "Autre commune",
+      "requestType": "Type de demande",
+      "requestTypePlaceholder": "Sélectionnez…",
+      "requestTypeAppointment": "Prendre rendez-vous",
+      "requestTypeInfo": "Demande d'information",
+      "requestTypeQuote": "Devis personnalisé",
+      "requestTypeOther": "Autre",
+      "message": "Message",
+      "messagePlaceholder": "Décrivez votre situation ou votre besoin en quelques mots…",
+      "rgpdConsentText": "J'accepte que mes données soient utilisées pour traiter ma demande, conformément à la",
+      "rgpdConsent": "J'accepte que mes données soient utilisées pour traiter ma demande, conformément à la politique de confidentialité.",
+      "rgpdLink": "politique de confidentialité",
+      "submit": "Envoyer ma demande",
+      "submitting": "Envoi en cours…",
+      "successTitle": "Message envoyé !",
+      "successText": "Merci pour votre message. Nous vous contactons en moins de 2 heures aux coordonnées que vous avez fournies.",
+      "errorTextPre": "Une erreur s'est produite. Veuillez réessayer ou",
+      "errorText": "Une erreur s'est produite. Veuillez réessayer ou nous appeler directement.",
+      "errorLink": "nous appeler directement",
+      "errors": {
+        "fullName": "Veuillez entrer votre nom complet",
+        "phone": "Numéro de téléphone belge invalide (ex: +32 470 00 00 00)",
+        "email": "Adresse email invalide",
+        "commune": "Veuillez sélectionner une commune",
+        "requestType": "Veuillez sélectionner un type de demande",
+        "rgpdConsent": "Vous devez accepter la politique de confidentialité"
+      }
+    }
+  },
+  "aboutPage": {
+    "heroBadge": "Notre équipe",
+    "heroTitle": "Une équipe d'infirmiers au service de votre santé",
+    "heroSubtitle": "Nous sommes des professionnels de santé passionnés par le soin à domicile, engagés auprès des habitants d'Overijse, Hoeilaart et Tervuren depuis plus d'une décennie.",
+    "ctaTitle": "Discutons de vos besoins",
+    "ctaSubtitle": "Chaque situation est unique. Contactez-nous pour un échange gratuit et sans engagement avec un infirmier de notre équipe.",
+    "ctaButton": "Nous contacter",
+    "ctaBadge1": "Toutes les Mutuelles Belges",
+    "ctaBadge2": "Conformité RGPD"
+  },
+  "servicesPage": {
+    "heroBadge": "Soins infirmiers à domicile",
+    "heroTitle": "Nos soins infirmiers à domicile",
+    "heroBadgeAll": "Toutes les mutuelles belges",
+    "heroBadge7j": "Disponible 7j/7",
+    "heroBadgeRapid": "Intervention rapide",
+    "ctaTitle": "Vous avez un besoin spécifique ?",
+    "ctaSubtitle": "Chaque situation est unique. Contactez-nous pour un entretien gratuit et sans engagement — nous évaluerons ensemble la prise en charge la plus adaptée.",
+    "ctaContact": "Nous contacter",
+    "learnMore": "En savoir plus"
+  },
+  "zonesPage": {
+    "heroBadge": "Brabant flamand · Belgique",
+    "heroTitle": "Nos zones d'intervention en Belgique",
+    "heroSubtitle": "Nos infirmiers interviennent à domicile dans les communes d'Overijse, Hoeilaart et Tervuren — en français, en néerlandais et en anglais.",
+    "mapLabel": "Carte des 3 zones d'intervention : Overijse, Hoeilaart, Tervuren",
+    "sectionTitle": "Trois communes, une équipe dédiée",
+    "sectionSubtitle": "Chaque commune possède ses particularités. Découvrez notre présence et nos engagements dans chaque zone.",
+    "discoverBtn": "Découvrir",
+    "outOfZoneTitle": "Vous n'êtes pas dans ces zones ?",
+    "outOfZoneSubtitle": "Nous couvrons également les communes voisines et étudions chaque demande au cas par cas. Contactez-nous pour vérifier si nous pouvons intervenir chez vous.",
+    "outOfZoneContact": "Nous contacter",
+    "outOfZoneCall": "Appeler directement"
+  },
+  "servicePage": {
+    "breadcrumbHome": "Accueil",
+    "breadcrumbServices": "Services",
+    "badgeMutual": "Toutes les mutuelles belges",
+    "badgeAvailable": "Disponible 7j/7",
+    "badgeHome": "À votre domicile",
+    "ctaBook": "Prendre rendez-vous",
+    "ctaCall": "Appeler",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaTitle": "Besoin de {service} ?",
+    "ctaSubtitle": "Contactez-nous dès aujourd'hui. Nous vous répondons en moins de 2 heures et organisons une évaluation gratuite à votre domicile."
+  },
+  "zonePage": {
+    "ctaBook": "Prendre rendez-vous",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaCall": "Appeler"
+  },
+  "contactInfo": {
+    "hoursTitle": "Horaires",
+    "hoursWeekdays": "Lun–Ven : 7h–20h",
+    "hoursWeekend": "Sam–Dim : 8h–18h",
+    "responseTime": "Réponse en moins de 2h",
+    "coverageTitle": "Zone couverte",
+    "coverageText": "Overijse, Hoeilaart et Tervuren",
+    "mutualitiesTitle": "Mutuelles",
+    "mutualitiesText": "Toutes les mutuelles belges acceptées",
+    "languagesTitle": "Langues",
+    "languagesText": "FR · NL · EN"
+  },
+  "faqContact": {
+    "title": "Questions fréquentes",
+    "items": [
+      {
+        "q": "Faut-il une prescription médicale pour faire appel à vos services ?",
+        "a": "Pour les actes remboursés par votre mutuelle (pansements, injections, perfusions), une prescription médicale est nécessaire. Pour les soins de confort ou une première évaluation, vous pouvez nous contacter directement sans ordonnance."
+      },
+      {
+        "q": "Dans quel délai intervenez-vous ?",
+        "a": "Pour les demandes standard, nous répondons en moins de 2 heures et planifions une visite dans les 24-48h. Pour les urgences, nous intervenons dans l'heure selon disponibilité."
+      },
+      {
+        "q": "Quels sont vos tarifs ?",
+        "a": "Nos soins sont conventionnés et remboursés par toutes les mutuelles belges. Votre participation personnelle dépend de votre statut (ticket modérateur standard, BIM/VIPO). Nous vous informons des tarifs avant toute intervention."
+      },
+      {
+        "q": "Intervenez-vous le weekend ?",
+        "a": "Oui, 7 jours sur 7, samedi et dimanche inclus. Nos horaires sont 7h-20h en semaine et 8h-18h le weekend."
+      },
+      {
+        "q": "Comment se passe la première visite ?",
+        "a": "La première visite est une évaluation gratuite et sans engagement. Un infirmier se déplace chez vous pour évaluer vos besoins, répondre à vos questions et établir un plan de soins personnalisé."
+      }
+    ]
+  },
+  "metadata": {
+    "home": {
+      "title": "Infirmier à domicile | Overijse, Hoeilaart, Tervuren",
+      "description": "Soins infirmiers professionnels à domicile. Disponible 7j/7 à Overijse, Hoeilaart et Tervuren. Toutes les mutuelles belges."
+    },
+    "services": {
+      "title": "Nos soins infirmiers à domicile",
+      "description": "Découvrez nos 8 services de soins infirmiers à domicile : soins généraux, troubles de la mémoire, maladies chroniques, soins palliatifs et plus encore. Toutes les mutuelles belges."
+    },
+    "zones": {
+      "title": "Zones d'intervention — Overijse, Hoeilaart, Tervuren",
+      "description": "Infirmier à domicile dans les communes d'Overijse, Hoeilaart et Tervuren (Brabant flamand). Disponible 7j/7. Toutes les mutuelles belges."
+    },
+    "about": {
+      "title": "À propos · Notre équipe d'infirmiers à domicile",
+      "description": "Découvrez notre équipe d'infirmiers à domicile, nos valeurs et notre histoire. Au service des patients d'Overijse, Hoeilaart et Tervuren."
+    },
+    "contact": {
+      "title": "Contact · Infirmier à domicile Belgique",
+      "description": "Contactez notre équipe d'infirmiers à domicile. Réponse en moins de 2 heures. Disponible 7j/7 à Overijse, Hoeilaart et Tervuren. Devis gratuit."
+    }
+  }
+}

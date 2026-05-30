@@ -1,0 +1,350 @@
+{
+  "common": {
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "address": "Adres",
+    "submit": "Versturen",
+    "cancel": "Annuleren",
+    "loading": "Laden…",
+    "learnMore": "Meer weten",
+    "bookAppointment": "Afspraak maken",
+    "contact": "Contact",
+    "required": "verplicht",
+    "optional": "optioneel",
+    "close": "Sluiten",
+    "open": "Openen",
+    "allMutualities": "Alle Belgische Ziekenfondsen",
+    "available247": "Beschikbaar 7/7",
+    "rapidIntervention": "Snelle interventie",
+    "atHome": "Bij u thuis",
+    "discover": "Ontdekken",
+    "callUs": "Bel ons",
+    "writeWhatsApp": "Schrijf op WhatsApp",
+    "sendMessage": "Bericht sturen",
+    "sendAnotherMessage": "Nog een bericht sturen"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Onze diensten",
+    "zones": "Verzorgingszones",
+    "about": "Over ons",
+    "contact": "Contact",
+    "bookAppointment": "Afspraak",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten"
+  },
+  "languageSwitcher": {
+    "label": "Taal",
+    "fr": "Français",
+    "nl": "Nederlands",
+    "en": "English",
+    "fr_short": "FR",
+    "nl_short": "NL",
+    "en_short": "EN"
+  },
+  "hero": {
+    "badge": "Verpleegkundige zorg aan huis",
+    "titlePre": "Verpleegkundige zorg",
+    "titleHighlight": "aan huis",
+    "titlePost": "bij u thuis.",
+    "subtitle": "Thuiszorg in België",
+    "description": "Ons team komt langs in Overijse, Hoeilaart en Tervuren — met professionalisme en zorgzaamheid, bij elke stap van uw herstel.",
+    "ctaBook": "Afspraak maken",
+    "ctaWhatsApp": "WhatsApp",
+    "imageAlt": "Lachende verpleegster die zorgt voor een oudere dame thuis",
+    "imageBadge": "Menselijke zorg, medische expertise",
+    "trust24h": "24/7",
+    "trust7j": "7/7",
+    "trustHome": "Aan huis"
+  },
+  "trustBar": {
+    "label": "Alle Belgische Ziekenfondsen",
+    "sublabel": "Overeenkomst met alle Belgische ziekenfondsen"
+  },
+  "servicesSection": {
+    "label": "Medische expertise",
+    "title": "Onze zorgvormen",
+    "subtitle": "Medische expertise aangepast aan elke situatie.",
+    "viewAll": "Alle zorgvormen bekijken",
+    "learnMore": "Meer weten"
+  },
+  "services": {
+    "soins-generaux": {
+      "name": "Algemene verpleegkundige zorg aan huis",
+      "shortName": "Algemene zorg",
+      "description": "Dagelijkse basisverzorging: verbanden, injecties, infusen, bloeddrukcontrole. Alles wat u nodig hebt, bij u thuis.",
+      "heroTitle": "Algemene verpleegkundige zorg aan huis in België",
+      "heroSubtitle": "Dagelijkse zorg van ziekenhuiskwaliteit, in het comfort van uw eigen woning. Verbanden, injecties, infusen, bewaking: wij zorgen elke dag voor u.",
+      "heroBadge": "Dienst · Algemene zorg"
+    },
+    "troubles-memoire": {
+      "name": "Begeleiding bij geheugenstoornissen",
+      "shortName": "Geheugenstoornissen",
+      "description": "Gespecialiseerde ondersteuning voor patiënten met Alzheimer of cognitieve stoornissen, met een zachte en geduldige aanpak.",
+      "heroTitle": "Verpleegkundige begeleiding bij geheugenstoornissen aan huis",
+      "heroSubtitle": "Een zachte en deskundige aanwezigheid voor patiënten met Alzheimer of cognitieve stoornissen. Wij begeleiden met geduld, vriendelijkheid en professionalisme.",
+      "heroBadge": "Dienst · Geheugenstoornissen"
+    },
+    "interventions-rapides": {
+      "name": "Snelle verpleegkundige interventies",
+      "shortName": "Snelle interventies",
+      "description": "Onmiddellijke beschikbaarheid voor dringende zorg aan huis: wij komen indien nodig binnen het uur.",
+      "heroTitle": "Snelle verpleegkundige interventies aan huis",
+      "heroSubtitle": "Onmiddellijke beschikbaarheid voor uw dringende behoeften. Onze verpleegkundigen kunnen binnen een uur ter plaatse zijn in Overijse, Hoeilaart en Tervuren.",
+      "heroBadge": "Dienst · Snelle interventies"
+    },
+    "suivi-long-terme": {
+      "name": "Langdurige verpleegkundige opvolging",
+      "shortName": "Langdurige opvolging",
+      "description": "Een stabiel team dat u langdurig opvolgt, met dezelfde referentieverpleegkundige voor echte continuïteit.",
+      "heroTitle": "Langdurige verpleegkundige opvolging aan huis",
+      "heroSubtitle": "Een vertrouwensrelatie die duurzaam is. Dezelfde referentieverpleegkundige, een stabiel team en naadloze medische coördinatie voor uw gezondheid op lange termijn.",
+      "heroBadge": "Dienst · Langdurige opvolging"
+    },
+    "maladies-chroniques": {
+      "name": "Begeleiding bij chronische aandoeningen",
+      "shortName": "Chronische aandoeningen",
+      "description": "Diabetes, hypertensie, COPD, hartfalen: dagelijks beheer en therapeutische educatie.",
+      "heroTitle": "Verpleegkundige opvolging van chronische aandoeningen aan huis",
+      "heroSubtitle": "Diabetes, hypertensie, COPD, hartfalen: deskundig beheer aan huis. Therapeutische educatie, continue bewaking en real-time aanpassingen.",
+      "heroBadge": "Dienst · Chronische aandoeningen"
+    },
+    "soins-seniors": {
+      "name": "Zorg voor ouderen",
+      "shortName": "Zorg voor ouderen",
+      "description": "Thuisblijven, valpreventie, hygiënische zorg en geriatrische begeleiding.",
+      "heroTitle": "Verpleegkundige zorg aan huis voor ouderen",
+      "heroSubtitle": "Thuisblijven, behoud van autonomie en kwaliteitsvolle geriatrische zorg. Omdat elke persoon verdient om waardig thuis oud te worden.",
+      "heroBadge": "Dienst · Zorg voor ouderen"
+    },
+    "soins-palliatifs": {
+      "name": "Palliatieve zorg en begeleiding aan huis",
+      "shortName": "Palliatieve zorg",
+      "description": "Comfort, waardigheid en menselijke aanwezigheid voor terminale patiënten en hun naasten.",
+      "heroTitle": "Palliatieve zorg aan huis in België",
+      "heroSubtitle": "Comfort, waardigheid en menselijke aanwezigheid voor patiënten in de laatste levensfase en hun families. Begeleiden tot het einde, thuis, omringd door dierbaren.",
+      "heroBadge": "Dienst · Palliatieve zorg"
+    },
+    "post-hospitalisation": {
+      "name": "Zorg na ziekenhuisopname aan huis",
+      "shortName": "Na ziekenhuisopname",
+      "description": "Rustig herstel na een operatie: verbanden, revalidatie, bewaking en medische coördinatie.",
+      "heroTitle": "Verpleegkundige zorg na ziekenhuisopname aan huis",
+      "heroSubtitle": "Veilig thuiskomen na een operatie of ziekenhuisopname. Medische coördinatie, wondbewaking, complicatiebewaking en geleidelijke revalidatie.",
+      "heroBadge": "Dienst · Na ziekenhuisopname"
+    }
+  },
+  "actesSection": {
+    "label": "Verpleegkundige handelingen",
+    "title": "Alle verpleegkundige handelingen aan huis",
+    "subtitle": "Wat wij onze patiënten aanbieden"
+  },
+  "actes": {
+    "injections": "Injecties & vaccinaties",
+    "perfusions": "Infusen aan huis",
+    "pansements": "Wondverzorging & verbanden",
+    "prelevements": "Bloedafnames",
+    "stomie": "Stomaverzorging",
+    "medicaments": "Medicatiebeheer",
+    "hygiene": "Toilette & hygiënische zorg",
+    "post-op": "Herstel na operatie"
+  },
+  "zonesSection": {
+    "label": "Interventiegebied",
+    "title": "Wij komen langs in uw gemeente",
+    "subtitle": "Wij komen langs in de gemeenten Overijse, Hoeilaart en Tervuren",
+    "mapCaption": "Schematische kaart — hoofdinterventiegebied",
+    "overijse": "Dagelijkse interventies in de hele gemeente en de omliggende gehuchten.",
+    "hoeilaart": "Volledige dekking van Hoeilaart en de aangrenzende woonwijken.",
+    "tervuren": "Regelmatige aanwezigheid in Tervuren, Vossem en Sint-Joris-Weert.",
+    "neighborsQuestion": "Woont u in een naburig dorp?",
+    "contactUs": "Contacteer ons",
+    "neighborsText": "om te controleren of wij bij u kunnen langskomen."
+  },
+  "processSection": {
+    "label": "Hoe werkt het",
+    "title": "Zo eenvoudig als een telefoontje",
+    "subtitle": "Van uw eerste telefoontje tot de start van de zorg, wij begeleiden elke stap duidelijk.",
+    "step1Title": "Neem contact op",
+    "step1Desc": "Bel ons, stuur een WhatsApp of vul het online formulier in. Wij antwoorden binnen 2 uur.",
+    "step2Title": "Evaluatie aan huis",
+    "step2Desc": "Een verpleegkundige komt gratis langs om uw behoeften te evalueren en een persoonlijk zorgplan op te stellen.",
+    "step3Title": "Persoonlijke zorg",
+    "step3Desc": "Wij starten de zorg volgens uw planning. Volledige flexibiliteit, 7/7, met continue opvolging."
+  },
+  "ctaSection": {
+    "availability": "Beschikbaar 7/7",
+    "title": "Thuiszorg nodig vandaag?",
+    "subtitle": "Ons team is bereikbaar 7 dagen per week, van 7u tot 20u op weekdagen en van 8u tot 18u in het weekend. Antwoord binnen 2u gegarandeerd.",
+    "formLink": "vul ons contactformulier in",
+    "orText": "Of"
+  },
+  "footer": {
+    "tagline": "Professionele verpleegkundige zorg aan huis in België",
+    "zonesTitle": "Verzorgingszones",
+    "servicesTitle": "Onze diensten",
+    "contactTitle": "Contact",
+    "rights": "Alle rechten voorbehouden.",
+    "legal": "Juridische vermeldingen",
+    "privacy": "Privacybeleid"
+  },
+  "contactPage": {
+    "heroBadge": "Contact",
+    "heroTitle": "Contacteer ons",
+    "heroSubtitle": "Wij antwoorden binnen 2 uur. Beschikbaar van maandag tot zondag.",
+    "heroResponseTime": "2 uur",
+    "formTitle": "Stuur een bericht",
+    "formSubtitle": "Alle velden gemarkeerd met een * zijn verplicht.",
+    "infoTitle": "Onze contactgegevens",
+    "emergencyLabel": "Niet-levensbedreigende medische noodsituatie",
+    "emergencyTitle": "Dringend? Bel ons direct.",
+    "emergencyText": "Voor alle levensbedreigende noodsituaties, bel onmiddellijk 112. Voor dringende niet-vitale zorg, komt ons team binnen het uur.",
+    "form": {
+      "fullName": "Volledige naam",
+      "fullNamePlaceholder": "Marie Dupont",
+      "phone": "Telefoon",
+      "phonePlaceholder": "+32 470 00 00 00",
+      "email": "E-mail",
+      "emailPlaceholder": "marie@voorbeeld.com",
+      "commune": "Gemeente",
+      "communePlaceholder": "Selecteer…",
+      "communeOther": "Andere gemeente",
+      "requestType": "Type aanvraag",
+      "requestTypePlaceholder": "Selecteer…",
+      "requestTypeAppointment": "Afspraak maken",
+      "requestTypeInfo": "Informatieverzoek",
+      "requestTypeQuote": "Persoonlijke offerte",
+      "requestTypeOther": "Andere",
+      "message": "Bericht",
+      "messagePlaceholder": "Beschrijf uw situatie of behoefte in enkele woorden…",
+      "rgpdConsentText": "Ik ga ermee akkoord dat mijn gegevens worden gebruikt om mijn verzoek te behandelen, overeenkomstig het",
+      "rgpdConsent": "Ik ga ermee akkoord dat mijn gegevens worden gebruikt om mijn verzoek te behandelen, overeenkomstig het privacybeleid.",
+      "rgpdLink": "privacybeleid",
+      "submit": "Mijn aanvraag versturen",
+      "submitting": "Versturen…",
+      "successTitle": "Bericht verzonden!",
+      "successText": "Bedankt voor uw bericht. Wij nemen binnen 2 uur contact met u op via de door u opgegeven contactgegevens.",
+      "errorTextPre": "Er is een fout opgetreden. Probeer opnieuw of",
+      "errorText": "Er is een fout opgetreden. Probeer opnieuw of bel ons direct.",
+      "errorLink": "bel ons direct",
+      "errors": {
+        "fullName": "Gelieve uw volledige naam in te vullen",
+        "phone": "Ongeldig Belgisch telefoonnummer (bijv: +32 470 00 00 00)",
+        "email": "Ongeldig e-mailadres",
+        "commune": "Gelieve een gemeente te selecteren",
+        "requestType": "Gelieve een type aanvraag te selecteren",
+        "rgpdConsent": "U moet het privacybeleid accepteren"
+      }
+    }
+  },
+  "aboutPage": {
+    "heroBadge": "Ons team",
+    "heroTitle": "Een team verpleegkundigen in dienst van uw gezondheid",
+    "heroSubtitle": "Wij zijn zorgprofessionals die gepassioneerd zijn door thuiszorg, betrokken bij de inwoners van Overijse, Hoeilaart en Tervuren.",
+    "ctaTitle": "Laten we uw behoeften bespreken",
+    "ctaSubtitle": "Elke situatie is uniek. Contacteer ons voor een gratis en vrijblijvend gesprek met een verpleegkundige van ons team.",
+    "ctaButton": "Contacteer ons",
+    "ctaBadge1": "Alle Belgische Ziekenfondsen",
+    "ctaBadge2": "AVG-conform"
+  },
+  "servicesPage": {
+    "heroBadge": "Verpleegkundige zorg aan huis",
+    "heroTitle": "Onze verpleegkundige zorg aan huis",
+    "heroBadgeAll": "Alle Belgische ziekenfondsen",
+    "heroBadge7j": "Beschikbaar 7/7",
+    "heroBadgeRapid": "Snelle interventie",
+    "ctaTitle": "Heeft u een specifieke behoefte?",
+    "ctaSubtitle": "Elke situatie is uniek. Contacteer ons voor een gratis en vrijblijvend gesprek — wij evalueren samen de meest geschikte zorgvorm.",
+    "ctaContact": "Contacteer ons",
+    "learnMore": "Meer weten"
+  },
+  "zonesPage": {
+    "heroBadge": "Vlaams-Brabant · België",
+    "heroTitle": "Onze interventiezones in België",
+    "heroSubtitle": "Onze verpleegkundigen komen aan huis in Overijse, Hoeilaart en Tervuren — in het Frans, Nederlands en Engels.",
+    "mapLabel": "Kaart van de 3 interventiezones: Overijse, Hoeilaart, Tervuren",
+    "sectionTitle": "Drie gemeenten, één toegewijd team",
+    "sectionSubtitle": "Elke gemeente heeft zijn eigen kenmerken. Ontdek onze aanwezigheid en onze engagementen in elke zone.",
+    "discoverBtn": "Ontdekken",
+    "outOfZoneTitle": "Bent u niet in deze zones?",
+    "outOfZoneSubtitle": "Wij dekken ook de naburige gemeenten en beoordelen elk verzoek geval per geval. Contacteer ons om te controleren of wij bij u kunnen langskomen.",
+    "outOfZoneContact": "Contacteer ons",
+    "outOfZoneCall": "Direct bellen"
+  },
+  "servicePage": {
+    "breadcrumbHome": "Home",
+    "breadcrumbServices": "Diensten",
+    "badgeMutual": "Alle Belgische ziekenfondsen",
+    "badgeAvailable": "Beschikbaar 7/7",
+    "badgeHome": "Bij u thuis",
+    "ctaBook": "Afspraak maken",
+    "ctaCall": "Bellen",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaTitle": "Behoefte aan {service}?",
+    "ctaSubtitle": "Contacteer ons vandaag. Wij antwoorden binnen 2 uur en organiseren een gratis evaluatie bij u thuis."
+  },
+  "zonePage": {
+    "ctaBook": "Afspraak maken",
+    "ctaWhatsApp": "WhatsApp",
+    "ctaCall": "Bellen"
+  },
+  "contactInfo": {
+    "hoursTitle": "Openingsuren",
+    "hoursWeekdays": "Ma–Vr: 7u–20u",
+    "hoursWeekend": "Za–Zo: 8u–18u",
+    "responseTime": "Antwoord binnen 2u",
+    "coverageTitle": "Dekkingsgebied",
+    "coverageText": "Overijse, Hoeilaart en Tervuren",
+    "mutualitiesTitle": "Ziekenfondsen",
+    "mutualitiesText": "Alle Belgische ziekenfondsen aanvaard",
+    "languagesTitle": "Talen",
+    "languagesText": "FR · NL · EN"
+  },
+  "faqContact": {
+    "title": "Veelgestelde vragen",
+    "items": [
+      {
+        "q": "Is een medisch voorschrift vereist om een beroep op uw diensten te doen?",
+        "a": "Voor handelingen die door uw ziekenfonds worden vergoed (verbanden, injecties, infusen), is een medisch voorschrift vereist. Voor comfortzorg of een eerste evaluatie kunt u ons rechtstreeks contacteren zonder voorschrift."
+      },
+      {
+        "q": "Binnen welke termijn grijpt u in?",
+        "a": "Voor standaardaanvragen antwoorden wij binnen 2 uur en plannen wij een bezoek binnen 24-48u. Voor urgente gevallen grijpen wij in binnen het uur, afhankelijk van beschikbaarheid."
+      },
+      {
+        "q": "Wat zijn uw tarieven?",
+        "a": "Onze zorg is geconventioneerd en vergoed door alle Belgische ziekenfondsen. Uw persoonlijk aandeel hangt af van uw statuut (standaard remgeld, BIM/OMNIO). Wij informeren u over de tarieven vóór elke interventie."
+      },
+      {
+        "q": "Grijpt u in het weekend in?",
+        "a": "Ja, 7 dagen per week, zaterdag en zondag inbegrepen. Onze openingsuren zijn 7u-20u op weekdagen en 8u-18u in het weekend."
+      },
+      {
+        "q": "Hoe verloopt het eerste bezoek?",
+        "a": "Het eerste bezoek is een gratis en vrijblijvende evaluatie. Een verpleegkundige komt bij u thuis om uw behoeften te beoordelen, uw vragen te beantwoorden en een persoonlijk zorgplan op te stellen."
+      }
+    ]
+  },
+  "metadata": {
+    "home": {
+      "title": "Verpleegkundige aan huis | Overijse, Hoeilaart, Tervuren",
+      "description": "Professionele verpleegkundige zorg aan huis. Beschikbaar 7/7 in Overijse, Hoeilaart en Tervuren. Alle Belgische ziekenfondsen."
+    },
+    "services": {
+      "title": "Onze verpleegkundige zorg aan huis",
+      "description": "Ontdek onze 8 vormen van verpleegkundige thuiszorg: algemene zorg, geheugenstoornissen, chronische aandoeningen, palliatieve zorg en meer. Alle Belgische ziekenfondsen."
+    },
+    "zones": {
+      "title": "Interventiezones — Overijse, Hoeilaart, Tervuren",
+      "description": "Verpleegkundige aan huis in Overijse, Hoeilaart en Tervuren (Vlaams-Brabant). Beschikbaar 7/7. Alle Belgische ziekenfondsen."
+    },
+    "about": {
+      "title": "Over ons · Ons team van thuisverpleegkundigen",
+      "description": "Ontdek ons team van thuisverpleegkundigen, onze waarden en onze geschiedenis. In dienst van de patiënten van Overijse, Hoeilaart en Tervuren."
+    },
+    "contact": {
+      "title": "Contact · Thuisverpleging België",
+      "description": "Contacteer ons team van thuisverpleegkundigen. Antwoord binnen 2 uur. Beschikbaar 7/7 in Overijse, Hoeilaart en Tervuren. Gratis offerte."
+    }
+  }
+}

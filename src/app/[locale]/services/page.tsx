@@ -1,22 +1,45 @@
-import Link from "next/link";
 import { ArrowRight, Phone, MessageCircle } from "lucide-react";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ALL_SERVICES } from "@/lib/services-data";
 import { CONTACT_INFO } from "@/lib/constants";
-import { createMetadata } from "@/lib/seo";
+import { getBaseUrl } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
 import FadeIn from "@/components/animations/FadeIn";
-import {
-  StaggerContainer,
-  StaggerItem,
-} from "@/components/animations/StaggerContainer";
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer";
 
-export const metadata = createMetadata({
-  title: "Nos soins infirmiers à domicile",
-  description:
-    "Découvrez nos 8 services de soins infirmiers à domicile : soins généraux, troubles de la mémoire, maladies chroniques, soins palliatifs et plus encore. Toutes les mutuelles belges.",
-  path: "/services",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.services" });
+  const base = getBaseUrl();
 
-export default function ServicesPage() {
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: `${base}/${locale}/services`,
+      languages: {
+        fr: `${base}/fr/services`,
+        nl: `${base}/nl/services`,
+        en: `${base}/en/services`,
+        "x-default": `${base}/fr/services`,
+      },
+    },
+  };
+}
+
+export default async function ServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
   return (
     <>
       {/* Hero */}
@@ -24,8 +47,7 @@ export default function ServicesPage() {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, hsl(197 83% 22%) 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, hsl(197 83% 22%) 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
           aria-hidden="true"
@@ -33,31 +55,24 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <FadeIn direction="up">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-              Soins infirmiers à domicile
+              {t("servicesPage.heroBadge")}
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground mb-6 leading-tight">
-              Nos soins infirmiers
-              <span className="block text-primary">à domicile</span>
+              {t("servicesPage.heroTitle")}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Une équipe d&apos;infirmiers qualifiés et disponibles 7j/7 dans la région
-              d&apos;Overijse, Hoeilaart et Tervuren. Toutes les mutuelles belges.
-            </p>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.15} className="flex flex-wrap justify-center gap-4 mt-8">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              Toutes les mutuelles belges
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              Disponible 7j/7
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              Intervention rapide
-            </div>
+            {[
+              t("servicesPage.heroBadgeAll"),
+              t("servicesPage.heroBadge7j"),
+              t("servicesPage.heroBadgeRapid"),
+            ].map((badge) => (
+              <div key={badge} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="w-2 h-2 rounded-full bg-accent" />
+                {badge}
+              </div>
+            ))}
           </FadeIn>
         </div>
       </section>
@@ -81,17 +96,14 @@ export default function ServicesPage() {
                       <Icon className="w-6 h-6 text-primary" aria-hidden="true" />
                     </div>
                     <h2 className="font-semibold text-foreground text-base mb-2 group-hover:text-primary transition-colors leading-snug">
-                      {service.shortName}
+                      {t(`services.${service.slug}.shortName`)}
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">
-                      {service.heroSubtitle.substring(0, 100)}…
+                      {t(`services.${service.slug}.heroSubtitle`).substring(0, 100)}…
                     </p>
                     <div className="flex items-center justify-center gap-1 text-sm font-medium text-primary mt-auto">
-                      En savoir plus
-                      <ArrowRight
-                        className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
-                        aria-hidden="true"
-                      />
+                      {t("servicesPage.learnMore")}
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                     </div>
                   </Link>
                 </StaggerItem>
@@ -101,16 +113,15 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA besoin spécifique */}
+      {/* CTA */}
       <section className="py-16 md:py-20 bg-muted">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn direction="up">
             <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-foreground mb-4">
-              Vous avez un besoin spécifique ?
+              {t("servicesPage.ctaTitle")}
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Chaque situation est unique. Contactez-nous pour un entretien gratuit et sans
-              engagement — nous évaluerons ensemble la prise en charge la plus adaptée.
+              {t("servicesPage.ctaSubtitle")}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
@@ -118,7 +129,7 @@ export default function ServicesPage() {
                 className="inline-flex items-center gap-2 bg-primary text-white rounded-full px-6 py-3 font-medium hover:bg-primary/90 transition-colors shadow-sm"
               >
                 <MessageCircle className="w-4 h-4" aria-hidden="true" />
-                Nous contacter
+                {t("servicesPage.ctaContact")}
               </Link>
               <a
                 href={`tel:${CONTACT_INFO.phone}`}

@@ -1,19 +1,45 @@
-import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { createMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { getBaseUrl } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
 import FadeIn from "@/components/animations/FadeIn";
 import StorySection from "@/components/about/StorySection";
 import ValuesSection from "@/components/about/ValuesSection";
 import TeamSection from "@/components/about/TeamSection";
 
-export const metadata = createMetadata({
-  title: "À propos · Notre équipe d'infirmiers à domicile",
-  description:
-    "Découvrez notre équipe d'infirmiers à domicile, nos valeurs et notre histoire. Au service des patients d'Overijse, Hoeilaart et Tervuren.",
-  path: "/a-propos",
-});
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata.about" });
+  const base = getBaseUrl();
 
-export default function AboutPage() {
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: `${base}/${locale}/a-propos`,
+      languages: {
+        fr: `${base}/fr/a-propos`,
+        nl: `${base}/nl/a-propos`,
+        en: `${base}/en/a-propos`,
+        "x-default": `${base}/fr/a-propos`,
+      },
+    },
+  };
+}
+
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "aboutPage" });
+
   return (
     <>
       {/* Hero */}
@@ -21,8 +47,7 @@ export default function AboutPage() {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, hsl(197 83% 22%) 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, hsl(197 83% 22%) 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
           aria-hidden="true"
@@ -30,16 +55,13 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <FadeIn direction="up">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
-              Notre équipe
+              {t("heroBadge")}
             </span>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-semibold text-foreground mb-6 leading-tight">
-              Une équipe d&apos;infirmiers
-              <span className="block text-primary">au service de votre santé</span>
+              {t("heroTitle")}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Nous sommes des professionnels de santé passionnés par le soin à domicile,
-              engagés auprès des habitants d&apos;Overijse, Hoeilaart et Tervuren depuis
-              plus d&apos;une décennie.
+              {t("heroSubtitle")}
             </p>
           </FadeIn>
         </div>
@@ -54,23 +76,22 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn direction="up">
             <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-foreground mb-4">
-              Discutons de vos besoins
+              {t("ctaTitle")}
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Chaque situation est unique. Contactez-nous pour un échange gratuit
-              et sans engagement avec un infirmier de notre équipe.
+              {t("ctaSubtitle")}
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 bg-primary text-white rounded-full px-6 py-3 font-medium hover:bg-primary/90 transition-colors shadow-sm"
             >
               <MessageCircle className="w-4 h-4" aria-hidden="true" />
-              Nous contacter
+              {t("ctaButton")}
             </Link>
             <div className="flex flex-wrap justify-center gap-4 mt-6 text-xs text-muted-foreground">
-              <span>Toutes les Mutuelles Belges</span>
+              <span>{t("ctaBadge1")}</span>
               <span>·</span>
-              <span>Conformité RGPD</span>
+              <span>{t("ctaBadge2")}</span>
             </div>
           </FadeIn>
         </div>

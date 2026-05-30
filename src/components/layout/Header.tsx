@@ -1,23 +1,26 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/brand/Logo";
-
-const navLinks = [
-  { href: "/", label: "Accueil" },
-  { href: "/services", label: "Nos services" },
-  { href: "/zones", label: "Zones desservies" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/contact", label: "Contact" },
-];
+import { Link } from "@/i18n/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
+  const t = useTranslations("navigation");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const navLinks = [
+    { href: "/", label: t("home") },
+    { href: "/services", label: t("services") },
+    { href: "/zones", label: t("zones") },
+    { href: "/a-propos", label: t("about") },
+    { href: "/contact", label: t("contact") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -55,19 +58,20 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-3">
+          {/* CTA + language switcher + mobile toggle */}
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher className="hidden sm:block" />
             <Link
               href="/contact"
               className="hidden sm:flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
-              Prendre RDV
+              {t("bookAppointment")}
             </Link>
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
-              aria-label={isMobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={isMobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={isMobileOpen}
             >
               {isMobileOpen ? (
@@ -107,8 +111,11 @@ export default function Header() {
                 className="flex items-center justify-center gap-2 bg-primary text-white px-4 py-2.5 rounded-full text-sm font-medium mt-2 hover:bg-primary/90 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                Prendre RDV
+                {t("bookAppointment")}
               </Link>
+              <div className="mt-2 pt-2 border-t border-slate-100">
+                <LanguageSwitcher className="w-full" />
+              </div>
             </nav>
           </motion.div>
         )}

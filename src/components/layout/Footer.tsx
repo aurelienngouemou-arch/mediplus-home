@@ -1,9 +1,11 @@
-import Link from "next/link";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { ZONES, SERVICES, CONTACT_INFO } from "@/lib/constants";
 import Logo from "@/components/brand/Logo";
+import { Link } from "@/i18n/navigation";
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations();
   const year = new Date().getFullYear();
 
   return (
@@ -11,7 +13,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
 
-          {/* À propos */}
+          {/* Logo + phone */}
           <div>
             <div className="mb-4">
               <Logo variant="full" size="lg" theme="white" />
@@ -25,9 +27,9 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Zones desservies — 3 communes seulement */}
+          {/* Zones */}
           <div>
-            <h3 className="font-medium text-white mb-4">Zones desservies</h3>
+            <h3 className="font-medium text-white mb-4">{t("footer.zonesTitle")}</h3>
             <ul className="space-y-2">
               {ZONES.map((zone) => (
                 <li key={zone.slug}>
@@ -43,9 +45,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Nos services — 8 catégories */}
+          {/* Services */}
           <div>
-            <h3 className="font-medium text-white mb-4">Nos services</h3>
+            <h3 className="font-medium text-white mb-4">{t("footer.servicesTitle")}</h3>
             <ul className="space-y-2">
               {SERVICES.map((service) => (
                 <li key={service.slug}>
@@ -53,7 +55,7 @@ export default function Footer() {
                     href={`/services/${service.slug}`}
                     className="text-sm text-slate-400 hover:text-accent transition-colors leading-snug block"
                   >
-                    {service.name}
+                    {t(`services.${service.slug}.shortName`)}
                   </Link>
                 </li>
               ))}
@@ -62,7 +64,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-medium text-white mb-4">Contact</h3>
+            <h3 className="font-medium text-white mb-4">{t("footer.contactTitle")}</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-slate-400">
                 <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" aria-hidden="true" />
@@ -88,19 +90,13 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© {year} Mediplus Home. Tous droits réservés.</p>
+          <p>© {year} Mediplus Home. {t("footer.rights")}</p>
           <div className="flex gap-6">
-            <Link
-              href="/mentions-legales"
-              className="hover:text-slate-300 transition-colors"
-            >
-              Mentions légales
+            <Link href="/mentions-legales" className="hover:text-slate-300 transition-colors">
+              {t("footer.legal")}
             </Link>
-            <Link
-              href="/politique-confidentialite"
-              className="hover:text-slate-300 transition-colors"
-            >
-              Confidentialité
+            <Link href="/politique-confidentialite" className="hover:text-slate-300 transition-colors">
+              {t("footer.privacy")}
             </Link>
           </div>
         </div>

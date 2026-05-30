@@ -1,8 +1,6 @@
-// src/app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "@/components/layout/ClientLayout";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], display: "swap" });
@@ -29,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
       <body className="min-h-full flex flex-col font-sans antialiased bg-background text-foreground overflow-x-hidden">
-        <ClientLayout>{children}</ClientLayout>
+        {children}
       </body>
     </html>
   );

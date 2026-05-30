@@ -1,19 +1,22 @@
+import { Phone, MessageCircle, CalendarCheck } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import type { ZoneData } from "@/lib/zones-data";
 import { CONTACT_INFO } from "@/lib/constants";
+import { Link } from "@/i18n/navigation";
 import FadeIn from "@/components/animations/FadeIn";
-import { Phone, MessageCircle, CalendarCheck } from "lucide-react";
 
 interface CtaZoneProps {
   zone: ZoneData;
 }
 
-export default function CtaZone({ zone }: CtaZoneProps) {
-  const whatsappUrl = `https://wa.me/${CONTACT_INFO.phone.replace(/\D/g, "")}?text=${encodeURIComponent(`Bonjour, je souhaite prendre rendez-vous pour des soins infirmiers à domicile à ${zone.name}.`)}`;
+export default async function CtaZone({ zone }: CtaZoneProps) {
+  const t = await getTranslations();
+  const whatsappUrl = `https://wa.me/${CONTACT_INFO.phone.replace(/\D/g, "")}`;
 
   return (
     <section
       role="region"
-      aria-label={`Prendre rendez-vous à ${zone.name}`}
+      aria-label={`${t("zonePage.ctaBook")} · ${zone.name}`}
       className="py-14 md:py-24 bg-gradient-to-br from-primary via-secondary to-primary/80 relative overflow-hidden"
     >
       <div className="absolute inset-0 -z-10">
@@ -25,47 +28,46 @@ export default function CtaZone({ zone }: CtaZoneProps) {
         <FadeIn direction="up">
           <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-6">
             <span className="size-1.5 rounded-full bg-accent animate-pulse" />
-            Disponible dès maintenant
+            {t("ctaSection.availability")}
           </div>
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-            Besoin d&apos;un infirmier à{" "}
-            <span className="text-accent">{zone.name}</span> aujourd&apos;hui ?
+            {zone.name}
           </h2>
 
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            Disponible 7j/7 · Toutes les mutuelles belges
+            {t("common.available247")} · {t("common.allMutualities")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href={`tel:${CONTACT_INFO.phone}`}
-              aria-label={`Appeler notre cabinet infirmier pour un soin à ${zone.name}`}
+              aria-label={`${t("zonePage.ctaCall")} · ${zone.name}`}
               className="inline-flex items-center gap-2.5 bg-white text-primary rounded-full px-7 py-3.5 font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/10 w-full sm:w-auto justify-center"
             >
               <Phone className="size-4" aria-hidden="true" />
-              Appeler
+              {t("zonePage.ctaCall")}
             </a>
 
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Envoyer un message WhatsApp pour un soin à ${zone.name}`}
+              aria-label={`${t("zonePage.ctaWhatsApp")} · ${zone.name}`}
               className="inline-flex items-center gap-2.5 bg-white/15 border border-white/30 text-white rounded-full px-7 py-3.5 font-semibold hover:bg-white/25 transition-colors w-full sm:w-auto justify-center"
             >
               <MessageCircle className="size-4" aria-hidden="true" />
-              WhatsApp
+              {t("zonePage.ctaWhatsApp")}
             </a>
 
-            <a
+            <Link
               href="/contact"
-              aria-label={`Prendre rendez-vous en ligne pour des soins infirmiers à ${zone.name}`}
+              aria-label={`${t("zonePage.ctaBook")} · ${zone.name}`}
               className="inline-flex items-center gap-2.5 bg-accent/90 text-primary rounded-full px-7 py-3.5 font-semibold hover:bg-accent transition-colors shadow-lg shadow-black/10 w-full sm:w-auto justify-center"
             >
               <CalendarCheck className="size-4" aria-hidden="true" />
-              Prendre RDV en ligne
-            </a>
+              {t("zonePage.ctaBook")}
+            </Link>
           </div>
         </FadeIn>
       </div>

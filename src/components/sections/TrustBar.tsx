@@ -1,4 +1,8 @@
-export default function TrustBar() {
+import { getTranslations } from "next-intl/server";
+
+export default async function TrustBar() {
+  const t = await getTranslations("trustBar");
+
   return (
     <div className="border-y border-border bg-muted/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -8,10 +12,10 @@ export default function TrustBar() {
             aria-hidden="true"
           />
           <span className="text-xs font-semibold text-foreground/70 uppercase tracking-wider">
-            Toutes les mutuelles belges
+            {t("label")}
           </span>
           <span className="hidden sm:inline text-xs text-muted-foreground ml-1.5">
-            · Convention avec toutes les mutuelles belges
+            · {t("sublabel")}
           </span>
         </div>
       </div>
