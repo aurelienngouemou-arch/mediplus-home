@@ -7,10 +7,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/brand/Logo";
 import { Link } from "@/i18n/navigation";
-import {
-  LanguageSwitcherDesktop,
-  LanguageSwitcherMobile,
-} from "./LanguageSwitcher";
+import { LanguageSwitcherDesktop } from "./LanguageSwitcher";
 
 export default function Header() {
   const t = useTranslations("navigation");
@@ -61,12 +58,10 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Desktop right: language switcher + CTA + burger */}
+          {/* Right: language switcher + CTA + burger */}
           <div className="flex items-center gap-2">
-            {/* Language switcher — desktop only */}
-            <div className="hidden md:block">
-              <LanguageSwitcherDesktop />
-            </div>
+            {/* Language switcher — toujours visible */}
+            <LanguageSwitcherDesktop />
 
             {/* CTA — hidden on small mobile */}
             <Link
@@ -107,11 +102,6 @@ export default function Header() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md border-t border-slate-100"
           >
             <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {/* Language switcher — en haut du drawer */}
-              <div className="pb-2 mb-1 border-b border-slate-100">
-                <LanguageSwitcherMobile onSwitch={() => setIsMobileOpen(false)} />
-              </div>
-
               {/* Nav links */}
               {navLinks.map((link) => (
                 <Link
