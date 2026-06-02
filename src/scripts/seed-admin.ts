@@ -18,7 +18,6 @@ function generateSecurePassword(length = 20): string {
   const symbols = "!@#$%^&*()-_+=";
   const all = upper + lower + digits + symbols;
 
-  // Garantit au moins un de chaque catégorie
   const required = [
     upper[crypto.randomInt(upper.length)],
     lower[crypto.randomInt(lower.length)],
@@ -35,46 +34,58 @@ function generateSecurePassword(length = 20): string {
     .join("");
 }
 
-async function main() {
-  const email = "test.admin@mediplus-home.local";
-  const plainPassword = generateSecurePassword(20);
-  const passwordHash = await bcrypt.hash(plainPassword, 12);
+function printCredentials(email: string, password: string) {
+  const border = "═".repeat(57);
+  console.log(`\n╔${border}╗`);
+  console.log(`║${"COMPTE ADMIN CRÉÉ AVEC SUCCÈS".padEnd(57)}║`);
+  console.log(`║${" ".repeat(57)}║`);
+  console.log(`║  Email    : ${email.padEnd(44)}║`);
+  console.log(`║  Password : ${password.padEnd(44)}║`);
+  console.log(`║${" ".repeat(57)}║`);
+  console.log(`║  ⚠  NOTE-LE MAINTENANT, IL NE SERA PLUS AFFICHÉ   ║`);
+  console.log(`║  ⚠  Sauvegarde dans un gestionnaire de mots de passe ║`);
+  console.log(`╚${border}╝\n`);
+}
 
-  // Vérifie si le compte existe déjà
+async function main() {
+  const email = "mediplushome@gmail.com";
+  const isReset = process.argv.includes("--reset");
+
   const existing = await db
     .select({ id: schema.users.id })
     .from(schema.users)
     .where(eq(schema.users.email, email))
     .limit(1);
 
+  if (existing.length > 0 && !isReset) {
+    console.log(`\n⚠️  Le compte ${email} existe déjà.`);
+    console.log(
+      "   Lancez avec --reset pour régénérer le mot de passe : npm run db:seed-admin -- --reset\n"
+    );
+    process.exit(0);
+  }
+
+  const plainPassword = generateSecurePassword(20);
+  const passwordHash = await bcrypt.hash(plainPassword, 12);
+
   if (existing.length > 0) {
-    // Met à jour le mot de passe si le compte existe déjà
     await db
       .update(schema.users)
       .set({ password_hash: passwordHash, actif: true })
       .where(eq(schema.users.email, email));
-    console.log("Compte existant — mot de passe réinitialisé.");
+    console.log("Mot de passe réinitialisé pour le compte existant.");
   } else {
     await db.insert(schema.users).values({
       email,
       password_hash: passwordHash,
-      nom: "Admin",
-      prenom: "Test",
+      nom: "Mediplus",
+      prenom: "Home",
       role: "admin",
       actif: true,
     });
   }
 
-  const border = "═".repeat(57);
-  console.log(`\n╔${border}╗`);
-  console.log(`║${"COMPTE ADMIN CRÉÉ AVEC SUCCÈS".padEnd(57)}║`);
-  console.log(`║${" ".repeat(57)}║`);
-  console.log(`║  Email    : ${email.padEnd(44)}║`);
-  console.log(`║  Password : ${plainPassword.padEnd(44)}║`);
-  console.log(`║${" ".repeat(57)}║`);
-  console.log(`║  ⚠  NOTE-LE MAINTENANT, IL NE SERA PLUS AFFICHÉ   ║`);
-  console.log(`║  ⚠  Garde-le dans un gestionnaire de mots de passe ║`);
-  console.log(`╚${border}╝\n`);
+  printCredentials(email, plainPassword);
 }
 
 main().catch((err) => {

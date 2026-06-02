@@ -20,15 +20,13 @@ import type {
   InfirmierPartenaire,
 } from "@/db/schema";
 
-const ADMIN_EMAIL = "aurelienngouemou@gmail.com";
-
 export async function sendContactNotificationToAdmin(
   demande: DemandeContact
 ): Promise<void> {
   try {
     await resend.emails.send({
       from: FROM_ADDRESS,
-      to: ADMIN_EMAIL,
+      to: env.ADMIN_EMAIL,
       subject: contactAdminSubject(demande),
       html: contactAdminHtml(demande, env.NEXT_PUBLIC_SITE_URL),
     });

@@ -101,7 +101,7 @@ export function LanguageSwitcherMobile({
   }
 
   return (
-    <div className="px-3 pt-1 pb-2">
+    <div className="px-3 pb-3">
       <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
         {t("label")}
       </p>
@@ -114,7 +114,7 @@ export function LanguageSwitcherMobile({
               onClick={() => switchLocale(loc)}
               aria-pressed={active}
               className={cn(
-                "flex-1 rounded-lg py-2 text-sm font-semibold transition-all",
+                "flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all",
                 active
                   ? "bg-primary text-white shadow-sm"
                   : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-800"

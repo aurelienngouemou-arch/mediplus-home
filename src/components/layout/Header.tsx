@@ -107,6 +107,11 @@ export default function Header() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md border-t border-slate-100"
           >
             <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+              {/* Language switcher — en haut du drawer */}
+              <div className="pb-2 mb-1 border-b border-slate-100">
+                <LanguageSwitcherMobile onSwitch={() => setIsMobileOpen(false)} />
+              </div>
+
               {/* Nav links */}
               {navLinks.map((link) => (
                 <Link
@@ -128,11 +133,6 @@ export default function Header() {
                 <Phone className="w-4 h-4" aria-hidden="true" />
                 {t("bookAppointment")}
               </Link>
-
-              {/* Language switcher — mobile pills */}
-              <div className="mt-1 pt-2 border-t border-slate-100">
-                <LanguageSwitcherMobile onSwitch={() => setIsMobileOpen(false)} />
-              </div>
             </nav>
           </motion.div>
         )}
