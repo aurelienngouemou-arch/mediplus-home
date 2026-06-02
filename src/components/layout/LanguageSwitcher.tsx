@@ -42,8 +42,9 @@ export function LanguageSwitcherDesktop() {
         aria-label={t("label")}
         className={cn(
           "flex items-center gap-1 rounded-lg px-2.5 py-1.5",
-          "text-sm font-semibold text-slate-600 hover:text-primary",
-          "hover:bg-slate-100 transition-colors outline-none",
+          "text-sm font-semibold text-slate-700 hover:text-primary",
+          "bg-white/90 border border-slate-200 hover:bg-slate-50",
+          "shadow-sm transition-colors outline-none",
           "focus-visible:ring-2 focus-visible:ring-ring"
         )}
       >
