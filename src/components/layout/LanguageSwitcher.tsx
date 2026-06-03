@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -20,6 +21,10 @@ const LOCALE_FULL: Record<string, string> = {
   en: "English",
 };
 
+// Shared button appearance — identical between placeholder and live trigger
+const BTN_CLS =
+  "flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 shadow-sm";
+
 function useLocale() {
   const params = useParams();
   return (params.locale as string) || routing.defaultLocale;
@@ -31,8 +36,29 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const locale = useLocale();
 
+  // Guard: Radix DropdownMenu uses useId() + a Portal targeting document.body.
+  // Both differ between SSR and client, causing hydration mismatch.
+  // We render an identical static placeholder on SSR and client-before-mount,
+  // then swap in the real interactive component after useEffect fires.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   function switchLocale(next: string) {
     router.push(pathname, { locale: next });
+  }
+
+  if (!mounted) {
+    // Must produce exactly the same HTML server-side and client-side.
+    // Use routing.defaultLocale so the value is static and never undefined.
+    return (
+      <div
+        className={cn(BTN_CLS, "cursor-default select-none")}
+        aria-hidden="true"
+      >
+        {LOCALE_CODE[routing.defaultLocale] ?? "FR"}
+        <ChevronDown className="w-3 h-3 opacity-60" aria-hidden="true" />
+      </div>
+    );
   }
 
   return (
@@ -40,10 +66,8 @@ export function LanguageSwitcher() {
       <DropdownMenuTrigger
         aria-label={t("label")}
         className={cn(
-          "group flex items-center gap-1 rounded-lg px-2.5 py-1.5",
-          "text-sm font-semibold text-slate-700",
-          "bg-white border border-slate-200",
-          "shadow-sm transition-colors outline-none",
+          BTN_CLS,
+          "group outline-none transition-colors",
           "hover:bg-slate-50 hover:text-primary",
           "data-[state=open]:bg-slate-50 data-[state=open]:text-primary",
           "focus-visible:ring-2 focus-visible:ring-ring"
