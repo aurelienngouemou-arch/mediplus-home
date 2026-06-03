@@ -29,6 +29,8 @@ function isRateLimited(ip: string): boolean {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // Requis sur Vercel : autorise les requêtes depuis l'hôte de déploiement
+  trustHost: true,
   providers: [
     Credentials({
       name: "credentials",
