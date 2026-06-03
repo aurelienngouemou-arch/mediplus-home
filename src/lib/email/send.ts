@@ -23,30 +23,53 @@ import type {
 export async function sendContactNotificationToAdmin(
   demande: DemandeContact
 ): Promise<void> {
+  const adminEmail = env.ADMIN_EMAIL;
+
+  console.log("[Email] Sending admin notification to:", adminEmail);
+  console.log("[Email] Demande received from:", demande.email);
+
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_ADDRESS,
-      to: env.ADMIN_EMAIL,
+      to: adminEmail,
       subject: contactAdminSubject(demande),
       html: contactAdminHtml(demande, env.NEXT_PUBLIC_SITE_URL),
     });
+
+    if (result.error) {
+      console.error("[Email] Resend error:", result.error);
+      throw new Error(`Resend error: ${result.error.message}`);
+    }
+
+    console.log("[Email] Admin email sent successfully:", result.data?.id);
   } catch (error) {
-    console.error("[email] Échec envoi admin :", error);
+    console.error("[Email] Failed to send admin notification:", error);
+    throw error;
   }
 }
 
 export async function sendContactConfirmationToPatient(
   demande: DemandeContact
 ): Promise<void> {
+  console.log("[Email] Sending confirmation to patient:", demande.email);
+
   try {
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: FROM_ADDRESS,
       to: demande.email,
       subject: contactConfirmationSubject(),
       html: contactConfirmationHtml(demande),
     });
+
+    if (result.error) {
+      console.error("[Email] Resend error (patient confirmation):", result.error);
+      throw new Error(`Resend error: ${result.error.message}`);
+    }
+
+    console.log("[Email] Patient confirmation sent successfully:", result.data?.id);
   } catch (error) {
-    console.error("[email] Échec envoi confirmation patient :", error);
+    console.error("[Email] Failed to send patient confirmation:", error);
+    throw error;
   }
 }
 
