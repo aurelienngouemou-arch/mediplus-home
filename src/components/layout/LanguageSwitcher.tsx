@@ -25,8 +25,7 @@ function useLocale() {
   return (params.locale as string) || routing.defaultLocale;
 }
 
-/* ── Desktop dropdown ─────────────────────────────────────────── */
-export function LanguageSwitcherDesktop() {
+export function LanguageSwitcher() {
   const t = useTranslations("languageSwitcher");
   const pathname = usePathname();
   const router = useRouter();
@@ -41,15 +40,20 @@ export function LanguageSwitcherDesktop() {
       <DropdownMenuTrigger
         aria-label={t("label")}
         className={cn(
-          "flex items-center gap-1 rounded-lg px-2.5 py-1.5",
-          "text-sm font-semibold text-slate-700 hover:text-primary",
-          "bg-white/90 border border-slate-200 hover:bg-slate-50",
+          "group flex items-center gap-1 rounded-lg px-2.5 py-1.5",
+          "text-sm font-semibold text-slate-700",
+          "bg-white border border-slate-200",
           "shadow-sm transition-colors outline-none",
+          "hover:bg-slate-50 hover:text-primary",
+          "data-[state=open]:bg-slate-50 data-[state=open]:text-primary",
           "focus-visible:ring-2 focus-visible:ring-ring"
         )}
       >
         {LOCALE_CODE[locale] ?? locale.toUpperCase()}
-        <ChevronDown className="w-3 h-3 opacity-60" aria-hidden="true" />
+        <ChevronDown
+          className="w-3 h-3 opacity-60 transition-transform group-data-[state=open]:rotate-180"
+          aria-hidden="true"
+        />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
@@ -85,47 +89,5 @@ export function LanguageSwitcherDesktop() {
   );
 }
 
-/* ── Mobile pills ─────────────────────────────────────────────── */
-export function LanguageSwitcherMobile({
-  onSwitch,
-}: {
-  onSwitch?: () => void;
-}) {
-  const t = useTranslations("languageSwitcher");
-  const pathname = usePathname();
-  const router = useRouter();
-  const locale = useLocale();
-
-  function switchLocale(next: string) {
-    router.push(pathname, { locale: next });
-    onSwitch?.();
-  }
-
-  return (
-    <div className="px-3 pb-3">
-      <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-        {t("label")}
-      </p>
-      <div className="flex gap-1.5" role="group" aria-label={t("label")}>
-        {routing.locales.map((loc) => {
-          const active = loc === locale;
-          return (
-            <button
-              key={loc}
-              onClick={() => switchLocale(loc)}
-              aria-pressed={active}
-              className={cn(
-                "flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all",
-                active
-                  ? "bg-primary text-white shadow-sm"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-800"
-              )}
-            >
-              {LOCALE_CODE[loc]}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
+// Alias kept for backwards compatibility
+export { LanguageSwitcher as LanguageSwitcherDesktop };

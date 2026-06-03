@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/brand/Logo";
 import { Link } from "@/i18n/navigation";
-import { LanguageSwitcherDesktop } from "./LanguageSwitcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export default function Header() {
   const t = useTranslations("navigation");
@@ -38,14 +38,18 @@ export default function Header() {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/*
+          Layout mobile  (<md) : [Logo] ─────────────── [LangSwitcher] [Burger]
+          Layout desktop (≥md) : [Logo] [Nav…] ──────── [LangSwitcher] [CTA]
+        */}
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/" aria-label="Mediplus Home">
+          <Link href="/" aria-label="Mediplus Home" className="shrink-0">
             <Logo variant="horizontal" size="sm" className="sm:hidden" />
             <Logo variant="horizontal" size="md" className="hidden sm:inline-flex" />
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop nav — hidden below md */}
           <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -58,12 +62,12 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right: language switcher + CTA + burger */}
+          {/* Right group: LangSwitcher (always) + CTA (≥sm) + Burger (<md) */}
           <div className="flex items-center gap-2">
-            {/* Language switcher — toujours visible */}
-            <LanguageSwitcherDesktop />
+            {/* Language switcher — ALWAYS visible, all screen sizes */}
+            <LanguageSwitcher />
 
-            {/* CTA — hidden on small mobile */}
+            {/* CTA — hidden on xs mobile */}
             <Link
               href="/contact"
               className="hidden sm:flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors"
@@ -72,10 +76,10 @@ export default function Header() {
               {t("bookAppointment")}
             </Link>
 
-            {/* Burger toggle — mobile only */}
+            {/* Burger — mobile/tablet only (<md) */}
             <button
               onClick={() => setIsMobileOpen((v) => !v)}
-              className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+              className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100/80 transition-colors"
               aria-label={isMobileOpen ? t("closeMenu") : t("openMenu")}
               aria-expanded={isMobileOpen}
               aria-controls="mobile-menu"
@@ -90,7 +94,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer — nav links + CTA only, NO language switcher */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -102,7 +106,6 @@ export default function Header() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-md border-t border-slate-100"
           >
             <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {/* Nav links */}
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -114,7 +117,7 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* CTA */}
+              {/* CTA in drawer (compensates for hidden sm:flex CTA on xs screens) */}
               <Link
                 href="/contact"
                 onClick={() => setIsMobileOpen(false)}
