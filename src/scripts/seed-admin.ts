@@ -48,7 +48,7 @@ function printCredentials(email: string, password: string) {
 }
 
 async function main() {
-  const email = "mediplushome@gmail.com";
+  const email = "medisplushome@gmail.com";
   const isReset = process.argv.includes("--reset");
 
   const existing = await db

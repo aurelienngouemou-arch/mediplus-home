@@ -101,7 +101,7 @@ export const ACTES_TECHNIQUES: ActeTechnique[] = [
 export const CONTACT_INFO: ContactInfo = {
   phone: "+32486364888",
   phoneDisplay: "+32 486 364 888",
-  email: "mediplushome@gmail.com",
+  email: "medisplushome@gmail.com",
   address: "Région d'Overijse, Hoeilaart & Tervuren, Belgique",
   hours: "Lun–Ven : 7h–20h · Sam–Dim : 8h–18h",
 };

@@ -12,7 +12,8 @@
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
     "db:seed-admin": "tsx src/scripts/seed-admin.ts",
-    "db:delete-test-admin": "tsx src/scripts/delete-test-admin.ts"
+    "db:delete-test-admin": "tsx src/scripts/delete-test-admin.ts",
+    "db:delete-old-admin": "tsx src/scripts/delete-old-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
