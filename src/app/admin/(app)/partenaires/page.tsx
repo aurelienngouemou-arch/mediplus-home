@@ -7,6 +7,7 @@ import {
   getPartenaires,
   getPartenairesStats,
 } from "@/lib/actions/partenaires";
+import { DeletePartenaireButton } from "@/components/admin/DeletePartenaireButton";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -254,6 +255,7 @@ export default async function PartenairesPage({
                         >
                           Modifier
                         </Link>
+                        <DeletePartenaireButton id={p.id} />
                       </div>
                     </td>
                   </tr>
@@ -277,16 +279,19 @@ export default async function PartenairesPage({
                       </p>
                       <ZonesChips zones={p.zones_couvertes} />
                     </Link>
-                    <Badge
-                      variant="outline"
-                      className={
-                        p.actif
-                          ? "border-green-200 bg-green-50 text-green-700 text-[10px]"
-                          : "border-gray-200 bg-gray-50 text-gray-500 text-[10px]"
-                      }
-                    >
-                      {p.actif ? "Actif" : "Inactif"}
-                    </Badge>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <Badge
+                        variant="outline"
+                        className={
+                          p.actif
+                            ? "border-green-200 bg-green-50 text-green-700 text-[10px]"
+                            : "border-gray-200 bg-gray-50 text-gray-500 text-[10px]"
+                        }
+                      >
+                        {p.actif ? "Actif" : "Inactif"}
+                      </Badge>
+                      <DeletePartenaireButton id={p.id} />
+                    </div>
                   </div>
                   <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
                     <a href={`tel:${p.telephone}`} className="flex items-center gap-1 hover:text-primary">

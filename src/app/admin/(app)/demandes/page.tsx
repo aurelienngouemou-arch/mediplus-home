@@ -7,6 +7,7 @@ import { Phone, Mail, Eye, Inbox } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import DemandeStatusBadge from "@/components/admin/DemandeStatusBadge";
 import DemandeFilters from "@/components/admin/DemandeFilters";
+import { DeleteDemandeButton } from "@/components/admin/DeleteDemandeButton";
 import type { Metadata } from "next";
 import type { SQL } from "drizzle-orm";
 
@@ -179,6 +180,7 @@ async function DemandesList({
                     >
                       <Eye className="h-3.5 w-3.5" />
                     </Link>
+                    <DeleteDemandeButton id={d.id} />
                   </div>
                 </td>
               </tr>
@@ -190,27 +192,28 @@ async function DemandesList({
       {/* Mobile cards */}
       <div className="md:hidden space-y-3">
         {rows.map((d) => (
-          <Link key={d.id} href={`/admin/demandes/${d.id}`}>
-            <Card className="border-border/50 hover:border-primary/30 transition-colors">
-              <CardContent className="pt-4 pb-4">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">{d.nom}</p>
-                    <p className="text-xs text-muted-foreground truncate">{d.telephone}</p>
-                  </div>
+          <Card key={d.id} className="border-border/50 hover:border-primary/30 transition-colors">
+            <CardContent className="pt-4 pb-4">
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <Link href={`/admin/demandes/${d.id}`} className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground truncate">{d.nom}</p>
+                  <p className="text-xs text-muted-foreground truncate">{d.telephone}</p>
+                </Link>
+                <div className="flex items-center gap-1 shrink-0">
                   <DemandeStatusBadge statut={d.statut ?? "nouveau"} />
+                  <DeleteDemandeButton id={d.id} />
                 </div>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                  <span>{d.commune ?? "—"}</span>
-                  <span>·</span>
-                  <span>{d.type_demande ?? "—"}</span>
-                  <span className="ml-auto">
-                    <RelativeTime date={d.created_at} />
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+              </div>
+              <Link href={`/admin/demandes/${d.id}`} className="flex items-center gap-3 text-xs text-muted-foreground">
+                <span>{d.commune ?? "—"}</span>
+                <span>·</span>
+                <span>{d.type_demande ?? "—"}</span>
+                <span className="ml-auto">
+                  <RelativeTime date={d.created_at} />
+                </span>
+              </Link>
+            </CardContent>
+          </Card>
         ))}
       </div>
 

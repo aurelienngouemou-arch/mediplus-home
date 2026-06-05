@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { demandesContact } from "@/db/schema";
+import { demandesContact, patients } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { z } from "zod/v4";
@@ -51,4 +51,28 @@ export async function updateDemandeNotes(id: string, notes: string) {
     .where(eq(demandesContact.id, parsed.data.id));
 
   revalidatePath(`/admin/demandes/${id}`);
+}
+
+export async function deleteDemande(id: string) {
+  await requireAuth();
+
+  const parsed = z.uuid().safeParse(id);
+  if (!parsed.success) return { error: "ID invalide" };
+
+  try {
+    await db
+      .update(patients)
+      .set({ demande_origine_id: null })
+      .where(eq(patients.demande_origine_id, id));
+
+    await db.delete(demandesContact).where(eq(demandesContact.id, id));
+
+    revalidatePath("/admin/demandes");
+    revalidatePath("/admin/dashboard");
+
+    return { success: true };
+  } catch (e) {
+    console.error("deleteDemande error:", e);
+    return { error: "Erreur lors de la suppression" };
+  }
 }
