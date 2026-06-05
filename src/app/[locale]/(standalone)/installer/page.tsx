@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { auth } from "@/auth";
 import InstallClient from "./InstallClient";
 
 export const metadata: Metadata = {
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export default function InstallerPage() {
-  return <InstallClient />;
+export default async function InstallerPage() {
+  const session = await auth();
+  return <InstallClient isAuthenticated={!!session?.user} />;
 }
