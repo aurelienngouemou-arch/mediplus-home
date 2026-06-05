@@ -1,4 +1,4 @@
-const CACHE_NAME = "mediplus-v1";
+const CACHE_NAME = "mediplus-v2";
 const STATIC_ASSETS = [
   "/icons/icon-192.png",
   "/icons/icon-512.png",
