@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
   images: {
     qualities: [75, 90],
   },
+  async redirects() {
+    return [
+      {
+        source: "/installer",
+        destination: "/fr/installer",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

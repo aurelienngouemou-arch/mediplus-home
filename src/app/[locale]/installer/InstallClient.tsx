@@ -74,7 +74,6 @@ export default function InstallClient() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A4D68] to-[#088395] flex flex-col items-center justify-center p-6">
-      {/* App card */}
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-[#0A4D68] px-6 pt-8 pb-6 text-center text-white">
@@ -87,9 +86,7 @@ export default function InstallClient() {
 
         {/* Content */}
         <div className="px-6 py-6 space-y-5">
-          {platform === "already-installed" && (
-            <AlreadyInstalled />
-          )}
+          {platform === "already-installed" && <AlreadyInstalled />}
           {platform === "android-chrome" && (
             <AndroidChrome
               deferredPrompt={deferredPrompt}
@@ -103,7 +100,6 @@ export default function InstallClient() {
           {platform === "desktop" && <Desktop />}
         </div>
 
-        {/* Footer link */}
         {platform !== "already-installed" && (
           <div className="border-t border-gray-100 px-6 py-4 text-center">
             <Link
@@ -118,13 +114,11 @@ export default function InstallClient() {
       </div>
 
       <p className="mt-6 text-white/50 text-xs text-center">
-        mediplus-home.vercel.app
+        mediplus-home.vercel.app/fr/installer
       </p>
     </div>
   );
 }
-
-// ─── Variants ─────────────────────────────────────────────
 
 function AlreadyInstalled() {
   return (
@@ -219,7 +213,7 @@ function IOSSafari() {
       <Step
         n={1}
         icon={<Share2 className="h-4 w-4 text-blue-500" />}
-        text='Appuyez sur le bouton Partager'
+        text="Appuyez sur le bouton Partager"
         sub="(icône en bas de l'écran ou en haut sur iPad)"
       />
       <Step
@@ -250,7 +244,7 @@ function IOSOther() {
       </div>
       <div className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
         <p className="text-xs font-mono text-gray-600 break-all select-all">
-          mediplus-home.vercel.app/installer
+          mediplus-home.vercel.app/fr/installer
         </p>
       </div>
       <Step n={1} text="Copiez le lien ci-dessus" />
@@ -272,7 +266,7 @@ function Desktop() {
       </div>
       <div className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3">
         <p className="text-xs font-mono text-gray-600 select-all">
-          mediplus-home.vercel.app/installer
+          mediplus-home.vercel.app/fr/installer
         </p>
       </div>
       <p className="text-xs text-gray-400">
