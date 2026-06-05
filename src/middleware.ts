@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Only redirect root "/" to the default locale "/fr".
-// All other routing (locale detection, etc.) is handled at the component level via next-intl.
-// Keeping this middleware minimal avoids Vercel Edge runtime host-URL issues.
+// Rewrite /installer → /fr/installer internally.
+// Using rewrite (not redirect) avoids Vercel Edge Runtime localhost host issue.
+// The browser URL stays /installer but serves /fr/installer content.
 export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL("/fr", request.nextUrl));
+  const url = request.nextUrl.clone();
+  url.pathname = "/fr/installer";
+  return NextResponse.rewrite(url);
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ["/installer"],
 };
