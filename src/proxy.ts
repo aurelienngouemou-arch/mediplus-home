@@ -11,7 +11,9 @@ export default auth((req: NextRequest & { auth: unknown }) => {
 
   // Rewrite /installer to /fr/installer without a client-side redirect
   if (pathname === "/installer") {
-    return NextResponse.rewrite(new URL("/fr/installer", req.url));
+    const url = req.nextUrl.clone();
+    url.pathname = "/fr/installer";
+    return NextResponse.rewrite(url);
   }
 
   if (pathname.startsWith("/admin")) {
