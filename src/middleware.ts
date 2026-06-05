@@ -1,12 +1,13 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "@/i18n/routing";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default createMiddleware(routing);
+// Only redirect root "/" to the default locale "/fr".
+// All other routing (locale detection, etc.) is handled at the component level via next-intl.
+// Keeping this middleware minimal avoids Vercel Edge runtime host-URL issues.
+export function middleware(request: NextRequest) {
+  return NextResponse.redirect(new URL("/fr", request.nextUrl));
+}
 
 export const config = {
-  // Only run the i18n middleware on:
-  // - "/" (redirects to /fr/)
-  // - locale-prefixed paths (/fr/*, /nl/*, /en/*)
-  // Everything else (/admin, /installer, /api, static files) is left untouched.
-  matcher: ["/", "/(fr|nl|en)/:path*"],
+  matcher: ["/"],
 };
