@@ -9,11 +9,9 @@ const intlMiddleware = createMiddleware(routing);
 export default auth((req: NextRequest & { auth: unknown }) => {
   const { pathname } = req.nextUrl;
 
-  // Rewrite /installer to /fr/installer without a client-side redirect
+  // Redirect /installer -> /fr/installer (uses req.url like admin redirects)
   if (pathname === "/installer") {
-    const url = req.nextUrl.clone();
-    url.pathname = "/fr/installer";
-    return NextResponse.rewrite(url);
+    return NextResponse.redirect(new URL("/fr/installer", req.url));
   }
 
   if (pathname.startsWith("/admin")) {
